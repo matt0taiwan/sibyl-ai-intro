@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sibyl AI - 突破 LINE OA 限制的智慧客服解決方案</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
         :root {
             --primary-color: #1E3A8A;
@@ -30,6 +25,64 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             scroll-behavior: smooth;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+        
+        /* Prevent horizontal overflow on all elements */
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+        
+        /* Fix for Safari iOS specific issues */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                -webkit-text-size-adjust: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Prevent zoom on input focus in Safari iOS */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+            
+            /* Fix Safari iOS viewport issues */
+            .hero {
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+            }
+            
+            /* Improve scrolling performance */
+            html {
+                height: 100%;
+                width: 100%;
+            }
+            
+            body {
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+                position: relative;
+            }
+        }
+        
+        /* Additional Safari iOS fixes */
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            /* Retina display optimizations */
+            .btn, .feature-card, .protection-layer {
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
         }
 
         /* Navigation */
@@ -1623,22 +1676,51 @@
             }
             
             section {
-                padding: 3rem 1rem;
+                padding: 2.5rem 1rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
             
             h1 {
-                font-size: 2.5rem;
-                line-height: 1.2;
+                font-size: 2.2rem;
+                line-height: 1.3;
+                margin-bottom: 1.5rem;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                line-height: 1.4;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+                line-height: 1.4;
+                margin-bottom: 0.8rem;
+            }
+            
+            p, li {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
             }
             
             .subtitle {
-                font-size: 1.2rem;
-                line-height: 1.4;
+                font-size: 1.1rem;
+                line-height: 1.5;
+                margin-bottom: 2rem;
+                word-wrap: break-word;
             }
             
             .hero {
                 min-height: 90vh;
-                padding-top: 80px;
+                padding: 80px 1rem 2rem;
+                text-align: center;
             }
             
             .chat-comparison {
@@ -1669,73 +1751,170 @@
             .cta-buttons {
                 flex-direction: column;
                 gap: 1rem;
+                align-items: stretch;
             }
             
             .btn {
                 width: 100%;
                 text-align: center;
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* Fix potential overflow elements */
+            .feature-card, .protection-layer, .tech-card, .case-card {
+                padding: 1.5rem;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Text containers */
+            .chat-bubble, .pain-point, .solution-item {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
             }
         }
         
         @media (max-width: 480px) {
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                line-height: 1.4;
+                margin-bottom: 0.8rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+                line-height: 1.4;
+            }
+            
+            p, li {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 0.8rem;
             }
             
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                padding: 0 0.5rem;
             }
             
             section {
-                padding: 2rem 0.5rem;
+                padding: 1.5rem 0.75rem;
             }
             
             .nav-container {
-                padding: 0 0.5rem;
+                padding: 0 0.75rem;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .btn {
-                font-size: 1rem;
-                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+                padding: 0.8rem 1rem;
+                margin: 0.5rem 0;
             }
             
-            .feature-card, .protection-layer, .tech-card {
-                padding: 1.5rem;
+            .feature-card, .protection-layer, .tech-card, .case-card {
+                padding: 1.2rem;
+                margin: 0.5rem 0;
             }
             
-            .case-card {
-                padding: 1.5rem;
+            /* Better text spacing for small screens */
+            .chat-bubble {
+                padding: 1rem;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            
+            .pain-point, .solution-item {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Ensure no horizontal scroll */
+            .hero, .nav-links, .feature-grid, .stats-grid {
+                max-width: 100vw;
+                overflow: hidden;
             }
         }
         
         /* Ultra small screens */
         @media (max-width: 360px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                line-height: 1.2;
+                padding: 0 0.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                line-height: 1.3;
             }
             
             .subtitle {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                padding: 0 0.5rem;
             }
             
             section {
-                padding: 1.5rem 0.25rem;
+                padding: 1rem 0.5rem;
             }
             
             .feature-card, .protection-layer, .tech-card, .case-card {
-                padding: 1rem;
+                padding: 0.8rem;
+                margin: 0.3rem 0;
             }
             
             .btn {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.7rem 0.8rem;
+                font-size: 0.85rem;
+                margin: 0.3rem 0;
             }
+            
+            .nav-container {
+                padding: 0 0.5rem;
+            }
+            
+            .nav-links {
+                padding: 0.8rem 1rem;
+            }
+        }
+        
+        /* Global overflow prevention */
+        .container, .section, .grid, .flex {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Fix any potential wide elements */
+        img, video, iframe, canvas, svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Text overflow handling */
+        .text-content, .description, .content {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
         }
     </style>
 </head>
