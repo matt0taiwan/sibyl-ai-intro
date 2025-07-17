@@ -2,16 +2,9 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sibyl AI - 突破 LINE OA 限制的智慧客服解決方案</title>
     <style>
-        /* Mobile-First Complete CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            max-width: 100%;
-        }
 
         :root {
             --primary-color: #1E3A8A;
@@ -19,943 +12,1489 @@
             --success-color: #10B981;
             --danger-color: #EF4444;
             --gray-light: #F3F4F6;
-            --gray-medium: #9CA3AF;
             --gray-dark: #374151;
             --white: #FFFFFF;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --border-radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+        
+        /* Prevent horizontal overflow on all elements */
         html, body {
             max-width: 100% !important;
             overflow-x: hidden !important;
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
-            line-height: 1.6;
-            color: var(--gray-dark);
-            background: var(--white);
-            -webkit-font-smoothing: antialiased;
-            -webkit-overflow-scrolling: touch;
-            width: 100%;
+        
+        /* Fix for Safari iOS specific issues */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                -webkit-text-size-adjust: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Prevent zoom on input focus in Safari iOS */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+            
+            /* Fix Safari iOS viewport issues */
+            .hero {
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+            }
+            
+            /* Improve scrolling performance */
+            html {
+                height: 100%;
+                width: 100%;
+            }
+            
+            body {
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+                position: relative;
+            }
+        }
+        
+        /* Additional Safari iOS fixes */
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            /* Retina display optimizations */
+            .btn, .feature-card, .protection-layer {
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
         }
 
-        /* Typography */
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            word-wrap: break-word;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            word-wrap: break-word;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--gray-dark);
-            line-height: 1.3;
-            margin-bottom: 0.75rem;
-            word-wrap: break-word;
-        }
-
-        h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--gray-dark);
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-            word-wrap: break-word;
-        }
-
-        h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--gray-dark);
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-        }
-
-        p, li {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            color: var(--gray-dark);
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav {
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--gray-light);
-            padding: 1rem;
+            box-shadow: var(--shadow);
             z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray-dark);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            min-width: 44px;
-            min-height: 44px;
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 2rem;
+            list-style: none;
         }
 
-        .side-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: var(--white);
-            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-            transition: right 0.3s ease;
-            z-index: 1001;
-            padding: 5rem 1.5rem 1.5rem;
-            overflow-y: auto;
-        }
-
-        .side-menu.active {
-            right: 0;
-        }
-
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-item {
-            display: block;
-            padding: 1rem 0;
+        .nav-links a {
             text-decoration: none;
             color: var(--gray-dark);
             font-weight: 500;
-            border-bottom: 1px solid var(--gray-light);
-            transition: color 0.2s ease;
-            font-size: 0.95rem;
+            transition: color 0.3s;
         }
 
-        .menu-item:hover {
+        .nav-links a:hover {
             color: var(--primary-color);
         }
 
-        /* Main Content */
-        .main-content {
-            margin-top: 70px;
-            padding: 0;
-        }
-
-        section {
-            padding: 2rem 1rem;
-            max-width: 100%;
-            overflow: hidden;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
-            padding: 3rem 1rem;
-            text-align: center;
-            min-height: 80vh;
-            display: flex;
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
             flex-direction: column;
-            justify-content: center;
+            cursor: pointer;
+            padding: 0.5rem;
         }
 
-        .value-proposition {
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--gray-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-links a {
+                padding: 0.8rem 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .btn {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+            
+            .mobile-menu-toggle {
+                min-height: 48px;
+                min-width: 48px;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-dark);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+
+        /* Pain Points */
+        .pain-section {
+            background: var(--gray-light);
+        }
+
+        .pain-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .chat-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chat-box {
             background: white;
             border-radius: 1rem;
-            box-shadow: var(--shadow);
             padding: 2rem;
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-
-        .value-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .value-highlight {
-            margin-top: 1rem;
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Card System */
-        .card-container {
-            padding: 0 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
             box-shadow: var(--shadow);
-            border: 1px solid var(--gray-light);
-            max-width: 100%;
-            box-sizing: border-box;
+            height: 600px;
+            overflow-y: auto;
+            position: relative;
         }
 
-        .section-header {
-            text-align: center;
-            padding: 2rem 1rem 1rem;
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--gray-medium);
-            line-height: 1.5;
-        }
-
-        /* Chat Comparison */
-        .chat-comparison {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .chat-container {
-            background: var(--gray-light);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            max-width: 100%;
-        }
-
-        .chat-header {
-            text-align: center;
-            font-weight: 600;
+        .chat-box h3 {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem 0;
             margin-bottom: 1rem;
-            padding: 0.5rem;
-            border-radius: 6px;
+            border-bottom: 2px solid var(--gray-light);
+            z-index: 10;
         }
 
-        .chat-header.old {
-            background: var(--danger-color);
-            color: var(--white);
+        .chat-box.traditional h3 {
+            color: var(--danger-color);
         }
 
-        .chat-header.new {
-            background: var(--success-color);
-            color: var(--white);
+        .chat-box.ai h3 {
+            color: var(--success-color);
         }
 
-        .chat-message {
-            background: var(--white);
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            max-width: 100%;
-            box-sizing: border-box;
+        .message {
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: messageSlide 0.5s ease-out forwards;
         }
 
-        .chat-message.user {
+        .message.user {
+            text-align: right;
+        }
+
+        .message.system {
+            text-align: left;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            max-width: 80%;
+        }
+
+        .user .message-bubble {
             background: var(--primary-color);
-            color: var(--white);
-            margin-left: 2rem;
+            color: white;
         }
 
-        .chat-message.system {
-            background: var(--white);
+        .system .message-bubble {
+            background: var(--gray-light);
             color: var(--gray-dark);
-            margin-right: 2rem;
-            font-family: monospace;
-            font-size: 0.75rem;
-            white-space: pre-line;
+        }
+
+        .traditional .system .message-bubble {
+            background: #FEE2E2;
+            color: var(--danger-color);
+        }
+
+        .ai .system .message-bubble {
+            background: #D1FAE5;
+            color: #065F46;
         }
 
         /* Protection Layers */
+        .protection-section {
+            padding: 4rem 2rem;
+        }
+
         .protection-layers {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 3rem;
+            position: relative;
         }
 
         .layer {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
             box-shadow: var(--shadow);
-            border-left: 4px solid var(--primary-color);
-            max-width: 100%;
-            box-sizing: border-box;
+            transition: transform 0.3s;
+            z-index: 1;
+        }
+
+        .layer:hover {
+            transform: translateY(-10px);
         }
 
         .layer-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2rem;
-            margin-bottom: 1rem;
+            color: white;
         }
 
         .layer h4 {
             color: var(--primary-color);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
-        .growth-bar {
+        /* Self Learning Section */
+        .learning-section {
             background: var(--gray-light);
-            height: 20px;
-            border-radius: 10px;
+            padding: 4rem 2rem;
+        }
+
+        .learning-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .evolution-process {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--accent-color);
             margin: 1rem 0;
+        }
+
+        .learning-results {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .growth-bar-mini {
+            background: #E5E7EB;
+            height: 35px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
             overflow: hidden;
-            position: relative;
         }
 
-        .growth-fill {
-            background: var(--success-color);
+        .growth-stage {
             height: 100%;
-            width: 60%;
-            border-radius: 10px;
-            position: relative;
-            transition: width 2s ease;
-        }
-
-        .growth-label {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
             color: white;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            transition: width 1s ease-out;
         }
 
-        /* Learning System */
-        .learning-container {
-            max-width: 100%;
+        .method-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
             padding: 1rem;
             background: var(--gray-light);
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
-        }
-
-        .learning-status {
-            background: #FEF3C7;
-            padding: 1.5rem;
             border-radius: 0.5rem;
-            margin-bottom: 2rem;
         }
 
-        .learning-status p {
-            color: #92400E;
-            margin: 0;
-            line-height: 1.6;
+        .method-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
         }
 
-        .learning-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-
-        .learning-stage {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            position: relative;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .learning-stage::before {
-            content: '';
-            position: absolute;
-            left: -2px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        .stage-features {
-            list-style: none;
-            padding: 0;
-        }
-
-        .stage-features li {
-            padding: 0.25rem 0;
-            font-size: 0.9rem;
-        }
-
-        /* Growth Sources */
-        .growth-sources {
-            margin: 2rem 0;
-        }
-
-        .source-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .source-item {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--gray-light);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .source-item:last-child {
-            border-bottom: none;
-        }
-
-        .source-title {
-            font-weight: 600;
+        .method-content strong {
+            color: var(--primary-color);
+            display: block;
             margin-bottom: 0.25rem;
         }
 
-        .source-desc {
-            font-size: 0.85rem;
-            color: var(--gray-medium);
+        .method-content p {
+            margin: 0;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
         }
 
-        /* FAQ Optimization */
-        .faq-optimization {
-            background: var(--gray-light);
+        .learning-benefits {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: white;
             padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
-        }
-
-        .analysis-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
-
-        .analysis-step {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            border-radius: 0.5rem;
             text-align: center;
-            max-width: 100%;
-            box-sizing: border-box;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
 
-        .analysis-arrow {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            transform: rotate(90deg);
-            margin: 0.5rem 0;
+        .benefit-card:hover {
+            transform: translateY(-5px);
         }
 
-        .example-box {
+        .benefit-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Success Metrics */
+        .metrics-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
             background: var(--gray-light);
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
 
-        .suggestion-box {
-            background: var(--accent-color);
-            color: white;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
+        .metric-card:hover {
+            transform: translateY(-5px);
         }
 
-        /* Features Grid */
-        .features-grid {
+        .metric-item {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Technical Features */
+        .features-section {
+            background: var(--gray-light);
+            padding: 4rem 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .feature-item {
-            background: var(--white);
+            background: white;
             padding: 1.5rem;
-            border-radius: var(--border-radius);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
             box-shadow: var(--shadow);
-            max-width: 100%;
-            box-sizing: border-box;
+            transform: translateX(5px);
         }
 
         .feature-title {
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
             font-weight: 600;
-            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
         }
 
         .feature-desc {
             color: var(--gray-dark);
-            line-height: 1.6;
             font-size: 0.9rem;
         }
 
-        /* Architecture */
-        .architecture-diagram {
+        /* FAQ Optimization Styles */
+        .faq-optimization {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .analysis-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .analysis-step {
             background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            min-height: 280px;
+        }
+
+        .analysis-step h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .data-example {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+        }
+
+        .count {
+            font-weight: 700;
+            color: var(--accent-color);
+            white-space: nowrap;
+            margin-right: 1rem;
+        }
+
+        .question {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .pattern-box, .suggestion-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .pattern-box p, .suggestion-box p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .alert-tag {
+            display: inline-block;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-suggestion {
+            background: #F0FDF4;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-a {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .analysis-arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+            justify-self: center;
+        }
+
+        /* Responsive adjustment for analysis flow */
+        @media (max-width: 1200px) {
+            .analysis-flow {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .analysis-arrow {
+                transform: rotate(90deg);
+                margin: -1rem 0;
+            }
+            
+            .analysis-step {
+                min-height: auto;
+            }
+        }
+
+        .optimization-cases {
+            margin-top: 3rem;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .case-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .case-header {
+            margin-bottom: 1rem;
+        }
+
+        .case-type {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .before-after {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .before, .after {
+            padding: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+        }
+
+        .before {
+            border-left: 3px solid var(--danger-color);
+        }
+
+        .after {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .improvement {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-align: center;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Technical Architecture Section */
+        .architecture-section {
+            background: var(--gray-light);
+            padding: 4rem 2rem;
+        }
+
+        .architecture-diagram {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+            max-width: 1000px;
+            box-shadow: var(--shadow);
         }
 
         .arch-flow {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            justify-content: center;
             align-items: center;
-            margin: 1.5rem 0;
+            gap: 1rem;
         }
 
         .arch-component {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
             text-align: center;
+            transition: all 0.3s;
+        }
+
+        .arch-component.highlight {
+            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+            border: 2px solid var(--primary-color);
+        }
+
+        .arch-component:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow);
-            max-width: 200px;
-            width: 100%;
         }
 
         .arch-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
 
         .arch-label {
-            font-size: 0.9rem;
             font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .arch-label small {
+            display: block;
+            font-weight: normal;
             color: var(--gray-dark);
+            font-size: 0.8rem;
         }
 
         .arch-arrow {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: var(--accent-color);
-            transform: rotate(90deg);
-            margin: 0.5rem 0;
         }
 
-        /* Hybrid Search */
+        /* Hybrid Search Diagram */
         .hybrid-search {
-            background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: var(--shadow);
         }
 
         .search-diagram {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
             align-items: center;
-            margin: 1.5rem 0;
+            gap: 2rem;
         }
 
-        .search-input,
-        .search-path,
-        .search-result {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .input-box {
+        .input-box, .merge-box {
             background: var(--primary-color);
-            color: var(--white);
-            padding: 0.75rem;
-            border-radius: 6px;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
             font-weight: 600;
         }
 
         .search-split {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            gap: 4rem;
             width: 100%;
-            align-items: center;
+            justify-content: center;
         }
 
-        /* Tech Specs */
-        .tech-specs {
+        .search-path {
             background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .search-path h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-box {
+            background: var(--success-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        /* Technical Specs */
+        .tech-specs {
+            margin: 3rem auto;
+            max-width: 1000px;
         }
 
         .specs-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
         }
 
         .spec-card {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
             text-align: center;
             box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
         }
 
         .spec-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .spec-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            word-wrap: break-word;
-        }
-
-        .spec-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.25rem;
-        }
-
-        .spec-detail {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
-            word-wrap: break-word;
-        }
-
-        /* Monitoring */
-        .monitor-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
 
-        .monitor-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-            margin-top: 1rem;
+        .spec-title {
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
         }
 
-        .metric-item {
-            background: var(--gray-light);
-            padding: 0.75rem;
-            border-radius: 6px;
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 1.1rem;
+        .spec-value {
+            font-size: 2rem;
             font-weight: 700;
             color: var(--primary-color);
-            display: block;
+            margin-bottom: 0.5rem;
         }
 
-        .metric-label {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
+        .spec-detail {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
         }
 
-        /* Vector Database */
-        .vector-demo {
+        /* Monitoring Preview */
+        .monitoring-preview {
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .monitor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .monitor-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .monitor-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-row span:first-child {
+            width: 100px;
+            font-size: 0.9rem;
+        }
+
+        .metric-bar {
+            flex: 1;
+            height: 20px;
             background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
-        .vector-space {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            margin: 1rem 0;
+        .metric-fill {
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 1s ease-out;
+        }
+
+        .metric-bar.success .metric-fill {
+            background: var(--success-color);
+        }
+
+        .monitor-stats {
+            display: flex;
+            justify-content: space-around;
             text-align: center;
         }
 
-        .vector-point {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            margin: 2px;
+        .stat-item {
+            padding: 1rem;
         }
 
-        /* API Grid */
-        .api-grid {
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        /* Advanced Technical Section */
+        .advanced-tech-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        /* Vector Visualization */
+        .vector-viz {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+
+        .vector-explanation {
+            text-align: center;
+        }
+
+        .vector-demo {
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin: 1.5rem 0;
+            justify-content: space-around;
+            margin: 2rem 0;
+            min-height: 300px;
         }
 
-        .api-current,
-        .api-future {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
+        .vector-cluster {
+            position: relative;
+            width: 300px;
+            height: 250px;
+            background: white;
+            border-radius: 50%;
             box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .cluster-title {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vector-points {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .point {
+            position: absolute;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .point:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* API Integration */
+        .api-potential {
+            margin: 3rem auto;
+            max-width: 1200px;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .api-current, .api-future {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 1rem;
         }
 
         .api-item {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
             padding: 1rem;
-            margin: 0.5rem 0;
-            background: var(--gray-light);
-            border-radius: 8px;
+            background: white;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .api-item.active {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .api-item.future {
+            border-left: 3px solid var(--accent-color);
+            opacity: 0.8;
+        }
+
+        .api-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
         }
 
         .api-icon {
             font-size: 2rem;
-            margin-bottom: 0.5rem;
+            margin-right: 1rem;
         }
 
-        .api-name {
-            font-weight: 600;
+        .api-info strong {
+            display: block;
+            color: var(--primary-color);
             margin-bottom: 0.25rem;
-            font-size: 0.9rem;
         }
 
-        .api-desc {
-            font-size: 0.8rem;
-            color: var(--gray-medium);
-            line-height: 1.4;
+        .api-info p {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+            margin: 0;
         }
 
         /* Analytics Dashboard */
         .analytics-dashboard {
             background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
         }
 
         .dashboard-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
         }
 
         .dashboard-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
             box-shadow: var(--shadow);
         }
 
-        .ranking-list {
-            max-width: 100%;
+        .dashboard-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
 
+        /* Ranking List */
         .rank-item {
             display: flex;
             align-items: center;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            background: var(--gray-light);
-            border-radius: 6px;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--gray-light);
         }
 
         .rank-number {
-            background: var(--primary-color);
-            color: var(--white);
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-color);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 0.8rem;
-            margin-right: 0.75rem;
-            flex-shrink: 0;
+            font-weight: bold;
+            margin-right: 1rem;
         }
 
         .rank-question {
             flex: 1;
-            font-size: 0.85rem;
-            line-height: 1.4;
+        }
+
+        .rank-count {
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        /* Time Chart */
+        .time-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            padding-bottom: 30px; /* 增加底部空間給標籤 */
+        }
+
+        .time-bar {
+            width: 40px;
+            background: linear-gradient(to top, var(--primary-color), var(--accent-color));
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .time-bar span {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        .time-bar:hover {
+            transform: scaleY(1.1);
+        }
+
+        /* Intent Stats */
+        .intent-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .intent-label {
+            width: 80px;
+            font-size: 0.9rem;
+        }
+
+        .bar-bg {
+            flex: 1;
+            height: 20px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            transition: width 1s ease-out;
+        }
+
+        .intent-percent {
+            width: 40px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Emotion Trend */
+        .emotion-trend {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .emotion-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .emotion-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .emotion-label {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .emotion-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
         }
 
         /* Cache Strategy */
+        .cache-strategy {
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
         .cache-flow {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
             align-items: center;
-            margin: 1.5rem 0;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
         .cache-step {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
             text-align: center;
-            max-width: 100%;
-            box-sizing: border-box;
+            min-width: 150px;
         }
 
-        .cache-decision {
+        .cache-step.highlight {
+            background: linear-gradient(135deg, #FEF3C7, #FEE2E2);
+            border: 2px solid var(--accent-color);
+        }
+
+        .cache-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cache-arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .cache-result {
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            width: 100%;
         }
 
-        .cache-hit,
-        .cache-miss {
-            background: var(--white);
+        .result-fast, .result-slow {
+            background: white;
             padding: 1rem;
-            border-radius: var(--border-radius);
+            border-radius: 0.5rem;
             box-shadow: var(--shadow);
+        }
+
+        .result-fast {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .result-slow {
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .cache-benefits {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
             text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            flex: 1;
+            margin: 0 1rem;
         }
 
-        .cache-hit {
-            border-left: 4px solid var(--success-color);
+        .benefit-item strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
-        .cache-miss {
-            border-left: 4px solid var(--accent-color);
+        /* Security Section */
+        .security-section {
+            background: white;
+            padding: 4rem 2rem;
         }
 
-        /* Security */
+        .security-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+
+        .security-foundation {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
         .security-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
         .security-item {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
             text-align: center;
             box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .security-item:hover {
+            transform: translateY(-5px);
         }
 
         .security-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .security-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .security-desc {
-            font-size: 0.75rem;
-            color: var(--gray-medium);
-            line-height: 1.4;
-        }
-
-        /* Data Protection */
-        .protection-practices {
-            background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
-        }
-
-        .practice-item {
-            background: var(--white);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            margin: 0.75rem 0;
-            box-shadow: var(--shadow);
-        }
-
-        .practice-title {
-            font-weight: 600;
+        .security-item h4 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
-        .practice-desc {
+        .security-item p {
             font-size: 0.9rem;
-            line-height: 1.5;
+            color: var(--gray-dark);
+        }
+
+        .data-protection {
+            margin-bottom: 3rem;
+        }
+
+        .protection-practice {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .practice-item {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .practice-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .practice-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .practice-header strong {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .practice-item ul {
+            list-style: none;
+            padding-left: 3rem;
+        }
+
+        .practice-item li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--gray-dark);
+        }
+
+        .practice-item li:before {
+            content: "✓";
+            position: absolute;
+            left: -1.5rem;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .security-commitment {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-top: 3rem;
+        }
+
+        .commitment-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .commitment-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .commitment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .commitment-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .commitment-card p {
+            font-size: 0.9rem;
             color: var(--gray-dark);
         }
 
         /* Cost Calculator */
-        .calculator {
+        .calculator-section {
             background: var(--gray-light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 1.5rem 0;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
         }
 
         .input-group {
@@ -964,8 +1503,8 @@
 
         .input-group label {
             display: block;
-            margin-bottom: 0.5rem;
             font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
         .slider {
@@ -984,192 +1523,86 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: var(--primary-color);
+            background: var(--accent-color);
             cursor: pointer;
         }
 
         .cost-breakdown {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
             margin-top: 2rem;
+            padding: 2rem;
+            background: var(--gray-light);
+            border-radius: 0.5rem;
         }
 
         .cost-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            background: var(--gray-light);
-            border-radius: 6px;
-        }
-
-        .cost-label {
-            font-size: 0.9rem;
-            color: var(--gray-dark);
-        }
-
-        .cost-value {
-            font-weight: 600;
-            color: var(--primary-color);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #E5E7EB;
         }
 
         .cost-total {
-            background: var(--primary-color);
-            color: var(--white);
+            font-size: 1.5rem;
             font-weight: 700;
+            color: var(--primary-color);
             margin-top: 1rem;
-        }
-
-        /* Metrics */
-        .metrics-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .metric-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-
-        .metric-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .metric-list-item {
-            display: flex;
-            align-items: flex-start;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .metric-list-item:last-child {
-            border-bottom: none;
-        }
-
-        .metric-icon {
-            font-size: 1rem;
-            margin-right: 0.75rem;
-            margin-top: 0.125rem;
-            min-width: 20px;
-        }
-
-        .metric-text {
-            flex: 1;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary-color);
         }
 
         /* CTA Section */
         .cta-section {
             background: var(--primary-color);
-            color: var(--white);
-            padding: 3rem 1rem;
+            color: white;
             text-align: center;
-            margin-top: 3rem;
+            padding: 4rem 2rem;
         }
 
-        .cta-section h2 {
-            color: var(--white);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        .cta-section h3 {
-            color: var(--white);
-            margin-bottom: 0.75rem;
-        }
-
-        .cta-content {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 2rem;
-            align-items: center;
-        }
-
-        /* Buttons */
-        .btn {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
+        .cta-button {
             display: inline-block;
-            transition: all 0.2s ease;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0.5rem 0;
-            max-width: 280px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .btn:hover {
-            background: #1E40AF;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--white);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .btn-accent {
+            padding: 1rem 2rem;
             background: var(--accent-color);
-            color: var(--white);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .btn-accent:hover {
-            background: #EA580C;
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
         }
 
-        /* Footer */
-        .footer {
-            background: var(--gray-dark);
-            color: var(--white);
-            padding: 2rem 1rem;
-            text-align: center;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .footer-text {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 0;
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        /* Fade in animation */
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
 
         .fade-in.visible {
@@ -1177,1153 +1610,1678 @@
             transform: translateY(0);
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 360px) {
-            h1 { font-size: 1.5rem; }
-            h2 { font-size: 1.3rem; }
-            h3 { font-size: 1.1rem; }
-            .card, .layer, .feature-item { padding: 1rem; }
-            .specs-grid, .security-grid { grid-template-columns: 1fr; }
-            .monitor-metrics { grid-template-columns: 1fr; }
+        /* Growth Animation */
+        .growth-bar {
+            width: 100%;
+            height: 40px;
+            background: var(--gray-light);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 2rem 0;
         }
 
-        html {
-            scroll-behavior: smooth;
+        .growth-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color) 0%, var(--primary-color) 100%);
+            border-radius: 20px;
+            width: 60%;
+            position: relative;
+            transition: width 2s ease-out;
+        }
+
+        .growth-fill.animate {
+            width: 85%;
+        }
+
+        .growth-label {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: var(--shadow);
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-container {
+                position: relative;
+                padding: 0 1rem;
+            }
+            
+            nav {
+                padding: 0.5rem 0;
+            }
+            
+            section {
+                padding: 2.5rem 1rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                line-height: 1.3;
+                margin-bottom: 1.5rem;
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                line-height: 1.4;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+                line-height: 1.4;
+                margin-bottom: 0.8rem;
+            }
+            
+            p, li {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                line-height: 1.5;
+                margin-bottom: 2rem;
+                word-wrap: break-word;
+            }
+            
+            .hero {
+                min-height: 90vh;
+                padding: 80px 1rem 2rem;
+                text-align: center;
+            }
+            
+            .chat-comparison {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .protection-layers {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .pricing-tiers {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* Fix potential overflow elements */
+            .feature-card, .protection-layer, .tech-card, .case-card {
+                padding: 1.5rem;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Text containers */
+            .chat-bubble, .pain-point, .solution-item {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                line-height: 1.4;
+                margin-bottom: 0.8rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+                line-height: 1.4;
+            }
+            
+            p, li {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 0.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                line-height: 1.5;
+                padding: 0 0.5rem;
+            }
+            
+            section {
+                padding: 1.5rem 0.75rem;
+            }
+            
+            .nav-container {
+                padding: 0 0.75rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .btn {
+                font-size: 0.95rem;
+                padding: 0.8rem 1rem;
+                margin: 0.5rem 0;
+            }
+            
+            .feature-card, .protection-layer, .tech-card, .case-card {
+                padding: 1.2rem;
+                margin: 0.5rem 0;
+            }
+            
+            /* Better text spacing for small screens */
+            .chat-bubble {
+                padding: 1rem;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            
+            .pain-point, .solution-item {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Ensure no horizontal scroll */
+            .hero, .nav-links, .feature-grid, .stats-grid {
+                max-width: 100vw;
+                overflow: hidden;
+            }
+        }
+        
+        /* Ultra small screens */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.6rem;
+                line-height: 1.2;
+                padding: 0 0.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                line-height: 1.3;
+            }
+            
+            .subtitle {
+                font-size: 0.95rem;
+                line-height: 1.4;
+                padding: 0 0.5rem;
+            }
+            
+            section {
+                padding: 1rem 0.5rem;
+            }
+            
+            .feature-card, .protection-layer, .tech-card, .case-card {
+                padding: 0.8rem;
+                margin: 0.3rem 0;
+            }
+            
+            .btn {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.85rem;
+                margin: 0.3rem 0;
+            }
+            
+            .nav-container {
+                padding: 0 0.5rem;
+            }
+            
+            .nav-links {
+                padding: 0.8rem 1rem;
+            }
+        }
+        
+        /* Global overflow prevention */
+        .container, .section, .grid, .flex {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Fix any potential wide elements */
+        img, video, iframe, canvas, svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Text overflow handling */
+        .text-content, .description, .content {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        /* Mobile fixes for specific problematic sections */
+        @media (max-width: 768px) {
+            /* Learning Section Mobile Fixes */
+            .learning-section {
+                padding: 2rem 1rem;
+                overflow: hidden;
+            }
+            
+            .learning-container {
+                max-width: 100%;
+                padding: 1rem;
+                overflow: hidden;
+            }
+            
+            .learning-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem;
+            }
+            
+            .learning-stage {
+                padding: 1rem;
+                margin: 0.5rem 0;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            /* Architecture Diagram Mobile Fixes */
+            .architecture-diagram {
+                padding: 1rem;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .arch-flow {
+                flex-direction: column !important;
+                gap: 1rem;
+                align-items: center;
+                max-width: 100%;
+            }
+            
+            .arch-component {
+                min-width: auto;
+                max-width: 200px;
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+            
+            .arch-arrow {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+            
+            /* Hybrid Search Mobile Fixes */
+            .hybrid-search {
+                padding: 1rem;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .search-diagram {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .search-split {
+                flex-direction: column !important;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .search-path {
+                min-width: auto;
+                max-width: 100%;
+                margin: 0.5rem 0;
+            }
+            
+            .search-result {
+                max-width: 100%;
+                margin: 0.5rem 0;
+            }
+            
+            /* Technical Specs Mobile Fixes */
+            .tech-specs {
+                padding: 1rem;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem;
+            }
+            
+            .spec-card {
+                padding: 1rem;
+                min-height: auto;
+                text-align: center;
+            }
+            
+            .spec-title {
+                font-size: 0.9rem;
+                word-wrap: break-word;
+            }
+            
+            .spec-value {
+                font-size: 1.2rem;
+            }
+            
+            .spec-detail {
+                font-size: 0.8rem;
+                word-wrap: break-word;
+            }
+            
+            /* API Integration Mobile Fixes */
+            .api-potential {
+                padding: 1rem;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .api-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+                margin-top: 1rem;
+            }
+            
+            .api-current, .api-future {
+                max-width: 100%;
+                padding: 1rem;
+                box-sizing: border-box;
+            }
+            
+            .api-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+                margin: 0.5rem 0;
+                gap: 0.5rem;
+            }
+            
+            .api-icon {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .api-info {
+                max-width: 100%;
+            }
+            
+            .api-name {
+                font-size: 0.9rem;
+                word-wrap: break-word;
+            }
+            
+            .api-desc {
+                font-size: 0.8rem;
+                word-wrap: break-word;
+                line-height: 1.4;
+            }
+            
+            /* Analytics Dashboard Mobile Fixes */
+            .analytics-dashboard {
+                padding: 1.5rem 1rem;
+                max-width: 100%;
+                overflow: hidden;
+                margin: 2rem auto;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem;
+            }
+            
+            .dashboard-card {
+                padding: 1rem;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .ranking-list, .chart-container, .metric-row {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            
+            .rank-item, .metric-item {
+                padding: 0.8rem;
+                margin: 0.3rem 0;
+                font-size: 0.9rem;
+                word-wrap: break-word;
+            }
+            
+            .rank-number, .metric-value {
+                font-size: 1rem;
+                min-width: auto;
+            }
+            
+            .rank-question, .metric-label {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                word-wrap: break-word;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small screen fixes */
+            .learning-section {
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .arch-component {
+                max-width: 150px;
+                padding: 0.8rem;
+            }
+            
+            .arch-label {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
+            
+            .search-diagram {
+                gap: 1rem;
+            }
+            
+            .input-box, .search-path, .search-result {
+                font-size: 0.85rem;
+                padding: 0.8rem;
+                margin: 0.3rem 0;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.8rem;
+            }
+            
+            .spec-card {
+                padding: 0.8rem;
+            }
+            
+            .spec-icon {
+                font-size: 1.5rem;
+            }
+            
+            .spec-title {
+                font-size: 0.85rem;
+            }
+            
+            .spec-value {
+                font-size: 1.1rem;
+            }
+            
+            .spec-detail {
+                font-size: 0.75rem;
+            }
+            
+            /* API Integration Extra Small Screen */
+            .api-potential {
+                padding: 0.8rem 0.5rem;
+            }
+            
+            .api-grid {
+                gap: 1.5rem;
+            }
+            
+            .api-current, .api-future {
+                padding: 0.8rem;
+            }
+            
+            .api-item {
+                padding: 0.8rem;
+                margin: 0.3rem 0;
+            }
+            
+            .api-icon {
+                font-size: 1.8rem;
+            }
+            
+            .api-name {
+                font-size: 0.85rem;
+            }
+            
+            .api-desc {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+            
+            /* Analytics Dashboard Extra Small Screen */
+            .analytics-dashboard {
+                padding: 1rem 0.5rem;
+                margin: 1.5rem auto;
+            }
+            
+            .dashboard-grid {
+                gap: 1rem;
+            }
+            
+            .dashboard-card {
+                padding: 0.8rem;
+            }
+            
+            .dashboard-card h4 {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .rank-item, .metric-item {
+                padding: 0.6rem;
+                font-size: 0.85rem;
+            }
+            
+            .rank-number, .metric-value {
+                font-size: 0.9rem;
+            }
+            
+            .rank-question, .metric-label {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav">
-        <div class="logo">Sibyl AI</div>
-        <button class="menu-toggle" id="menuToggle">☰</button>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <h2 style="color: var(--primary-color);">Sibyl AI</h2>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">首頁</a></li>
+                <li><a href="#pain">痛點分析</a></li>
+                <li><a href="#solution">解決方案</a></li>
+                <li><a href="#learning">智慧進化</a></li>
+                <li><a href="#features">技術特色</a></li>
+                <li><a href="#architecture">技術架構</a></li>
+                <li><a href="#advanced-tech">進階技術</a></li>
+                <li><a href="#security">資訊安全</a></li>
+                <li><a href="#cost">成本分析</a></li>
+                <li><a href="#metrics">成效指標</a></li>
+                <li><a href="#cta">立即行動</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Side Menu -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <div class="side-menu" id="sideMenu">
-        <a href="#hero" class="menu-item">首頁</a>
-        <a href="#pain" class="menu-item">痛點分析</a>
-        <a href="#solution" class="menu-item">解決方案</a>
-        <a href="#learning" class="menu-item">智慧進化</a>
-        <a href="#features" class="menu-item">技術特色</a>
-        <a href="#architecture" class="menu-item">技術架構</a>
-        <a href="#advanced-tech" class="menu-item">進階技術</a>
-        <a href="#security" class="menu-item">資訊安全</a>
-        <a href="#cost" class="menu-item">成本分析</a>
-        <a href="#metrics" class="menu-item">成效指標</a>
-        <a href="#cta" class="menu-item">立即行動</a>
-    </div>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div>
             <h1>突破 LINE OA 限制</h1>
             <p class="subtitle">GPT-4o 賦能的智慧客服系統</p>
-            
-            <div class="value-proposition">
-                <p class="value-title">🎯 核心價值主張</p>
+            <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto;">
+                <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600; margin-bottom: 1rem;">
+                    🎯 核心價值主張
+                </p>
                 <p>我們的同仁已在 LINE OA 框架內盡心設計完整服務，<br>
                 但工具的限制讓優質服務難以傳達給客戶。</p>
-                <p class="value-highlight">
+                <p style="margin-top: 1rem; color: var(--accent-color); font-weight: 600;">
                     Sibyl AI 不是推翻重來，而是技術突破！
                 </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Pain Points -->
-        <section id="pain">
-            <div class="section-header">
-                <h2>LINE OA 框架限制 vs Sibyl AI 突破</h2>
-                <p class="section-subtitle">真實案例：客戶想了解塔位價格</p>
+    <!-- Pain Points Section -->
+    <section id="pain" class="pain-section">
+        <div class="pain-header fade-in">
+            <h2 style="color: var(--primary-color); margin-bottom: 1rem;">LINE OA 框架限制 vs Sibyl AI 突破</h2>
+            <p style="font-size: 1.2rem;">真實案例：客戶想了解塔位價格</p>
+        </div>
+
+        <div class="chat-comparison">
+            <!-- Traditional Chat -->
+            <div class="chat-box traditional">
+                <h3>LINE OA 框架限制下的體驗 ❌</h3>
+                <div id="traditional-chat"></div>
             </div>
 
-            <div class="card-container">
-                <div class="chat-comparison fade-in">
-                    <div class="chat-container">
-                        <div class="chat-header old">LINE OA 框架限制下的體驗 ❌</div>
-                        <div class="chat-message user">我想了解塔位價格</div>
-                        <div class="chat-message system">❤️親愛的五湖園貴賓您好!
-歡迎使用自動回覆查詢
-⭐服務時間          請輸入 1
-⭐優惠新訊          請輸入 2
-⭐交通資訊          請輸入 3
-⭐年度祭典日期      請輸入 4
-⭐各類法會介紹      請輸入 5
-⭐法會報名表        請輸入 6
-⭐法會報名辦法&匯款  請輸入 7
-⭐報名查詢及線上追思 請輸入 8
-⭐佛事預約          請輸入 9</div>
-                        <div class="chat-message user">有哪些樓層可以選擇？</div>
-                        <div class="chat-message system">❤️親愛的五湖園貴賓您好!
-歡迎使用自動回覆查詢
-⭐服務時間          請輸入 1
-⭐優惠新訊          請輸入 2
-⭐交通資訊          請輸入 3
-⭐年度祭典日期      請輸入 4
-⭐各類法會介紹      請輸入 5
-⭐法會報名表        請輸入 6
-⭐法會報名辦法&匯款  請輸入 7
-⭐報名查詢及線上追思 請輸入 8
-⭐佛事預約          請輸入 9</div>
-                    </div>
+            <!-- AI Chat -->
+            <div class="chat-box ai">
+                <h3>Sibyl AI 突破限制後的體驗 ✓</h3>
+                <div id="ai-chat"></div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="chat-container">
-                        <div class="chat-header new">Sibyl AI 突破限制後的體驗 ✓</div>
-                        <div class="chat-message user">我想了解塔位價格</div>
-                        <div class="chat-message system">您好！五湖園的塔位價格從 8 萬元起（已含 12% 管理費），依據位置、樓層和大小有不同選擇。目前正值優惠期間，歡迎您預約參觀，我們可以根據您的需求推薦最適合的方案。</div>
-                        <div class="chat-message user">有哪些樓層可以選擇？</div>
-                        <div class="chat-message system">我們有多個樓層可供選擇，每層都有不同的景觀特色。低樓層可欣賞園區綠意，高樓層視野開闊。建議您親自來參觀，感受不同樓層的氛圍，我們的專業團隊會詳細為您介紹每個位置的特色。</div>
+    <!-- Protection Layers Section -->
+    <section id="solution" class="protection-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">三層防護機制，確保服務品質</h2>
+            <p style="text-align: center; font-size: 1.2rem;">智慧處理常規問題，人工專注高價值服務</p>
+        </div>
+
+        <div class="protection-layers fade-in">
+            <div class="layer">
+                <div class="layer-icon">📚</div>
+                <h4>第一層：智慧成長知識庫</h4>
+                <p>不只回答問題<br>還會主動學習</p>
+                <div class="growth-bar">
+                    <div class="growth-fill" id="growth-bar">
+                        <span class="growth-label">60%</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Protection Layers -->
-        <section id="solution">
-            <div class="section-header">
-                <h2>三層防護機制，確保服務品質</h2>
-                <p class="section-subtitle">智慧處理常規問題，人工專注高價值服務</p>
+                <p style="color: var(--success-color); font-weight: 600;">持續成長中...</p>
             </div>
 
-            <div class="card-container">
-                <div class="protection-layers fade-in">
-                    <div class="layer">
-                        <div class="layer-icon">📚</div>
-                        <h4>第一層：智慧成長知識庫</h4>
-                        <p>不只回答問題<br>還會主動學習</p>
-                        <div class="growth-bar">
-                            <div class="growth-fill">
-                                <span class="growth-label">60%</span>
-                            </div>
-                        </div>
-                        <p style="color: var(--success-color); font-weight: 600;">持續成長中...</p>
-                    </div>
+            <div class="layer">
+                <div class="layer-icon">🤖</div>
+                <h4>第二層：AI 智慧判斷</h4>
+                <p>GPT-4o 語意理解<br>信心度 < 70% 誠實告知</p>
+                <p style="margin-top: 1rem; color: var(--primary-color);">「我不太確定這個問題，<br>讓我請同仁為您解答」</p>
+            </div>
 
-                    <div class="layer">
-                        <div class="layer-icon">🤖</div>
-                        <h4>第二層：AI 智慧判斷</h4>
-                        <p>GPT-4o 語意理解<br>信心度 < 70% 誠實告知</p>
-                        <p style="margin-top: 1rem; color: var(--primary-color);">「我不太確定這個問題，<br>讓我請同仁為您解答」</p>
-                    </div>
+            <div class="layer">
+                <div class="layer-icon">👥</div>
+                <h4>第三層：人工接管</h4>
+                <p>敏感議題自動轉接<br>客服可隨時介入</p>
+                <p style="margin-top: 1rem; color: var(--accent-color);">永遠有人把關</p>
+            </div>
+        </div>
+    </section>
 
-                    <div class="layer">
-                        <div class="layer-icon">👥</div>
-                        <h4>第三層：人工接管</h4>
-                        <p>敏感議題自動轉接<br>客服可隨時介入</p>
-                        <p style="margin-top: 1rem; color: var(--accent-color);">永遠有人把關</p>
-                    </div>
+    <!-- Self Learning Section -->
+    <section id="learning" class="learning-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">自我進化的智慧系統</h2>
+            <p style="text-align: center; font-size: 1.2rem;">Sibyl 像新生兒，需要大家一起培育成長</p>
+        </div>
+
+        <div class="learning-container fade-in">
+            <!-- 左側：成長概念 -->
+            <div class="evolution-process">
+                <h3 style="color: var(--accent-color); margin-bottom: 2rem;">智慧成長之路</h3>
+                
+                <div style="background: #FEF3C7; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                    <p style="color: #92400E; margin: 0;">
+                        <strong>現況說明：</strong><br>
+                        Sibyl 剛誕生不久，就像一個聰明但需要學習的新生兒。
+                        她有強大的理解能力（GPT-4o），但對五湖園的專業知識還在學習中。
+                        每一次對話都是她的成長養分。
+                    </p>
                 </div>
-            </div>
-        </section>
 
-        <!-- Learning System -->
-        <section id="learning">
-            <div class="section-header">
-                <h2>自我進化的智慧系統</h2>
-                <p class="section-subtitle">Sibyl 像新生兒，需要大家一起培育成長</p>
-            </div>
-
-            <div class="card-container">
-                <div class="learning-container fade-in">
-                    <h3 style="color: var(--accent-color); margin-bottom: 2rem; text-align: center;">智慧成長之路</h3>
-                    
-                    <div class="learning-status">
-                        <p>
-                            <strong>現況說明：</strong><br>
-                            Sibyl 剛誕生不久，就像一個聰明但需要學習的新生兒。
-                            她有強大的理解能力（GPT-4o），但對五湖園的專業知識還在學習中。
-                            每一次對話都是她的成長養分。
-                        </p>
-                    </div>
-                    
-                    <div class="learning-timeline">
-                        <div class="learning-stage">
-                            <h4>現在：基礎知識期</h4>
-                            <ul class="stage-features">
-                                <li>✓ 具備強大的語言理解能力</li>
-                                <li>✓ 已建立基礎知識庫架構</li>
-                                <li>✓ 能處理基本客戶問題</li>
-                                <li>⏳ 持續學習五湖園專業知識</li>
-                                <li>⏳ 建立更多客戶服務情境</li>
-                            </ul>
-                        </div>
-
-                        <div class="learning-stage">
-                            <h4>3個月：快速成長期</h4>
-                            <ul class="stage-features">
-                                <li>📈 對話理解準確率達 85%</li>
-                                <li>🧠 開始理解客戶隱含需求</li>
-                                <li>💬 發展出自然的對話風格</li>
-                                <li>🔍 能主動提供相關資訊</li>
-                                <li>📊 協助優化服務流程</li>
-                            </ul>
-                        </div>
-
-                        <div class="learning-stage">
-                            <h4>6個月：成熟智慧期</h4>
-                            <ul class="stage-features">
-                                <li>🏆 成為五湖園專業智慧顧問</li>
-                                <li>💡 主動提供個人化建議</li>
-                                <li>🔮 預測客戶需求和趨勢</li>
-                                <li>📈 協助業務決策分析</li>
-                                <li>🤝 與團隊無縫協作</li>
-                            </ul>
-                        </div>
+                <div class="process-step">
+                    <div class="step-number">📚</div>
+                    <div class="step-content">
+                        <h4>現在：基礎知識期</h4>
+                        <p>掌握基本FAQ，能回答常見問題，但仍有許多知識缺口</p>
                     </div>
                 </div>
 
-                <!-- Growth Sources -->
-                <div class="card fade-in">
-                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">如何培育 Sibyl 成長</h3>
-                    
+                <div class="process-arrow">↓</div>
+
+                <div class="process-step">
+                    <div class="step-number">🌱</div>
+                    <div class="step-content">
+                        <h4>3個月：快速成長期</h4>
+                        <p>透過大量對話學習，FAQ覆蓋率顯著提升，回答更精準</p>
+                    </div>
+                </div>
+
+                <div class="process-arrow">↓</div>
+
+                <div class="process-step">
+                    <div class="step-number">🌳</div>
+                    <div class="step-content">
+                        <h4>6個月：成熟智慧期</h4>
+                        <p>累積豐富經驗，能處理複雜情境，成為真正的智慧助手</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：培育方式 -->
+            <div class="learning-results">
+                <h3 style="color: var(--primary-color); margin-bottom: 2rem;">如何培育 Sibyl 成長</h3>
+                
+                <div class="nurture-methods">
                     <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🍼 成長的養分來源</h4>
-                    <ul class="source-list">
-                        <li class="source-item">
-                            <div class="source-title">📞 真實客戶對話</div>
-                            <div class="source-desc">每一次互動都是學習機會</div>
-                        </li>
-                        <li class="source-item">
-                            <div class="source-title">✅ 專家回饋標註</div>
-                            <div class="source-desc">人工確認正確答案</div>
-                        </li>
-                        <li class="source-item">
-                            <div class="source-title">📝 新增知識內容</div>
-                            <div class="source-desc">持續擴充專業知識庫</div>
-                        </li>
-                        <li class="source-item">
-                            <div class="source-title">🔄 模式調整優化</div>
-                            <div class="source-desc">根據效果數據精調</div>
-                        </li>
-                        <li class="source-item">
-                            <div class="source-title">🤝 跨部門協作</div>
-                            <div class="source-desc">業務團隊共同培養</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- FAQ Optimization -->
-                <div class="faq-optimization fade-in">
-                    <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">智慧分析創建 FAQ 條目</h3>
                     
-                    <div class="analysis-flow">
-                        <div class="analysis-step">
-                            <h4>📥 Step 1: 收集對話數據</h4>
-                            <p>系統自動收集所有客戶對話記錄</p>
-                            <div class="example-box">
-                                範例：客戶詢問「拜桌服務包含什麼？」
-                            </div>
-                        </div>
-
-                        <div class="analysis-arrow">↓</div>
-
-                        <div class="analysis-step">
-                            <h4>🔍 Step 2: AI 模式識別</h4>
-                            <p>GPT-4o 分析相似問題，找出共同模式</p>
-                            <div class="example-box">
-                                發現：15位客戶都詢問拜桌服務內容
-                            </div>
-                        </div>
-
-                        <div class="analysis-arrow">↓</div>
-
-                        <div class="analysis-step">
-                            <h4>💡 Step 3: 自動建議</h4>
-                            <p>生成新的 FAQ 條目建議</p>
-                            <div class="suggestion-box">
-                                <strong>建議新增 FAQ：</strong><br>「拜桌服務詳細內容說明」
-                            </div>
+                    <div class="method-item">
+                        <div class="method-icon">💬</div>
+                        <div class="method-content">
+                            <strong>客戶對話</strong>
+                            <p>每次互動都讓 Sibyl 學習新的問答模式</p>
                         </div>
                     </div>
 
-                    <h4 style="text-align: center; margin: 2rem 0;">FAQ 優化實例</h4>
-                    <div class="card">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <div>
-                                <h5 style="color: var(--danger-color);">優化前 ❌</h5>
-                                <ul style="font-size: 0.85rem;">
-                                    <li>只有5個基本FAQ</li>
-                                    <li>70%問題無法回答</li>
-                                    <li>大量轉人工處理</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 style="color: var(--success-color);">優化後 ✅</h5>
-                                <ul style="font-size: 0.85rem;">
-                                    <li>擴充至50+個FAQ</li>
-                                    <li>90%問題即時解答</li>
-                                    <li>客戶滿意度提升</li>
-                                </ul>
-                            </div>
+                    <div class="method-item">
+                        <div class="method-icon">👥</div>
+                        <div class="method-content">
+                            <strong>團隊回饋</strong>
+                            <p>客服同仁糾正錯誤，補充專業知識</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">📊</div>
+                        <div class="method-content">
+                            <strong>數據分析</strong>
+                            <p>系統自動分析失敗案例，找出改善方向</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Learning Benefits -->
-                <div class="card fade-in">
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
-                        <div>
-                            <h4>🎯 初期目標</h4>
-                            <p style="font-size: 0.85rem;">建立穩定的基礎服務能力</p>
-                        </div>
-                        <div>
-                            <h4>📈 成長曲線</h4>
-                            <p style="font-size: 0.85rem;">每月效能持續提升</p>
-                        </div>
-                        <div>
-                            <h4>🤝 團隊協作</h4>
-                            <p style="font-size: 0.85rem;">與同仁共同培育AI智慧</p>
-                        </div>
-                        <div>
-                            <h4>🏆 未來願景</h4>
-                            <p style="font-size: 0.85rem;">成為最專業的智慧顧問</p>
-                        </div>
-                    </div>
+                <div style="background: #D1FAE5; padding: 1rem; border-radius: 0.5rem; margin-top: 1.5rem;">
+                    <p style="color: #065F46; margin: 0; font-weight: 600;">
+                        💡 關鍵理念：不是 Sibyl 不夠聰明，而是她還在學習五湖園的專業領域。
+                        就像培育孩子，需要耐心與時間。
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Features -->
-        <section id="features">
-            <div class="section-header">
-                <h2>技術優勢特色</h2>
-                <p class="section-subtitle">先進技術打造卓越服務體驗</p>
-            </div>
-
-            <div class="card-container">
-                <div class="features-grid fade-in">
-                    <div class="feature-item">
-                        <div class="feature-title">🧠 情感智慧引擎</div>
-                        <div class="feature-desc">準確理解情感狀態，提供溫暖支援</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">💾 智慧記憶系統</div>
-                        <div class="feature-desc">30天對話歷史，個性化服務體驗</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">🔄 雙模式切換</div>
-                        <div class="feature-desc">傳統模式與AI模式無縫切換</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">📊 混合檢索架構</div>
-                        <div class="feature-desc">向量語義+關鍵字，準確率>90%</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">⚡ 即時回應</div>
-                        <div class="feature-desc">平均回應時間<3秒，24/7服務</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">🎯 多輪對話管理</div>
-                        <div class="feature-desc">記住上下文，避免重複提問</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">📱 豐富訊息格式</div>
-                        <div class="feature-desc">圖文訊息、可點擊圖片、表情符號</div>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <div class="feature-title">🔒 資料安全保護</div>
-                        <div class="feature-desc">企業級加密，符合隱私法規</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Architecture -->
-        <section id="architecture">
-            <div class="section-header">
-                <h2>技術架構展示</h2>
-                <p class="section-subtitle">企業級穩定可靠的技術基礎</p>
-            </div>
-
-            <div class="card-container">
-                <!-- System Architecture -->
-                <div class="architecture-diagram fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">系統架構圖</h3>
-                    <div class="arch-flow">
-                        <div class="arch-component">
-                            <div class="arch-icon">📱</div>
-                            <div class="arch-label">LINE 用戶</div>
-                        </div>
-                        <div class="arch-arrow">↓</div>
-                        <div class="arch-component">
-                            <div class="arch-icon">🌐</div>
-                            <div class="arch-label">LINE Platform<br><small>Webhook</small></div>
-                        </div>
-                        <div class="arch-arrow">↓</div>
-                        <div class="arch-component">
-                            <div class="arch-icon">🚀</div>
-                            <div class="arch-label">Cloud Run<br><small>FastAPI</small></div>
-                        </div>
-                        <div class="arch-arrow">↓</div>
-                        <div class="arch-component">
-                            <div class="arch-icon">🧠</div>
-                            <div class="arch-label">GPT-4o<br><small>AI Engine</small></div>
-                        </div>
-                    </div>
-                    <div class="arch-flow" style="margin-top: 2rem;">
-                        <div class="arch-component">
-                            <div class="arch-icon">💾</div>
-                            <div class="arch-label">Firestore<br><small>對話記憶</small></div>
-                        </div>
-                        <div class="arch-component">
-                            <div class="arch-icon">📊</div>
-                            <div class="arch-label">Google Sheets<br><small>知識庫</small></div>
-                        </div>
-                        <div class="arch-component">
-                            <div class="arch-icon">🔍</div>
-                            <div class="arch-label">Vector DB<br><small>語義搜索</small></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hybrid Search -->
-                <div class="hybrid-search fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">混合檢索架構詳解</h3>
-                    <div class="search-diagram">
-                        <div class="search-input">
-                            <div class="input-box">使用者問題：「塔位價格多少？」</div>
-                        </div>
-                        <div class="search-split">
-                            <div class="search-path">
-                                <h4>🧭 語義檢索</h4>
-                                <p>向量化問題 → 相似度計算 → 智慧排序</p>
-                            </div>
-                            <div class="search-path">
-                                <h4>🔍 關鍵字檢索</h4>
-                                <p>關鍵字提取 → 精確匹配 → 快速定位</p>
-                            </div>
-                        </div>
-                        <div class="search-result">
-                            <strong>最佳答案組合</strong><br>
-                            精準的塔位價格資訊 + 個人化建議
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Technical Specs -->
-                <div class="tech-specs fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">技術規格與效能</h3>
-                    <div class="specs-grid">
-                        <div class="spec-card">
-                            <div class="spec-icon">⚡</div>
-                            <div class="spec-title">回應速度</div>
-                            <div class="spec-value">&lt; 3秒</div>
-                            <div class="spec-detail">平均處理時間</div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon">🎯</div>
-                            <div class="spec-title">準確率</div>
-                            <div class="spec-value">90%+</div>
-                            <div class="spec-detail">FAQ 命中準確度</div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon">🔄</div>
-                            <div class="spec-title">可用性</div>
-                            <div class="spec-value">99.9%</div>
-                            <div class="spec-detail">系統正常運行</div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon">📈</div>
-                            <div class="spec-title">擴展性</div>
-                            <div class="spec-value">無限</div>
-                            <div class="spec-detail">雲端自動擴展</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Real-time Monitoring -->
-                <div class="card fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">即時監控能力</h3>
-                    
-                    <div class="monitor-card">
-                        <h4>📈 效能監控</h4>
-                        <div class="monitor-metrics">
-                            <div class="metric-item">
-                                <span class="metric-value">2.1s</span>
-                                <span class="metric-label">平均回應</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-value">99.8%</span>
-                                <span class="metric-label">系統可用</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-value">247</span>
-                                <span class="metric-label">活躍用戶</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-value">1,428</span>
-                                <span class="metric-label">今日訊息</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="monitor-card">
-                        <h4>💬 對話分析</h4>
-                        <div class="monitor-metrics">
-                            <div class="metric-item">
-                                <span class="metric-value">92%</span>
-                                <span class="metric-label">滿意度</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-value">2.8</span>
-                                <span class="metric-label">平均輪次</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-value">18%</span>
-                                <span class="metric-label">轉人工率</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-value">87%</span>
-                                <span class="metric-label">問題解決</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Advanced Technology -->
-        <section id="advanced-tech">
-            <div class="section-header">
-                <h2>進階技術展示</h2>
-                <p class="section-subtitle">深度技術解析與創新應用</p>
-            </div>
-
-            <div class="card-container">
-                <!-- Vector Database -->
-                <div class="vector-demo fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">向量資料庫智慧檢索</h3>
-                    
-                    <div class="card">
-                        <h4>🧮 3072 維向量空間</h4>
-                        <p style="margin-bottom: 1rem;">每個FAQ都被轉換為3072維的向量表示，在高維空間中進行相似度計算。</p>
-                        
-                        <div class="vector-space">
-                            <div style="margin-bottom: 1rem;">
-                                <strong>問題向量化示例：</strong>
-                            </div>
-                            <div style="display: grid; grid-template-columns: repeat(16, 1fr); gap: 2px; margin-bottom: 1rem;">
-                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
-                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
-                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
-                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
-                            </div>
-                            <small>實際為 3072 維度，此處簡化展示</small>
-                        </div>
-                        
-                        <div style="background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem;">
-                                <div>
-                                    <strong>相似度計算</strong><br>
-                                    • 餘弦相似度<br>
-                                    • 歐幾里得距離<br>
-                                    • 點積運算
-                                </div>
-                                <div>
-                                    <strong>檢索效能</strong><br>
-                                    • 毫秒級查詢<br>
-                                    • 高精度匹配<br>
-                                    • 語義理解
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- API Integration -->
-                <div class="card fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">API 整合潛力與未來擴充</h3>
-                    <div class="api-grid">
-                        <div class="api-current">
-                            <h4 style="color: var(--primary-color); margin-bottom: 1.5rem;">🔌 現有整合</h4>
-                            <div class="api-item">
-                                <div class="api-icon">💬</div>
-                                <div class="api-name">LINE Messaging API</div>
-                                <div class="api-desc">官方認證的訊息推送服務</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">🧠</div>
-                                <div class="api-name">OpenAI GPT-4o</div>
-                                <div class="api-desc">最先進的語言理解模型</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">☁️</div>
-                                <div class="api-name">Google Cloud Platform</div>
-                                <div class="api-desc">企業級雲端基礎設施</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">📊</div>
-                                <div class="api-name">Google Sheets API</div>
-                                <div class="api-desc">動態知識庫管理系統</div>
-                            </div>
-                        </div>
-                        
-                        <div class="api-future">
-                            <h4 style="color: var(--accent-color); margin-bottom: 1.5rem;">🚀 未來擴充潛力</h4>
-                            <div class="api-item">
-                                <div class="api-icon">💳</div>
-                                <div class="api-name">線上支付系統</div>
-                                <div class="api-desc">整合信用卡、行動支付</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">📅</div>
-                                <div class="api-name">預約排程系統</div>
-                                <div class="api-desc">自動化參觀時間管理</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">📧</div>
-                                <div class="api-name">Email 通知服務</div>
-                                <div class="api-desc">自動發送確認和提醒</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">📱</div>
-                                <div class="api-name">多平台擴展</div>
-                                <div class="api-desc">Facebook、Instagram整合</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">🎤</div>
-                                <div class="api-name">語音辨識服務</div>
-                                <div class="api-desc">支援語音訊息對話</div>
-                            </div>
-                            <div class="api-item">
-                                <div class="api-icon">📊</div>
-                                <div class="api-name">CRM 系統整合</div>
-                                <div class="api-desc">客戶關係管理自動化</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Analytics Dashboard -->
-                <div class="analytics-dashboard fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">資料分析儀表板</h3>
-                    <div class="dashboard-grid">
-                        <div class="dashboard-card">
-                            <h4>📊 熱門問題排行</h4>
-                            <div class="ranking-list">
-                                <div class="rank-item">
-                                    <span class="rank-number">1</span>
-                                    <span class="rank-question">塔位價格相關諮詢</span>
-                                </div>
-                                <div class="rank-item">
-                                    <span class="rank-number">2</span>
-                                    <span class="rank-question">參觀預約時間詢問</span>
-                                </div>
-                                <div class="rank-item">
-                                    <span class="rank-number">3</span>
-                                    <span class="rank-question">服務項目介紹</span>
-                                </div>
-                                <div class="rank-item">
-                                    <span class="rank-number">4</span>
-                                    <span class="rank-question">位置交通資訊</span>
-                                </div>
-                                <div class="rank-item">
-                                    <span class="rank-number">5</span>
-                                    <span class="rank-question">付款方式說明</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dashboard-card">
-                            <h4>⏰ 活躍時段分析</h4>
-                            <div style="background: var(--gray-light); padding: 1rem; border-radius: 6px;">
-                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1rem;">
-                                    <div style="text-align: center; font-size: 0.8rem;">
-                                        <div style="background: var(--primary-color); height: 40px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
-                                        09-12
-                                    </div>
-                                    <div style="text-align: center; font-size: 0.8rem;">
-                                        <div style="background: var(--accent-color); height: 60px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
-                                        12-15
-                                    </div>
-                                    <div style="text-align: center; font-size: 0.8rem;">
-                                        <div style="background: var(--success-color); height: 50px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
-                                        15-18
-                                    </div>
-                                    <div style="text-align: center; font-size: 0.8rem;">
-                                        <div style="background: var(--gray-medium); height: 30px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
-                                        18-21
-                                    </div>
-                                </div>
-                                <p style="font-size: 0.85rem; text-align: center;">尖峰時段：下午 12-15 點</p>
-                            </div>
-                        </div>
-
-                        <div class="dashboard-card">
-                            <h4>🎯 意圖分類統計</h4>
-                            <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
-                                    <span style="font-size: 0.85rem;">價格諮詢</span>
-                                    <span style="font-weight: 600; color: var(--primary-color);">35%</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
-                                    <span style="font-size: 0.85rem;">服務說明</span>
-                                    <span style="font-weight: 600; color: var(--accent-color);">28%</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
-                                    <span style="font-size: 0.85rem;">預約參觀</span>
-                                    <span style="font-weight: 600; color: var(--success-color);">22%</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
-                                    <span style="font-size: 0.85rem;">其他問題</span>
-                                    <span style="font-weight: 600; color: var(--gray-medium);">15%</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dashboard-card">
-                            <h4>😊 情緒分析趨勢</h4>
-                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-                                <div style="text-align: center; padding: 0.75rem; background: var(--success-color); color: white; border-radius: 6px;">
-                                    <div style="font-size: 1.2rem; font-weight: 700;">78%</div>
-                                    <div style="font-size: 0.75rem;">正面情緒</div>
-                                </div>
-                                <div style="text-align: center; padding: 0.75rem; background: var(--gray-medium); color: white; border-radius: 6px;">
-                                    <div style="font-size: 1.2rem; font-weight: 700;">18%</div>
-                                    <div style="font-size: 0.75rem;">中性情緒</div>
-                                </div>
-                                <div style="text-align: center; padding: 0.75rem; background: var(--danger-color); color: white; border-radius: 6px;">
-                                    <div style="font-size: 1.2rem; font-weight: 700;">4%</div>
-                                    <div style="font-size: 0.75rem;">負面情緒</div>
-                                </div>
-                            </div>
-                            <p style="font-size: 0.8rem; text-align: center; margin-top: 0.5rem; color: var(--gray-medium);">
-                                整體客戶滿意度持續提升
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cache Strategy -->
-                <div class="card fade-in">
-                    <h3 style="text-align: center; margin-bottom: 2rem;">智慧快取策略</h3>
-                    
-                    <div class="cache-flow">
-                        <div class="cache-step">
-                            <h4>用戶提問</h4>
-                            <p>「塔位有什麼類型？」</p>
-                        </div>
-
-                        <div class="analysis-arrow">↓</div>
-
-                        <div class="cache-step">
-                            <h4>檢查快取</h4>
-                            <p>查詢是否有相似問題的快取答案</p>
-                        </div>
-
-                        <div class="analysis-arrow">↓</div>
-
-                        <div class="cache-decision">
-                            <div class="cache-hit">
-                                <h5>快取命中</h5>
-                                <p>立即返回答案<br><strong>回應時間：&lt; 100ms</strong></p>
-                            </div>
-                            <div class="cache-miss">
-                                <h5>快取失效</h5>
-                                <p>調用 AI 生成答案<br><strong>回應時間：&lt; 3秒</strong></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
-                        <h5 style="margin-bottom: 0.75rem;">快取優化效果</h5>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; font-size: 0.85rem;">
-                            <div>
-                                <strong>命中率：</strong> 72%<br>
-                                <strong>平均回應：</strong> 0.8s
-                            </div>
-                            <div>
-                                <strong>成本節省：</strong> 55%<br>
-                                <strong>用戶滿意度：</strong> 92%
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Security -->
-        <section id="security">
-            <div class="section-header">
-                <h2>企業級資訊安全保障</h2>
-                <p class="section-subtitle">全方位保護客戶資料與隱私</p>
-            </div>
-
-            <div class="card-container">
-                <!-- Security Features -->
-                <div class="card fade-in">
-                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
-                        🛡️ 多層次安全防護架構
-                    </h3>
-                    
-                    <div class="security-grid">
-                        <div class="security-item">
-                            <div class="security-icon">🏢</div>
-                            <div class="security-title">實體安全</div>
-                            <div class="security-desc">Google 資料中心軍事級實體安全</div>
-                        </div>
-                        <div class="security-item">
-                            <div class="security-icon">🔐</div>
-                            <div class="security-title">加密保護</div>
-                            <div class="security-desc">端到端 AES-256 加密傳輸</div>
-                        </div>
-                        <div class="security-item">
-                            <div class="security-icon">🛡️</div>
-                            <div class="security-title">DDoS 防護</div>
-                            <div class="security-desc">Google Cloud Armor 防護</div>
-                        </div>
-                        <div class="security-item">
-                            <div class="security-icon">📜</div>
-                            <div class="security-title">國際認證</div>
-                            <div class="security-desc">ISO 27001、SOC 2 Type II</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Data Protection Practices -->
-                <div class="protection-practices fade-in">
-                    <h3 style="color: var(--accent-color); margin-bottom: 2rem;">五湖園資料保護實踐</h3>
-                    
-                    <div class="practice-item">
-                        <div class="practice-title">🔒 對話資料加密</div>
-                        <div class="practice-desc">所有客戶對話內容採用 AES-256 加密儲存，確保敏感資訊絕對安全。</div>
-                    </div>
-                    
-                    <div class="practice-item">
-                        <div class="practice-title">👥 存取權限管控</div>
-                        <div class="practice-desc">採用最小權限原則，只有授權人員才能存取客戶資料，並有完整的存取記錄。</div>
-                    </div>
-                    
-                    <div class="practice-item">
-                        <div class="practice-title">🕒 資料保留政策</div>
-                        <div class="practice-desc">依據法規要求設定資料保留期限，自動清除過期資料，保護客戶隱私。</div>
-                    </div>
-                    
-                    <div class="practice-item">
-                        <div class="practice-title">🔍 即時監控系統</div>
-                        <div class="practice-desc">24/7 安全監控，即時偵測異常存取行為，確保系統安全無虞。</div>
-                    </div>
-                    
-                    <div class="practice-item">
-                        <div class="practice-title">📋 定期安全稽核</div>
-                        <div class="practice-desc">每季進行安全檢測與漏洞掃描，確保系統持續符合最高安全標準。</div>
-                    </div>
-                    
-                    <div class="practice-item">
-                        <div class="practice-title">🎓 員工安全培訓</div>
-                        <div class="practice-desc">定期進行資安教育訓練，建立全員資安意識，從源頭保護客戶資料。</div>
-                    </div>
-                </div>
-
-                <!-- Google Cloud Security -->
-                <div class="card fade-in">
-                    <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Google Cloud 安全保障</h3>
-                    
-                    <div class="security-grid">
-                        <div class="security-item">
-                            <div class="security-icon">🌍</div>
-                            <div class="security-title">資料主權</div>
-                            <div class="security-desc">資料儲存於台灣地區，符合在地法規要求</div>
-                        </div>
-                        <div class="security-item">
-                            <div class="security-icon">⚖️</div>
-                            <div class="security-title">在地合規</div>
-                            <div class="security-desc">符合台灣個資法與金融監管要求</div>
-                        </div>
-                        <div class="security-item">
-                            <div class="security-icon">🔍</div>
-                            <div class="security-title">透明稽核</div>
-                            <div class="security-desc">提供完整的稽核日誌與合規報告</div>
-                        </div>
-                        <div class="security-item">
-                            <div class="security-icon">🚨</div>
-                            <div class="security-title">即時應變</div>
-                            <div class="security-desc">24/7 安全監控與事件應變機制</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cost Analysis -->
-        <section id="cost">
-            <div class="section-header">
-                <h2>投資透明度</h2>
-                <p class="section-subtitle">清楚了解每一分投資</p>
-            </div>
-
-            <div class="card-container">
-                <div class="calculator fade-in">
-                    <div class="input-group">
-                        <label>預期每月對話量：<span id="volume-display">1000</span> 則</label>
-                        <input type="range" class="slider" id="volume-slider" min="100" max="5000" value="1000" step="100">
-                    </div>
-
-                    <div class="input-group">
-                        <label>對話複雜度分布</label>
-                        <div style="margin-top: 1rem;">
-                            <div style="margin-bottom: 1rem;">
-                                <label>簡單查詢：<span id="simple-display">40</span>%</label>
-                                <input type="range" class="slider" id="simple-slider" min="0" max="100" value="40">
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <label>中等複雜：<span id="medium-display">40</span>%</label>
-                                <input type="range" class="slider" id="medium-slider" min="0" max="100" value="40">
-                            </div>
-                            <div>
-                                <label>複雜流程：<span id="complex-display">20</span>%</label>
-                                <input type="range" class="slider" id="complex-slider" min="0" max="100" value="20">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cost-breakdown">
-                        <h3 style="margin-bottom: 1rem;">成本明細</h3>
-                        <div class="cost-item">
-                            <span class="cost-label">AI 對話成本 (GPT-4o)</span>
-                            <span class="cost-value" id="ai-cost">$150</span>
-                        </div>
-                        <div class="cost-item">
-                            <span class="cost-label">Cloud Run 運算服務</span>
-                            <span class="cost-value" id="cloudrun-cost">$800</span>
-                        </div>
-                        <div class="cost-item">
-                            <span class="cost-label">Firestore 資料庫</span>
-                            <span class="cost-value" id="firestore-cost">$150</span>
-                        </div>
-                        <div class="cost-item">
-                            <span class="cost-label">Secret Manager 金鑰管理</span>
-                            <span class="cost-value" id="secret-cost">$30</span>
-                        </div>
-                        <div class="cost-item">
-                            <span class="cost-label">Cloud Storage 檔案儲存</span>
-                            <span class="cost-value" id="storage-cost">$40</span>
-                        </div>
-                        <div class="cost-item">
-                            <span class="cost-label">網路傳輸費用</span>
-                            <span class="cost-value" id="network-cost">$60</span>
-                        </div>
-                        <div class="cost-item">
-                            <span class="cost-label">Google Sheets API</span>
-                            <span class="cost-value">免費</span>
-                        </div>
-                        <div class="cost-item cost-total">
-                            <span class="cost-label">總月度投資：</span>
-                            <span class="cost-value" id="total-cost">$1,230 TWD</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Success Metrics -->
-        <section id="metrics">
-            <div class="section-header">
-                <h2>預期成效</h2>
-                <p class="section-subtitle">系統導入後的改善方向</p>
-            </div>
-
-            <div class="card-container">
-                <div class="metrics-grid fade-in">
-                    <!-- 技術成效 -->
-                    <div class="metric-card">
-                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🔧 技術層面</h3>
-                        <ul class="metric-list">
-                            <li class="metric-list-item">
-                                <span class="metric-icon">⚡</span>
-                                <span class="metric-text">回應時間從平均 5 分鐘縮短至 3 秒內</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">🎯</span>
-                                <span class="metric-text">問題解決率從 60% 提升至 90%</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">🔄</span>
-                                <span class="metric-text">24/7 不間斷服務，無需輪班安排</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">📊</span>
-                                <span class="metric-text">系統可用性達 99.9%，穩定可靠</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- 客戶體驗 -->
-                    <div class="metric-card">
-                        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">📈 客戶體驗</h3>
-                        <ul class="metric-list">
-                            <li class="metric-list-item">
-                                <span class="metric-icon">😊</span>
-                                <span class="metric-text">客戶滿意度從 75% 提升至 90%</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">🎯</span>
-                                <span class="metric-text">個人化服務，記住客戶偏好</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">💬</span>
-                                <span class="metric-text">自然對話體驗，如同真人客服</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">🔍</span>
-                                <span class="metric-text">精準理解需求，減少重複詢問</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- 營運效益 -->
-                    <div class="metric-card">
-                        <h3 style="color: var(--success-color); margin-bottom: 1rem;">💰 營運效益</h3>
-                        <ul class="metric-list">
-                            <li class="metric-list-item">
-                                <span class="metric-icon">💵</span>
-                                <span class="metric-text">減少 70% 重複性問題處理工作</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">📈</span>
-                                <span class="metric-text">客戶轉換率預期提升 25%</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">⏰</span>
-                                <span class="metric-text">員工可專注高價值服務工作</span>
-                            </li>
-                            <li class="metric-list-item">
-                                <span class="metric-icon">🎯</span>
-                                <span class="metric-text">透過數據洞察優化營運策略</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action -->
-        <section id="cta" class="cta-section">
-            <h2>準備好突破限制了嗎？</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">讓 Sibyl AI 為五湖園開啟智慧服務的新篇章</p>
+        <!-- 新增：FAQ 分析優化展示 -->
+        <div class="faq-optimization fade-in">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">智慧分析創建 FAQ 條目</h3>
             
-            <div class="cta-content">
-                <h3>✅ 系統已開發完成</h3>
-                <p>核心功能已完善，雙模式系統穩定運行</p>
-                
-                <h3 style="margin: 1rem 0;">✅ 段階式推進建議</h3>
-                <p>第1個月：內部測試與部分客戶試行<br>
-                   第2個月：系統優化與監控完善<br>
-                   第3個月：全面部署與標準化運營</p>
-                
-                <h3 style="margin: 1rem 0;">✅ 立即行動建議</h3>
-                <p>1. 完成客服人員培訓<br>
-                   2. 熟悉人機協作流程<br>
-                   3. 設定監控與回退機制</p>
-            </div>
-            
-            <div class="cta-buttons">
-                <a href="tel:+886-2-1234-5678" class="btn btn-accent">
-                    📞 立即來電討論
-                </a>
-                <a href="mailto:contact@sibyl-ai.com" class="btn btn-secondary">
-                    ✉️ 發送需求信件
-                </a>
-                <a href="#demo" class="btn" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white;">
-                    🚀 預約系統展示
-                </a>
-            </div>
-        </section>
-    </main>
+            <!-- 分析流程 -->
+            <div class="analysis-flow">
+                <div class="analysis-step">
+                    <h4>📥 Step 1: 收集對話數據</h4>
+                    <div class="data-example">
+                        <div class="data-item">
+                            <span class="count">45次</span>
+                            <span class="question">「可以帶寵物來嗎？」</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="count">38次</span>
+                            <span class="question">「寵物可以一起安葬嗎？」</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="count">27次</span>
+                            <span class="question">「有寵物塔位嗎？」</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p class="footer-text">© 2024 Sibyl AI. 專業的智慧客服解決方案提供商。<br>
-        讓科技為人性服務，打造更美好的客戶體驗。</p>
-    </footer>
+                <div class="analysis-arrow">→</div>
+
+                <div class="analysis-step">
+                    <h4>🔍 Step 2: AI 模式識別</h4>
+                    <div class="pattern-box">
+                        <p><strong>發現模式：</strong></p>
+                        <p>• 高頻關鍵字：寵物、毛小孩</p>
+                        <p>• 意圖分類：詢問寵物服務</p>
+                        <p>• 回答成功率：僅 23%</p>
+                        <div class="alert-tag">⚠️ 知識缺口</div>
+                    </div>
+                </div>
+
+                <div class="analysis-arrow">→</div>
+
+                <div class="analysis-step">
+                    <h4>💡 Step 3: 自動建議</h4>
+                    <div class="suggestion-box">
+                        <p><strong>建議新增 FAQ：</strong></p>
+                        <div class="faq-suggestion">
+                            <div class="faq-q">問：五湖園有提供寵物相關服務嗎？</div>
+                            <div class="faq-a">答：目前園區專注於人的生命服務，暫無寵物專屬區域。但我們理解毛小孩也是家人，建議您可以...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 優化案例 -->
+            <div class="optimization-cases">
+                <h4 style="text-align: center; margin: 2rem 0;">FAQ 優化實例</h4>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-type">🔧 用詞優化</span>
+                        </div>
+                        <div class="before-after">
+                            <div class="before">
+                                <strong>原本：</strong><br>
+                                「塔位使用權狀遺失補發需要...」
+                            </div>
+                            <div class="after">
+                                <strong>優化後：</strong><br>
+                                「權狀遺失了怎麼辦？別擔心，我們提供補發服務...」
+                            </div>
+                        </div>
+                        <div class="improvement">更口語化，降低焦慮感</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-type">📝 內容擴充</span>
+                        </div>
+                        <div class="before-after">
+                            <div class="before">
+                                <strong>原本：</strong><br>
+                                「參觀時間：09:00-16:00」
+                            </div>
+                            <div class="after">
+                                <strong>優化後：</strong><br>
+                                「參觀時間：09:00-16:00<br>
+                                • 建議預約確保專人接待<br>
+                                • 週末人潮較多<br>
+                                • 可安排線上導覽」
+                            </div>
+                        </div>
+                        <div class="improvement">資訊更完整實用</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="learning-benefits fade-in">
+            <div class="benefit-card">
+                <h4>🎯 初期目標</h4>
+                <p>先求有再求好<br>逐步完善</p>
+            </div>
+            <div class="benefit-card">
+                <h4>📈 成長曲線</h4>
+                <p>越用越聰明<br>價值遞增</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🤝 團隊協作</h4>
+                <p>全員參與<br>共同培育</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🏆 未來願景</h4>
+                <p>成為業界最懂<br>生命服務的 AI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Features Section -->
+    <section id="features" class="features-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">技術優勢特色</h2>
+            <p style="text-align: center; font-size: 1.2rem;">GPT-4o 賦能的先進功能</p>
+        </div>
+
+        <div class="features-grid fade-in">
+            <div class="feature-item">
+                <div class="feature-title">🧠 情感智慧引擎</div>
+                <div class="feature-desc">準確理解情感狀態，提供溫暖支援</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">💾 智慧記憶系統</div>
+                <div class="feature-desc">30天對話歷史，個性化服務體驗</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🔄 雙模式切換</div>
+                <div class="feature-desc">傳統模式與AI模式無縫切換</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">📊 混合檢索架構</div>
+                <div class="feature-desc">向量語義+關鍵字，準確率>90%</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">⚡ 即時回應</div>
+                <div class="feature-desc">平均回應時間<3秒，24/7服務</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🎯 多輪對話管理</div>
+                <div class="feature-desc">記住上下文，避免重複提問</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">📱 豐富訊息格式</div>
+                <div class="feature-desc">圖文訊息、可點擊圖片、表情符號</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🛡️ 企業級安全</div>
+                <div class="feature-desc">GCP安全防護，隱私合規保護</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture Section -->
+    <section id="architecture" class="architecture-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">技術架構展示</h2>
+            <p style="text-align: center; font-size: 1.2rem;">企業級架構設計，確保穩定可靠</p>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="architecture-diagram fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">系統架構圖</h3>
+            <div class="arch-flow">
+                <div class="arch-component">
+                    <div class="arch-icon">📱</div>
+                    <div class="arch-label">LINE 用戶</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-component">
+                    <div class="arch-icon">🌐</div>
+                    <div class="arch-label">LINE Platform<br><small>Webhook</small></div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-component highlight">
+                    <div class="arch-icon">☁️</div>
+                    <div class="arch-label">Cloud Run<br><small>Auto-scaling</small></div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-component">
+                    <div class="arch-icon">🧠</div>
+                    <div class="arch-label">GPT-4o<br><small>AI Engine</small></div>
+                </div>
+            </div>
+            <div class="arch-flow" style="margin-top: 2rem;">
+                <div class="arch-component">
+                    <div class="arch-icon">💾</div>
+                    <div class="arch-label">Firestore<br><small>對話記憶</small></div>
+                </div>
+                <div class="arch-component">
+                    <div class="arch-icon">📊</div>
+                    <div class="arch-label">Google Sheets<br><small>知識庫</small></div>
+                </div>
+                <div class="arch-component">
+                    <div class="arch-icon">🔐</div>
+                    <div class="arch-label">Secret Manager<br><small>金鑰管理</small></div>
+                </div>
+                <div class="arch-component">
+                    <div class="arch-icon">📈</div>
+                    <div class="arch-label">Cloud Logging<br><small>監控分析</small></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hybrid Search -->
+        <div class="hybrid-search fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">混合檢索架構詳解</h3>
+            <div class="search-diagram">
+                <div class="search-input">
+                    <div class="input-box">使用者問題：「塔位價格多少？」</div>
+                </div>
+                <div class="search-split">
+                    <div class="search-path">
+                        <h4>🧭 語義檢索</h4>
+                        <p>理解「費用」「售價」「收費」<br>都是在問價格</p>
+                        <div class="result-box">相似度: 0.92</div>
+                    </div>
+                    <div class="search-path">
+                        <h4>🔍 關鍵字檢索</h4>
+                        <p>精確匹配<br>「塔位」「價格」</p>
+                        <div class="result-box">匹配度: 0.95</div>
+                    </div>
+                </div>
+                <div class="search-merge">
+                    <div class="merge-box">🎯 綜合評分：最佳答案</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Specs -->
+        <div class="tech-specs fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">技術規格與效能</h3>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-icon">⚡</div>
+                    <div class="spec-title">回應速度</div>
+                    <div class="spec-value">&lt; 500ms</div>
+                    <div class="spec-detail">P95 延遲時間</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🚀</div>
+                    <div class="spec-title">併發處理</div>
+                    <div class="spec-value">1000+</div>
+                    <div class="spec-detail">同時對話數</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">📊</div>
+                    <div class="spec-title">系統可用性</div>
+                    <div class="spec-value">99.9%</div>
+                    <div class="spec-detail">SLA 保證</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🔌</div>
+                    <div class="spec-title">API 整合</div>
+                    <div class="spec-value">RESTful</div>
+                    <div class="spec-detail">+ Webhook</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Dashboard -->
+        <div class="monitoring-preview fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">即時監控能力</h3>
+            <div class="monitor-grid">
+                <div class="monitor-card">
+                    <h4>📈 效能監控</h4>
+                    <div class="monitor-metrics">
+                        <div class="metric-row">
+                            <span>CPU 使用率</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 35%;"></div>
+                            </div>
+                            <span>35%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span>記憶體使用</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 42%;"></div>
+                            </div>
+                            <span>42%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span>請求成功率</span>
+                            <div class="metric-bar success">
+                                <div class="metric-fill" style="width: 99.8%;"></div>
+                            </div>
+                            <span>99.8%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-card">
+                    <h4>💬 對話分析</h4>
+                    <div class="monitor-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">2,847</div>
+                            <div class="stat-label">今日對話數</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1.3s</div>
+                            <div class="stat-label">平均回應時間</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">92%</div>
+                            <div class="stat-label">問題解決率</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Technical Section -->
+    <section id="advanced-tech" class="advanced-tech-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">進階技術展示</h2>
+            <p style="text-align: center; font-size: 1.2rem;">深入了解 Sibyl AI 的技術能力</p>
+        </div>
+
+        <!-- Vector Database Visualization -->
+        <div class="vector-viz fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">向量資料庫智慧檢索</h3>
+            <div class="vector-container">
+                <div class="vector-explanation">
+                    <h4>🧮 3072 維向量空間</h4>
+                    <p>每個問題都被轉換成 3072 維的向量，在高維空間中相似的問題會聚集在一起。</p>
+                    <div class="vector-demo">
+                        <div class="vector-cluster">
+                            <div class="cluster-title">價格諮詢群</div>
+                            <div class="vector-points">
+                                <span class="point" style="top: 20%; left: 30%;">塔位多少錢</span>
+                                <span class="point" style="top: 35%; left: 25%;">價格怎麼算</span>
+                                <span class="point" style="top: 25%; left: 45%;">費用詢問</span>
+                                <span class="point" style="top: 40%; left: 40%;">收費標準</span>
+                            </div>
+                        </div>
+                        <div class="vector-cluster">
+                            <div class="cluster-title">參觀預約群</div>
+                            <div class="vector-points">
+                                <span class="point" style="top: 20%; left: 20%;">想參觀</span>
+                                <span class="point" style="top: 30%; left: 35%;">可以看看嗎</span>
+                                <span class="point" style="top: 15%; left: 40%;">實地了解</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray-dark);">
+                        * 此為簡化的 2D 視覺化呈現，實際運作於 3072 維空間
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Integration Potential -->
+        <div class="api-potential fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">API 整合潛力與未來擴充</h3>
+            <div class="api-grid">
+                <div class="api-current">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1.5rem;">🔌 現有整合</h4>
+                    <div class="api-item active">
+                        <div class="api-icon">💬</div>
+                        <div class="api-info">
+                            <strong>LINE Messaging API</strong>
+                            <p>接收訊息、回覆、推播通知</p>
+                        </div>
+                    </div>
+                    <div class="api-item active">
+                        <div class="api-icon">🧠</div>
+                        <div class="api-info">
+                            <strong>OpenAI GPT-4o</strong>
+                            <p>自然語言理解與生成</p>
+                        </div>
+                    </div>
+                    <div class="api-item active">
+                        <div class="api-icon">📊</div>
+                        <div class="api-info">
+                            <strong>Google Workspace</strong>
+                            <p>Sheets 知識庫、文件管理</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="api-future">
+                    <h4 style="color: var(--accent-color); margin-bottom: 1.5rem;">🚀 未來擴充潛力</h4>
+                    <div class="api-item future">
+                        <div class="api-icon">💳</div>
+                        <div class="api-info">
+                            <strong>金流整合</strong>
+                            <p>線上繳費、分期付款、退款處理</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">📅</div>
+                        <div class="api-info">
+                            <strong>預約系統</strong>
+                            <p>即時空檔查詢、自動排程、提醒通知</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">🎥</div>
+                        <div class="api-info">
+                            <strong>視訊導覽</strong>
+                            <p>VR 實境參觀、線上直播法會</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">📱</div>
+                        <div class="api-info">
+                            <strong>IoT 整合</strong>
+                            <p>智慧塔位監控、環境感測、自動照明</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">🔔</div>
+                        <div class="api-info">
+                            <strong>CRM 系統</strong>
+                            <p>客戶關係管理、自動關懷提醒</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Analytics Dashboard -->
+        <div class="analytics-dashboard fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">資料分析儀表板</h3>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h4>📊 熱門問題排行</h4>
+                    <div class="ranking-list">
+                        <div class="rank-item">
+                            <span class="rank-number">1</span>
+                            <span class="rank-question">塔位價格諮詢</span>
+                            <span class="rank-count">342次</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-number">2</span>
+                            <span class="rank-question">參觀預約</span>
+                            <span class="rank-count">286次</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-number">3</span>
+                            <span class="rank-question">法會時間</span>
+                            <span class="rank-count">195次</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h4>⏰ 活躍時段分析</h4>
+                    <div class="time-chart">
+                        <div class="time-bar" style="height: 40%"><span>06</span></div>
+                        <div class="time-bar" style="height: 60%"><span>09</span></div>
+                        <div class="time-bar" style="height: 80%"><span>12</span></div>
+                        <div class="time-bar" style="height: 90%"><span>15</span></div>
+                        <div class="time-bar" style="height: 70%"><span>18</span></div>
+                        <div class="time-bar" style="height: 45%"><span>21</span></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--gray-dark);">
+                        下午時段詢問度最高
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h4>🎯 意圖分類統計</h4>
+                    <div class="intent-stats">
+                        <div class="intent-bar">
+                            <span class="intent-label">價格詢問</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 35%; background: var(--primary-color);"></div>
+                            </div>
+                            <span class="intent-percent">35%</span>
+                        </div>
+                        <div class="intent-bar">
+                            <span class="intent-label">參觀預約</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 28%; background: var(--accent-color);"></div>
+                            </div>
+                            <span class="intent-percent">28%</span>
+                        </div>
+                        <div class="intent-bar">
+                            <span class="intent-label">法會報名</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 20%; background: var(--success-color);"></div>
+                            </div>
+                            <span class="intent-percent">20%</span>
+                        </div>
+                        <div class="intent-bar">
+                            <span class="intent-label">一般諮詢</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 17%; background: #8B5CF6;"></div>
+                            </div>
+                            <span class="intent-percent">17%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h4>😊 情緒分析趨勢</h4>
+                    <div class="emotion-trend">
+                        <div class="emotion-stat">
+                            <span class="emotion-icon">😊</span>
+                            <span class="emotion-label">正面</span>
+                            <span class="emotion-value">68%</span>
+                        </div>
+                        <div class="emotion-stat">
+                            <span class="emotion-icon">😐</span>
+                            <span class="emotion-label">中性</span>
+                            <span class="emotion-value">25%</span>
+                        </div>
+                        <div class="emotion-stat">
+                            <span class="emotion-icon">😔</span>
+                            <span class="emotion-label">需關懷</span>
+                            <span class="emotion-value">7%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smart Cache Strategy -->
+        <div class="cache-strategy fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">智慧快取策略</h3>
+            <div class="cache-flow">
+                <div class="cache-step">
+                    <div class="cache-icon">❓</div>
+                    <h4>用戶提問</h4>
+                    <p>「塔位價格多少？」</p>
+                </div>
+                <div class="cache-arrow">→</div>
+                <div class="cache-step highlight">
+                    <div class="cache-icon">💾</div>
+                    <h4>檢查快取</h4>
+                    <p>TTL: 1 小時<br>命中率: 85%</p>
+                </div>
+                <div class="cache-arrow">→</div>
+                <div class="cache-result">
+                    <div class="result-fast">
+                        <div class="cache-icon">⚡</div>
+                        <h5>快取命中</h5>
+                        <p>< 50ms 回應</p>
+                    </div>
+                    <div class="result-slow">
+                        <div class="cache-icon">🔄</div>
+                        <h5>快取失效</h5>
+                        <p>查詢 + 更新快取</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cache-benefits">
+                <div class="benefit-item">
+                    <strong>🚀 效能提升</strong>
+                    <p>回應速度快 10 倍</p>
+                </div>
+                <div class="benefit-item">
+                    <strong>💰 成本節省</strong>
+                    <p>減少 85% API 呼叫</p>
+                </div>
+                <div class="benefit-item">
+                    <strong>📊 智慧預載</strong>
+                    <p>熱門問題自動快取</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="security-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">企業級資訊安全保障</h2>
+            <p style="text-align: center; font-size: 1.2rem;">採用 Google Cloud Platform，享有世界級安全防護</p>
+        </div>
+
+        <div class="security-container fade-in">
+            <!-- GCP 安全基礎 -->
+            <div class="security-foundation">
+                <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
+                    <img src="https://www.gstatic.com/devrel-devsite/prod/v1241c04ebcb2127897d6c18221acbd64e7ed5c46e5217fd83dd808e592c47bf6/cloud/images/cloud-logo.svg" alt="Google Cloud" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+                    Google 等級的安全基礎設施
+                </h3>
+                
+                <div class="security-grid">
+                    <div class="security-item">
+                        <div class="security-icon">🏛️</div>
+                        <h4>實體安全</h4>
+                        <p>Google 資料中心 24/7 監控<br>多層次實體防護</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon">🔐</div>
+                        <h4>加密保護</h4>
+                        <p>傳輸中加密（TLS 1.3）<br>靜態資料 AES-256 加密</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon">🛡️</div>
+                        <h4>DDoS 防護</h4>
+                        <p>Google 全球網路自動防護<br>確保服務不中斷</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon">📜</div>
+                        <h4>國際認證</h4>
+                        <p>ISO 27001、SOC 2/3<br>GDPR 合規</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 資料保護實踐 -->
+            <div class="data-protection">
+                <h3 style="color: var(--accent-color); margin-bottom: 2rem;">五湖園資料保護實踐</h3>
+                
+                <div class="protection-practice">
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">🔑</span>
+                            <strong>敏感資料管理</strong>
+                        </div>
+                        <ul>
+                            <li>API 金鑰存放於 Secret Manager</li>
+                            <li>自動輪替機制</li>
+                            <li>最小權限原則</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">🗑️</span>
+                            <strong>隱私保護設計</strong>
+                        </div>
+                        <ul>
+                            <li>對話記錄 30 天自動刪除</li>
+                            <li>不儲存身分證、電話等個資</li>
+                            <li>用戶可要求刪除所有資料</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">👤</span>
+                            <strong>存取控制</strong>
+                        </div>
+                        <ul>
+                            <li>IAM 身份驗證</li>
+                            <li>服務帳戶最小權限</li>
+                            <li>稽核日誌完整記錄</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">🔄</span>
+                            <strong>災難復原</strong>
+                        </div>
+                        <ul>
+                            <li>自動備份機制</li>
+                            <li>多區域備援（台灣 + 新加坡）</li>
+                            <li>一鍵回退功能</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 安全承諾 -->
+        <div class="security-commitment fade-in">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Google Cloud 安全保障</h3>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--gray-dark);">
+                採用 Google 企業級基礎設施，享有與 Google 服務同等級的安全防護
+            </p>
+            <div class="commitment-cards">
+                <div class="commitment-card">
+                    <div class="commitment-icon">🔒</div>
+                    <h4>資料主權</h4>
+                    <p>您的資料永遠屬於您<br>隨時可匯出或刪除</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🌏</div>
+                    <h4>在地合規</h4>
+                    <p>資料存放於亞洲<br>符合台灣法規要求</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🔍</div>
+                    <h4>透明稽核</h4>
+                    <p>定期安全報告<br>可追蹤的操作日誌</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🚨</div>
+                    <h4>即時應變</h4>
+                    <p>24/7 監控警報<br>快速事件響應</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Calculator Section -->
+    <section id="cost" class="calculator-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">投資透明度</h2>
+            <p style="text-align: center; font-size: 1.2rem;">清楚了解每一分投資</p>
+        </div>
+
+        <div class="calculator fade-in">
+            <div class="input-group">
+                <label>預期每月對話量：<span id="volume-display">1000</span> 則</label>
+                <input type="range" class="slider" id="volume-slider" min="100" max="5000" value="1000" step="100">
+            </div>
+
+            <div class="input-group">
+                <label>對話複雜度分布</label>
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                    <div>
+                        <label>簡單查詢：<span id="simple-display">40</span>%</label>
+                        <input type="range" class="slider" id="simple-slider" min="0" max="100" value="40" style="width: 200px;">
+                    </div>
+                    <div>
+                        <label>中等複雜：<span id="medium-display">40</span>%</label>
+                        <input type="range" class="slider" id="medium-slider" min="0" max="100" value="40" style="width: 200px;">
+                    </div>
+                    <div>
+                        <label>複雜流程：<span id="complex-display">20</span>%</label>
+                        <input type="range" class="slider" id="complex-slider" min="0" max="100" value="20" style="width: 200px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="cost-breakdown">
+                <h3 style="margin-bottom: 1rem;">成本明細</h3>
+                <div class="cost-item">
+                    <span>AI 對話成本 (GPT-4o)</span>
+                    <span id="ai-cost">$150</span>
+                </div>
+                <div class="cost-item">
+                    <span>Cloud Run 運算服務</span>
+                    <span id="cloudrun-cost">$800</span>
+                </div>
+                <div class="cost-item">
+                    <span>Firestore 資料庫</span>
+                    <span id="firestore-cost">$150</span>
+                </div>
+                <div class="cost-item">
+                    <span>Secret Manager 金鑰管理</span>
+                    <span id="secret-cost">$30</span>
+                </div>
+                <div class="cost-item">
+                    <span>Cloud Storage 檔案儲存</span>
+                    <span id="storage-cost">$40</span>
+                </div>
+                <div class="cost-item">
+                    <span>網路傳輸費用</span>
+                    <span id="network-cost">$60</span>
+                </div>
+                <div class="cost-item">
+                    <span>Google Sheets API</span>
+                    <span>免費</span>
+                </div>
+                <div class="cost-total">
+                    總月度投資：<span id="total-cost">$1,230 TWD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Metrics Section -->
+    <section id="metrics" class="metrics-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">預期成效</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">系統導入後的改善方向</p>
+        </div>
+
+        <div class="metrics-grid fade-in">
+            <!-- 技術成效 -->
+            <div class="metric-card">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🔧 技術層面</h3>
+                <div class="metric-item">
+                    <span class="metric-label">系統穩定性</span>
+                    <span class="metric-value">24/7 穩定運作</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">回應速度</span>
+                    <span class="metric-value">即時回覆</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">理解能力</span>
+                    <span class="metric-value">自然語言理解</span>
+                </div>
+            </div>
+
+            <!-- 客戶體驗 -->
+            <div class="metric-card">
+                <h3 style="color: var(--accent-color); margin-bottom: 1rem;">📈 客戶體驗</h3>
+                <div class="metric-item">
+                    <span class="metric-label">服務感受</span>
+                    <span class="metric-value">更貼心溫暖</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">問題解決</span>
+                    <span class="metric-value">更快速有效</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">整體滿意度</span>
+                    <span class="metric-value">顯著提升</span>
+                </div>
+            </div>
+
+            <!-- 營運效益 -->
+            <div class="metric-card">
+                <h3 style="color: var(--success-color); margin-bottom: 1rem;">💰 營運效益</h3>
+                <div class="metric-item">
+                    <span class="metric-label">人力配置</span>
+                    <span class="metric-value">更有效運用</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">服務品質</span>
+                    <span class="metric-value">持續優化</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">品牌形象</span>
+                    <span class="metric-value">智慧園區實踐</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">準備好突破限制了嗎？</h2>
+        <p style="font-size: 1.5rem; margin-bottom: 2rem;">讓 Sibyl AI 為五湖園開啟智慧服務的新篇章</p>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 1rem; max-width: 800px; margin: 0 auto;">
+            <h3 style="margin-bottom: 1rem;">✅ 系統已開發完成</h3>
+            <p>核心功能已完善，雙模式系統穩定運行</p>
+            <h3 style="margin: 1rem 0;">✅ 段階式推進建議</h3>
+            <p>第1個月：內部測試與部分客戶試行<br>
+               第2個月：系統優化與監控完善<br>
+               第3個月：全面部署與標準化運營</p>
+            <h3 style="margin: 1rem 0;">✅ 立即行動建議</h3>
+            <p>1. 完成客服人員培訓<br>
+               2. 熟悉人機協作流程<br>
+               3. 設定監控與回退機制</p>
+        </div>
+    </section>
 
     <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const sideMenu = document.getElementById('sideMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const menuItems = document.querySelectorAll('.menu-item');
-
-        function openMenu() {
-            sideMenu.classList.add('active');
-            menuOverlay.classList.add('active');
-            menuToggle.innerHTML = '✕';
-        }
-
-        function closeMenu() {
-            sideMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            menuToggle.innerHTML = '☰';
-        }
-
-        menuToggle.addEventListener('click', () => {
-            if (sideMenu.classList.contains('active')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-
-        menuOverlay.addEventListener('click', closeMenu);
-
-        menuItems.forEach(item => {
-            item.addEventListener('click', closeMenu);
-        });
-
-        // Cost Calculator
-        function updateCalculator() {
-            const volume = parseInt(document.getElementById('volume-slider').value);
-            const simple = parseInt(document.getElementById('simple-slider').value);
-            const medium = parseInt(document.getElementById('medium-slider').value);
-            const complex = parseInt(document.getElementById('complex-slider').value);
-
-            // Update displays
-            document.getElementById('volume-display').textContent = volume;
-            document.getElementById('simple-display').textContent = simple;
-            document.getElementById('medium-display').textContent = medium;
-            document.getElementById('complex-display').textContent = complex;
-
-            // Calculate costs (simplified calculation)
-            const aiCost = Math.round(volume * 0.15);
-            const cloudrunCost = Math.max(800, Math.round(volume * 0.8));
-            const firestoreCost = Math.round(volume * 0.15);
-            const secretCost = 30;
-            const storageCost = 40;
-            const networkCost = Math.round(volume * 0.06);
-
-            const total = aiCost + cloudrunCost + firestoreCost + secretCost + storageCost + networkCost;
-
-            // Update cost displays
-            document.getElementById('ai-cost').textContent = `$${aiCost}`;
-            document.getElementById('cloudrun-cost').textContent = `$${cloudrunCost}`;
-            document.getElementById('firestore-cost').textContent = `$${firestoreCost}`;
-            document.getElementById('secret-cost').textContent = `$${secretCost}`;
-            document.getElementById('storage-cost').textContent = `$${storageCost}`;
-            document.getElementById('network-cost').textContent = `$${networkCost}`;
-            document.getElementById('total-cost').textContent = `$${total} TWD`;
-        }
-
-        // Add event listeners for sliders
-        document.getElementById('volume-slider').addEventListener('input', updateCalculator);
-        document.getElementById('simple-slider').addEventListener('input', updateCalculator);
-        document.getElementById('medium-slider').addEventListener('input', updateCalculator);
-        document.getElementById('complex-slider').addEventListener('input', updateCalculator);
-
-        // Fade in animation
+        // Intersection Observer for fade-in animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -2335,23 +3293,232 @@
             observer.observe(el);
         });
 
-        // Smooth scroll
+        // Chat simulation - 改善相容性
+        function initializeChatSimulation() {
+            const traditionalMessages = [
+                { type: 'user', text: '我想了解塔位價格', delay: 1000 },
+                { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 1500 },
+                { type: 'user', text: '有哪些樓層可以選擇？', delay: 3000 },
+                { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 3500 }
+            ];
+
+            const aiMessages = [
+                { type: 'user', text: '我想了解塔位價格', delay: 1000 },
+                { type: 'system', text: '您好！五湖園的塔位價格從 8 萬元起（已含 12% 管理費），依據位置、樓層和大小有不同選擇。目前正值優惠期間，歡迎您預約參觀，我們可以根據您的需求推薦最適合的方案。', delay: 1500 },
+                { type: 'user', text: '有哪些樓層可以選擇？', delay: 3000 },
+                { type: 'system', text: '我們有多個樓層可供選擇，每層都有不同的景觀特色。低樓層可欣賞園區綠意，高樓層視野開闊。建議您親自來參觀，感受不同樓層的氛圍，我們的專業團隊會詳細為您介紹每個位置的特色。', delay: 3500 }
+            ];
+
+            function addMessage(container, message, index) {
+                setTimeout(function() {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message ' + message.type;
+                    messageDiv.style.animationDelay = (index * 0.1) + 's';
+                    
+                    const bubble = document.createElement('div');
+                    bubble.className = 'message-bubble';
+                    // 處理換行符號
+                    bubble.innerHTML = message.text.replace(/\n/g, '<br>');
+                    
+                    messageDiv.appendChild(bubble);
+                    container.appendChild(messageDiv);
+                    
+                    // Auto scroll
+                    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+                }, message.delay);
+            }
+
+            // 使用 IntersectionObserver 或 fallback
+            if ('IntersectionObserver' in window) {
+                const chatSection = document.querySelector('.pain-section');
+                const chatObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const traditionalChat = document.getElementById('traditional-chat');
+                            const aiChat = document.getElementById('ai-chat');
+                            
+                            if (traditionalChat && aiChat) {
+                                traditionalMessages.forEach(function(msg, index) {
+                                    addMessage(traditionalChat, msg, index);
+                                });
+                                
+                                aiMessages.forEach(function(msg, index) {
+                                    addMessage(aiChat, msg, index);
+                                });
+                            }
+                            
+                            chatObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                if (chatSection) {
+                    chatObserver.observe(chatSection);
+                }
+            } else {
+                // Fallback: 直接執行動畫
+                setTimeout(function() {
+                    const traditionalChat = document.getElementById('traditional-chat');
+                    const aiChat = document.getElementById('ai-chat');
+                    
+                    if (traditionalChat && aiChat) {
+                        traditionalMessages.forEach(function(msg, index) {
+                            addMessage(traditionalChat, msg, index);
+                        });
+                        
+                        aiMessages.forEach(function(msg, index) {
+                            addMessage(aiChat, msg, index);
+                        });
+                    }
+                }, 2000);
+            }
+        }
+
+        // 確保 DOM 載入完成後執行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeChatSimulation);
+        } else {
+            initializeChatSimulation();
+        }
+
+        // Growth bar animation
+        const growthBar = document.getElementById('growth-bar');
+        const growthObserver = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+                growthBar.classList.add('animate');
+                
+                // Animate percentage
+                let current = 60;
+                const target = 85;
+                const increment = 1;
+                const timer = setInterval(() => {
+                    current += increment;
+                    growthBar.querySelector('.growth-label').textContent = current + '%';
+                    if (current >= target) clearInterval(timer);
+                }, 50);
+                
+                growthObserver.disconnect();
+            }
+        }, { threshold: 0.5 });
+        
+        if (growthBar) growthObserver.observe(growthBar);
+
+        // Cost calculator
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeDisplay = document.getElementById('volume-display');
+        const simpleSlider = document.getElementById('simple-slider');
+        const mediumSlider = document.getElementById('medium-slider');
+        const complexSlider = document.getElementById('complex-slider');
+
+        function updateCosts() {
+            const volume = parseInt(volumeSlider.value);
+            const simple = parseInt(simpleSlider.value);
+            const medium = parseInt(mediumSlider.value);
+            const complex = parseInt(complexSlider.value);
+            
+            // Update displays
+            volumeDisplay.textContent = volume;
+            document.getElementById('simple-display').textContent = simple;
+            document.getElementById('medium-display').textContent = medium;
+            document.getElementById('complex-display').textContent = complex;
+            
+            // Calculate AI cost
+            const avgTokensPerConversation = (simple * 500 + medium * 1000 + complex * 2000) / 100;
+            const totalTokens = volume * avgTokensPerConversation;
+            const aiCost = Math.round(totalTokens * 0.001 * 0.225); // Output tokens cost more
+            
+            // Calculate infrastructure costs based on volume
+            const cloudRunCost = volume < 1000 ? 500 : volume < 3000 ? 800 : 1200;
+            const firestoreCost = volume < 1000 ? 100 : volume < 3000 ? 150 : 200;
+            const secretCost = 30;
+            const storageCost = volume < 1000 ? 20 : volume < 3000 ? 40 : 60;
+            const networkCost = volume < 1000 ? 30 : volume < 3000 ? 60 : 100;
+            
+            // Update display
+            document.getElementById('ai-cost').textContent = `$${aiCost}`;
+            document.getElementById('cloudrun-cost').textContent = `$${cloudRunCost}`;
+            document.getElementById('firestore-cost').textContent = `$${firestoreCost}`;
+            document.getElementById('secret-cost').textContent = `$${secretCost}`;
+            document.getElementById('storage-cost').textContent = `$${storageCost}`;
+            document.getElementById('network-cost').textContent = `$${networkCost}`;
+            
+            const total = aiCost + cloudRunCost + firestoreCost + secretCost + storageCost + networkCost;
+            document.getElementById('total-cost').textContent = `$${total} TWD`;
+        }
+
+        // Balance sliders
+        function balanceSliders(changedSlider) {
+            const sliders = [simpleSlider, mediumSlider, complexSlider];
+            const values = sliders.map(s => parseInt(s.value));
+            const total = values.reduce((a, b) => a + b, 0);
+            
+            if (total > 100) {
+                const excess = total - 100;
+                const otherSliders = sliders.filter(s => s !== changedSlider);
+                const distribution = excess / otherSliders.length;
+                
+                otherSliders.forEach(slider => {
+                    const newValue = Math.max(0, parseInt(slider.value) - distribution);
+                    slider.value = newValue;
+                });
+            }
+            
+            updateCosts();
+        }
+
+        volumeSlider.addEventListener('input', updateCosts);
+        simpleSlider.addEventListener('input', () => balanceSliders(simpleSlider));
+        mediumSlider.addEventListener('input', () => balanceSliders(mediumSlider));
+        complexSlider.addEventListener('input', () => balanceSliders(complexSlider));
+
+        // Initialize
+        updateCosts();
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const offsetTop = target.offsetTop - 70;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
         });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            function toggleMobileMenu() {
+                navLinks.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('active');
+            }
+            
+            // Add click event listener to mobile menu toggle
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
 
-        // Initialize calculator
-        updateCalculator();
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const nav = document.querySelector('nav');
+                
+                if (!nav.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
