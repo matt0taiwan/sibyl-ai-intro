@@ -1,0 +1,2807 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sibyl AI - 突破 LINE OA 限制的智慧客服解決方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1E3A8A;
+            --accent-color: #F97316;
+            --success-color: #10B981;
+            --danger-color: #EF4444;
+            --gray-light: #F3F4F6;
+            --gray-dark: #374151;
+            --white: #FFFFFF;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-dark);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+
+        /* Pain Points */
+        .pain-section {
+            background: var(--gray-light);
+        }
+
+        .pain-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .chat-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chat-box {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            height: 600px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .chat-box h3 {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-light);
+            z-index: 10;
+        }
+
+        .chat-box.traditional h3 {
+            color: var(--danger-color);
+        }
+
+        .chat-box.ai h3 {
+            color: var(--success-color);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: messageSlide 0.5s ease-out forwards;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.system {
+            text-align: left;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            max-width: 80%;
+        }
+
+        .user .message-bubble {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .system .message-bubble {
+            background: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .traditional .system .message-bubble {
+            background: #FEE2E2;
+            color: var(--danger-color);
+        }
+
+        .ai .system .message-bubble {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        /* Protection Layers */
+        .protection-section {
+            padding: 4rem 2rem;
+        }
+
+        .protection-layers {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .layer {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            z-index: 1;
+        }
+
+        .layer:hover {
+            transform: translateY(-10px);
+        }
+
+        .layer-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .layer h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Self Learning Section */
+        .learning-section {
+            background: var(--gray-light);
+            padding: 4rem 2rem;
+        }
+
+        .learning-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .evolution-process {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .learning-results {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .growth-bar-mini {
+            background: #E5E7EB;
+            height: 35px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .growth-stage {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: width 1s ease-out;
+        }
+
+        .method-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: 0.5rem;
+        }
+
+        .method-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .method-content strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .method-content p {
+            margin: 0;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .learning-benefits {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Success Metrics */
+        .metrics-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
+
+        .metric-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Technical Features */
+        .features-section {
+            background: var(--gray-light);
+            padding: 4rem 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            box-shadow: var(--shadow);
+            transform: translateX(5px);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Optimization Styles */
+        .faq-optimization {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .analysis-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .analysis-step {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            min-height: 280px;
+        }
+
+        .analysis-step h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .data-example {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+        }
+
+        .count {
+            font-weight: 700;
+            color: var(--accent-color);
+            white-space: nowrap;
+            margin-right: 1rem;
+        }
+
+        .question {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .pattern-box, .suggestion-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .pattern-box p, .suggestion-box p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .alert-tag {
+            display: inline-block;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-suggestion {
+            background: #F0FDF4;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-a {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .analysis-arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+            justify-self: center;
+        }
+
+        /* Responsive adjustment for analysis flow */
+        @media (max-width: 1200px) {
+            .analysis-flow {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .analysis-arrow {
+                transform: rotate(90deg);
+                margin: -1rem 0;
+            }
+            
+            .analysis-step {
+                min-height: auto;
+            }
+        }
+
+        .optimization-cases {
+            margin-top: 3rem;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .case-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .case-header {
+            margin-bottom: 1rem;
+        }
+
+        .case-type {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .before-after {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .before, .after {
+            padding: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+        }
+
+        .before {
+            border-left: 3px solid var(--danger-color);
+        }
+
+        .after {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .improvement {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-align: center;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Technical Architecture Section */
+        .architecture-section {
+            background: var(--gray-light);
+            padding: 4rem 2rem;
+        }
+
+        .architecture-diagram {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+            max-width: 1000px;
+            box-shadow: var(--shadow);
+        }
+
+        .arch-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .arch-component {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .arch-component.highlight {
+            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+            border: 2px solid var(--primary-color);
+        }
+
+        .arch-component:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .arch-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .arch-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .arch-label small {
+            display: block;
+            font-weight: normal;
+            color: var(--gray-dark);
+            font-size: 0.8rem;
+        }
+
+        .arch-arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* Hybrid Search Diagram */
+        .hybrid-search {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: var(--shadow);
+        }
+
+        .search-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .input-box, .merge-box {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+
+        .search-split {
+            display: flex;
+            gap: 4rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .search-path {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .search-path h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-box {
+            background: var(--success-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        /* Technical Specs */
+        .tech-specs {
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .spec-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .spec-title {
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-detail {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        /* Monitoring Preview */
+        .monitoring-preview {
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .monitor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .monitor-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .monitor-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-row span:first-child {
+            width: 100px;
+            font-size: 0.9rem;
+        }
+
+        .metric-bar {
+            flex: 1;
+            height: 20px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 1s ease-out;
+        }
+
+        .metric-bar.success .metric-fill {
+            background: var(--success-color);
+        }
+
+        .monitor-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        /* Advanced Technical Section */
+        .advanced-tech-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        /* Vector Visualization */
+        .vector-viz {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+
+        .vector-explanation {
+            text-align: center;
+        }
+
+        .vector-demo {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            min-height: 300px;
+        }
+
+        .vector-cluster {
+            position: relative;
+            width: 300px;
+            height: 250px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .cluster-title {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vector-points {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .point {
+            position: absolute;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .point:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* API Integration */
+        .api-potential {
+            margin: 3rem auto;
+            max-width: 1200px;
+        }
+
+        .api-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .api-current, .api-future {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+
+        .api-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .api-item.active {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .api-item.future {
+            border-left: 3px solid var(--accent-color);
+            opacity: 0.8;
+        }
+
+        .api-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .api-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .api-info strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .api-info p {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+            margin: 0;
+        }
+
+        /* Analytics Dashboard */
+        .analytics-dashboard {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin: 3rem auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Ranking List */
+        .rank-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .rank-question {
+            flex: 1;
+        }
+
+        .rank-count {
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        /* Time Chart */
+        .time-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            padding-bottom: 30px; /* 增加底部空間給標籤 */
+        }
+
+        .time-bar {
+            width: 40px;
+            background: linear-gradient(to top, var(--primary-color), var(--accent-color));
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .time-bar span {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        .time-bar:hover {
+            transform: scaleY(1.1);
+        }
+
+        /* Intent Stats */
+        .intent-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .intent-label {
+            width: 80px;
+            font-size: 0.9rem;
+        }
+
+        .bar-bg {
+            flex: 1;
+            height: 20px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            transition: width 1s ease-out;
+        }
+
+        .intent-percent {
+            width: 40px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Emotion Trend */
+        .emotion-trend {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .emotion-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .emotion-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .emotion-label {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .emotion-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Cache Strategy */
+        .cache-strategy {
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .cache-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .cache-step {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .cache-step.highlight {
+            background: linear-gradient(135deg, #FEF3C7, #FEE2E2);
+            border: 2px solid var(--accent-color);
+        }
+
+        .cache-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cache-arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        .cache-result {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .result-fast, .result-slow {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .result-fast {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .result-slow {
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .cache-benefits {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            flex: 1;
+            margin: 0 1rem;
+        }
+
+        .benefit-item strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Security Section */
+        .security-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .security-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+
+        .security-foundation {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .security-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .security-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .security-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .security-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .security-item p {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .data-protection {
+            margin-bottom: 3rem;
+        }
+
+        .protection-practice {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .practice-item {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .practice-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .practice-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .practice-header strong {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .practice-item ul {
+            list-style: none;
+            padding-left: 3rem;
+        }
+
+        .practice-item li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--gray-dark);
+        }
+
+        .practice-item li:before {
+            content: "✓";
+            position: absolute;
+            left: -1.5rem;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .security-commitment {
+            background: var(--gray-light);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-top: 3rem;
+        }
+
+        .commitment-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .commitment-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .commitment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .commitment-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .commitment-card p {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        /* Cost Calculator */
+        .calculator-section {
+            background: var(--gray-light);
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--gray-light);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .cost-breakdown {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--gray-light);
+            border-radius: 0.5rem;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .cost-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Growth Animation */
+        .growth-bar {
+            width: 100%;
+            height: 40px;
+            background: var(--gray-light);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .growth-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color) 0%, var(--primary-color) 100%);
+            border-radius: 20px;
+            width: 60%;
+            position: relative;
+            transition: width 2s ease-out;
+        }
+
+        .growth-fill.animate {
+            width: 85%;
+        }
+
+        .growth-label {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .chat-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .protection-layers {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            nav {
+                padding: 0.5rem 0;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <h2 style="color: var(--primary-color);">Sibyl AI</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">首頁</a></li>
+                <li><a href="#pain">痛點分析</a></li>
+                <li><a href="#solution">解決方案</a></li>
+                <li><a href="#learning">智慧進化</a></li>
+                <li><a href="#features">技術特色</a></li>
+                <li><a href="#architecture">技術架構</a></li>
+                <li><a href="#advanced-tech">進階技術</a></li>
+                <li><a href="#security">資訊安全</a></li>
+                <li><a href="#cost">成本分析</a></li>
+                <li><a href="#metrics">成效指標</a></li>
+                <li><a href="#cta">立即行動</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div>
+            <h1>突破 LINE OA 限制</h1>
+            <p class="subtitle">GPT-4o 賦能的智慧客服系統</p>
+            <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto;">
+                <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600; margin-bottom: 1rem;">
+                    🎯 核心價值主張
+                </p>
+                <p>我們的同仁已在 LINE OA 框架內盡心設計完整服務，<br>
+                但工具的限制讓優質服務難以傳達給客戶。</p>
+                <p style="margin-top: 1rem; color: var(--accent-color); font-weight: 600;">
+                    Sibyl AI 不是推翻重來，而是技術突破！
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section id="pain" class="pain-section">
+        <div class="pain-header fade-in">
+            <h2 style="color: var(--primary-color); margin-bottom: 1rem;">LINE OA 框架限制 vs Sibyl AI 突破</h2>
+            <p style="font-size: 1.2rem;">真實案例：客戶想了解塔位價格</p>
+        </div>
+
+        <div class="chat-comparison">
+            <!-- Traditional Chat -->
+            <div class="chat-box traditional">
+                <h3>LINE OA 框架限制下的體驗 ❌</h3>
+                <div id="traditional-chat"></div>
+            </div>
+
+            <!-- AI Chat -->
+            <div class="chat-box ai">
+                <h3>Sibyl AI 突破限制後的體驗 ✓</h3>
+                <div id="ai-chat"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Protection Layers Section -->
+    <section id="solution" class="protection-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">三層防護機制，確保服務品質</h2>
+            <p style="text-align: center; font-size: 1.2rem;">智慧處理常規問題，人工專注高價值服務</p>
+        </div>
+
+        <div class="protection-layers fade-in">
+            <div class="layer">
+                <div class="layer-icon">📚</div>
+                <h4>第一層：智慧成長知識庫</h4>
+                <p>不只回答問題<br>還會主動學習</p>
+                <div class="growth-bar">
+                    <div class="growth-fill" id="growth-bar">
+                        <span class="growth-label">60%</span>
+                    </div>
+                </div>
+                <p style="color: var(--success-color); font-weight: 600;">持續成長中...</p>
+            </div>
+
+            <div class="layer">
+                <div class="layer-icon">🤖</div>
+                <h4>第二層：AI 智慧判斷</h4>
+                <p>GPT-4o 語意理解<br>信心度 < 70% 誠實告知</p>
+                <p style="margin-top: 1rem; color: var(--primary-color);">「我不太確定這個問題，<br>讓我請同仁為您解答」</p>
+            </div>
+
+            <div class="layer">
+                <div class="layer-icon">👥</div>
+                <h4>第三層：人工接管</h4>
+                <p>敏感議題自動轉接<br>客服可隨時介入</p>
+                <p style="margin-top: 1rem; color: var(--accent-color);">永遠有人把關</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Self Learning Section -->
+    <section id="learning" class="learning-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">自我進化的智慧系統</h2>
+            <p style="text-align: center; font-size: 1.2rem;">Sibyl 像新生兒，需要大家一起培育成長</p>
+        </div>
+
+        <div class="learning-container fade-in">
+            <!-- 左側：成長概念 -->
+            <div class="evolution-process">
+                <h3 style="color: var(--accent-color); margin-bottom: 2rem;">智慧成長之路</h3>
+                
+                <div style="background: #FEF3C7; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                    <p style="color: #92400E; margin: 0;">
+                        <strong>現況說明：</strong><br>
+                        Sibyl 剛誕生不久，就像一個聰明但需要學習的新生兒。
+                        她有強大的理解能力（GPT-4o），但對五湖園的專業知識還在學習中。
+                        每一次對話都是她的成長養分。
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">📚</div>
+                    <div class="step-content">
+                        <h4>現在：基礎知識期</h4>
+                        <p>掌握基本FAQ，能回答常見問題，但仍有許多知識缺口</p>
+                    </div>
+                </div>
+
+                <div class="process-arrow">↓</div>
+
+                <div class="process-step">
+                    <div class="step-number">🌱</div>
+                    <div class="step-content">
+                        <h4>3個月：快速成長期</h4>
+                        <p>透過大量對話學習，FAQ覆蓋率顯著提升，回答更精準</p>
+                    </div>
+                </div>
+
+                <div class="process-arrow">↓</div>
+
+                <div class="process-step">
+                    <div class="step-number">🌳</div>
+                    <div class="step-content">
+                        <h4>6個月：成熟智慧期</h4>
+                        <p>累積豐富經驗，能處理複雜情境，成為真正的智慧助手</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：培育方式 -->
+            <div class="learning-results">
+                <h3 style="color: var(--primary-color); margin-bottom: 2rem;">如何培育 Sibyl 成長</h3>
+                
+                <div class="nurture-methods">
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🍼 成長的養分來源</h4>
+                    
+                    <div class="method-item">
+                        <div class="method-icon">💬</div>
+                        <div class="method-content">
+                            <strong>客戶對話</strong>
+                            <p>每次互動都讓 Sibyl 學習新的問答模式</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">👥</div>
+                        <div class="method-content">
+                            <strong>團隊回饋</strong>
+                            <p>客服同仁糾正錯誤，補充專業知識</p>
+                        </div>
+                    </div>
+
+                    <div class="method-item">
+                        <div class="method-icon">📊</div>
+                        <div class="method-content">
+                            <strong>數據分析</strong>
+                            <p>系統自動分析失敗案例，找出改善方向</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #D1FAE5; padding: 1rem; border-radius: 0.5rem; margin-top: 1.5rem;">
+                    <p style="color: #065F46; margin: 0; font-weight: 600;">
+                        💡 關鍵理念：不是 Sibyl 不夠聰明，而是她還在學習五湖園的專業領域。
+                        就像培育孩子，需要耐心與時間。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新增：FAQ 分析優化展示 -->
+        <div class="faq-optimization fade-in">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">智慧分析創建 FAQ 條目</h3>
+            
+            <!-- 分析流程 -->
+            <div class="analysis-flow">
+                <div class="analysis-step">
+                    <h4>📥 Step 1: 收集對話數據</h4>
+                    <div class="data-example">
+                        <div class="data-item">
+                            <span class="count">45次</span>
+                            <span class="question">「可以帶寵物來嗎？」</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="count">38次</span>
+                            <span class="question">「寵物可以一起安葬嗎？」</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="count">27次</span>
+                            <span class="question">「有寵物塔位嗎？」</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-arrow">→</div>
+
+                <div class="analysis-step">
+                    <h4>🔍 Step 2: AI 模式識別</h4>
+                    <div class="pattern-box">
+                        <p><strong>發現模式：</strong></p>
+                        <p>• 高頻關鍵字：寵物、毛小孩</p>
+                        <p>• 意圖分類：詢問寵物服務</p>
+                        <p>• 回答成功率：僅 23%</p>
+                        <div class="alert-tag">⚠️ 知識缺口</div>
+                    </div>
+                </div>
+
+                <div class="analysis-arrow">→</div>
+
+                <div class="analysis-step">
+                    <h4>💡 Step 3: 自動建議</h4>
+                    <div class="suggestion-box">
+                        <p><strong>建議新增 FAQ：</strong></p>
+                        <div class="faq-suggestion">
+                            <div class="faq-q">問：五湖園有提供寵物相關服務嗎？</div>
+                            <div class="faq-a">答：目前園區專注於人的生命服務，暫無寵物專屬區域。但我們理解毛小孩也是家人，建議您可以...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 優化案例 -->
+            <div class="optimization-cases">
+                <h4 style="text-align: center; margin: 2rem 0;">FAQ 優化實例</h4>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-type">🔧 用詞優化</span>
+                        </div>
+                        <div class="before-after">
+                            <div class="before">
+                                <strong>原本：</strong><br>
+                                「塔位使用權狀遺失補發需要...」
+                            </div>
+                            <div class="after">
+                                <strong>優化後：</strong><br>
+                                「權狀遺失了怎麼辦？別擔心，我們提供補發服務...」
+                            </div>
+                        </div>
+                        <div class="improvement">更口語化，降低焦慮感</div>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-type">📝 內容擴充</span>
+                        </div>
+                        <div class="before-after">
+                            <div class="before">
+                                <strong>原本：</strong><br>
+                                「參觀時間：09:00-16:00」
+                            </div>
+                            <div class="after">
+                                <strong>優化後：</strong><br>
+                                「參觀時間：09:00-16:00<br>
+                                • 建議預約確保專人接待<br>
+                                • 週末人潮較多<br>
+                                • 可安排線上導覽」
+                            </div>
+                        </div>
+                        <div class="improvement">資訊更完整實用</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="learning-benefits fade-in">
+            <div class="benefit-card">
+                <h4>🎯 初期目標</h4>
+                <p>先求有再求好<br>逐步完善</p>
+            </div>
+            <div class="benefit-card">
+                <h4>📈 成長曲線</h4>
+                <p>越用越聰明<br>價值遞增</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🤝 團隊協作</h4>
+                <p>全員參與<br>共同培育</p>
+            </div>
+            <div class="benefit-card">
+                <h4>🏆 未來願景</h4>
+                <p>成為業界最懂<br>生命服務的 AI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Features Section -->
+    <section id="features" class="features-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">技術優勢特色</h2>
+            <p style="text-align: center; font-size: 1.2rem;">GPT-4o 賦能的先進功能</p>
+        </div>
+
+        <div class="features-grid fade-in">
+            <div class="feature-item">
+                <div class="feature-title">🧠 情感智慧引擎</div>
+                <div class="feature-desc">準確理解情感狀態，提供溫暖支援</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">💾 智慧記憶系統</div>
+                <div class="feature-desc">30天對話歷史，個性化服務體驗</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🔄 雙模式切換</div>
+                <div class="feature-desc">傳統模式與AI模式無縫切換</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">📊 混合檢索架構</div>
+                <div class="feature-desc">向量語義+關鍵字，準確率>90%</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">⚡ 即時回應</div>
+                <div class="feature-desc">平均回應時間<3秒，24/7服務</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🎯 多輪對話管理</div>
+                <div class="feature-desc">記住上下文，避免重複提問</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">📱 豐富訊息格式</div>
+                <div class="feature-desc">圖文訊息、可點擊圖片、表情符號</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🛡️ 企業級安全</div>
+                <div class="feature-desc">GCP安全防護，隱私合規保護</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture Section -->
+    <section id="architecture" class="architecture-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">技術架構展示</h2>
+            <p style="text-align: center; font-size: 1.2rem;">企業級架構設計，確保穩定可靠</p>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="architecture-diagram fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">系統架構圖</h3>
+            <div class="arch-flow">
+                <div class="arch-component">
+                    <div class="arch-icon">📱</div>
+                    <div class="arch-label">LINE 用戶</div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-component">
+                    <div class="arch-icon">🌐</div>
+                    <div class="arch-label">LINE Platform<br><small>Webhook</small></div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-component highlight">
+                    <div class="arch-icon">☁️</div>
+                    <div class="arch-label">Cloud Run<br><small>Auto-scaling</small></div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-component">
+                    <div class="arch-icon">🧠</div>
+                    <div class="arch-label">GPT-4o<br><small>AI Engine</small></div>
+                </div>
+            </div>
+            <div class="arch-flow" style="margin-top: 2rem;">
+                <div class="arch-component">
+                    <div class="arch-icon">💾</div>
+                    <div class="arch-label">Firestore<br><small>對話記憶</small></div>
+                </div>
+                <div class="arch-component">
+                    <div class="arch-icon">📊</div>
+                    <div class="arch-label">Google Sheets<br><small>知識庫</small></div>
+                </div>
+                <div class="arch-component">
+                    <div class="arch-icon">🔐</div>
+                    <div class="arch-label">Secret Manager<br><small>金鑰管理</small></div>
+                </div>
+                <div class="arch-component">
+                    <div class="arch-icon">📈</div>
+                    <div class="arch-label">Cloud Logging<br><small>監控分析</small></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hybrid Search -->
+        <div class="hybrid-search fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">混合檢索架構詳解</h3>
+            <div class="search-diagram">
+                <div class="search-input">
+                    <div class="input-box">使用者問題：「塔位價格多少？」</div>
+                </div>
+                <div class="search-split">
+                    <div class="search-path">
+                        <h4>🧭 語義檢索</h4>
+                        <p>理解「費用」「售價」「收費」<br>都是在問價格</p>
+                        <div class="result-box">相似度: 0.92</div>
+                    </div>
+                    <div class="search-path">
+                        <h4>🔍 關鍵字檢索</h4>
+                        <p>精確匹配<br>「塔位」「價格」</p>
+                        <div class="result-box">匹配度: 0.95</div>
+                    </div>
+                </div>
+                <div class="search-merge">
+                    <div class="merge-box">🎯 綜合評分：最佳答案</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Specs -->
+        <div class="tech-specs fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">技術規格與效能</h3>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-icon">⚡</div>
+                    <div class="spec-title">回應速度</div>
+                    <div class="spec-value">&lt; 500ms</div>
+                    <div class="spec-detail">P95 延遲時間</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🚀</div>
+                    <div class="spec-title">併發處理</div>
+                    <div class="spec-value">1000+</div>
+                    <div class="spec-detail">同時對話數</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">📊</div>
+                    <div class="spec-title">系統可用性</div>
+                    <div class="spec-value">99.9%</div>
+                    <div class="spec-detail">SLA 保證</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">🔌</div>
+                    <div class="spec-title">API 整合</div>
+                    <div class="spec-value">RESTful</div>
+                    <div class="spec-detail">+ Webhook</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Dashboard -->
+        <div class="monitoring-preview fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">即時監控能力</h3>
+            <div class="monitor-grid">
+                <div class="monitor-card">
+                    <h4>📈 效能監控</h4>
+                    <div class="monitor-metrics">
+                        <div class="metric-row">
+                            <span>CPU 使用率</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 35%;"></div>
+                            </div>
+                            <span>35%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span>記憶體使用</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 42%;"></div>
+                            </div>
+                            <span>42%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span>請求成功率</span>
+                            <div class="metric-bar success">
+                                <div class="metric-fill" style="width: 99.8%;"></div>
+                            </div>
+                            <span>99.8%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-card">
+                    <h4>💬 對話分析</h4>
+                    <div class="monitor-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">2,847</div>
+                            <div class="stat-label">今日對話數</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1.3s</div>
+                            <div class="stat-label">平均回應時間</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">92%</div>
+                            <div class="stat-label">問題解決率</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Technical Section -->
+    <section id="advanced-tech" class="advanced-tech-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">進階技術展示</h2>
+            <p style="text-align: center; font-size: 1.2rem;">深入了解 Sibyl AI 的技術能力</p>
+        </div>
+
+        <!-- Vector Database Visualization -->
+        <div class="vector-viz fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">向量資料庫智慧檢索</h3>
+            <div class="vector-container">
+                <div class="vector-explanation">
+                    <h4>🧮 3072 維向量空間</h4>
+                    <p>每個問題都被轉換成 3072 維的向量，在高維空間中相似的問題會聚集在一起。</p>
+                    <div class="vector-demo">
+                        <div class="vector-cluster">
+                            <div class="cluster-title">價格諮詢群</div>
+                            <div class="vector-points">
+                                <span class="point" style="top: 20%; left: 30%;">塔位多少錢</span>
+                                <span class="point" style="top: 35%; left: 25%;">價格怎麼算</span>
+                                <span class="point" style="top: 25%; left: 45%;">費用詢問</span>
+                                <span class="point" style="top: 40%; left: 40%;">收費標準</span>
+                            </div>
+                        </div>
+                        <div class="vector-cluster">
+                            <div class="cluster-title">參觀預約群</div>
+                            <div class="vector-points">
+                                <span class="point" style="top: 20%; left: 20%;">想參觀</span>
+                                <span class="point" style="top: 30%; left: 35%;">可以看看嗎</span>
+                                <span class="point" style="top: 15%; left: 40%;">實地了解</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray-dark);">
+                        * 此為簡化的 2D 視覺化呈現，實際運作於 3072 維空間
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Integration Potential -->
+        <div class="api-potential fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">API 整合潛力與未來擴充</h3>
+            <div class="api-grid">
+                <div class="api-current">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1.5rem;">🔌 現有整合</h4>
+                    <div class="api-item active">
+                        <div class="api-icon">💬</div>
+                        <div class="api-info">
+                            <strong>LINE Messaging API</strong>
+                            <p>接收訊息、回覆、推播通知</p>
+                        </div>
+                    </div>
+                    <div class="api-item active">
+                        <div class="api-icon">🧠</div>
+                        <div class="api-info">
+                            <strong>OpenAI GPT-4o</strong>
+                            <p>自然語言理解與生成</p>
+                        </div>
+                    </div>
+                    <div class="api-item active">
+                        <div class="api-icon">📊</div>
+                        <div class="api-info">
+                            <strong>Google Workspace</strong>
+                            <p>Sheets 知識庫、文件管理</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="api-future">
+                    <h4 style="color: var(--accent-color); margin-bottom: 1.5rem;">🚀 未來擴充潛力</h4>
+                    <div class="api-item future">
+                        <div class="api-icon">💳</div>
+                        <div class="api-info">
+                            <strong>金流整合</strong>
+                            <p>線上繳費、分期付款、退款處理</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">📅</div>
+                        <div class="api-info">
+                            <strong>預約系統</strong>
+                            <p>即時空檔查詢、自動排程、提醒通知</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">🎥</div>
+                        <div class="api-info">
+                            <strong>視訊導覽</strong>
+                            <p>VR 實境參觀、線上直播法會</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">📱</div>
+                        <div class="api-info">
+                            <strong>IoT 整合</strong>
+                            <p>智慧塔位監控、環境感測、自動照明</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">🔔</div>
+                        <div class="api-info">
+                            <strong>CRM 系統</strong>
+                            <p>客戶關係管理、自動關懷提醒</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Analytics Dashboard -->
+        <div class="analytics-dashboard fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">資料分析儀表板</h3>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h4>📊 熱門問題排行</h4>
+                    <div class="ranking-list">
+                        <div class="rank-item">
+                            <span class="rank-number">1</span>
+                            <span class="rank-question">塔位價格諮詢</span>
+                            <span class="rank-count">342次</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-number">2</span>
+                            <span class="rank-question">參觀預約</span>
+                            <span class="rank-count">286次</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-number">3</span>
+                            <span class="rank-question">法會時間</span>
+                            <span class="rank-count">195次</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h4>⏰ 活躍時段分析</h4>
+                    <div class="time-chart">
+                        <div class="time-bar" style="height: 40%"><span>06</span></div>
+                        <div class="time-bar" style="height: 60%"><span>09</span></div>
+                        <div class="time-bar" style="height: 80%"><span>12</span></div>
+                        <div class="time-bar" style="height: 90%"><span>15</span></div>
+                        <div class="time-bar" style="height: 70%"><span>18</span></div>
+                        <div class="time-bar" style="height: 45%"><span>21</span></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--gray-dark);">
+                        下午時段詢問度最高
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h4>🎯 意圖分類統計</h4>
+                    <div class="intent-stats">
+                        <div class="intent-bar">
+                            <span class="intent-label">價格詢問</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 35%; background: var(--primary-color);"></div>
+                            </div>
+                            <span class="intent-percent">35%</span>
+                        </div>
+                        <div class="intent-bar">
+                            <span class="intent-label">參觀預約</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 28%; background: var(--accent-color);"></div>
+                            </div>
+                            <span class="intent-percent">28%</span>
+                        </div>
+                        <div class="intent-bar">
+                            <span class="intent-label">法會報名</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 20%; background: var(--success-color);"></div>
+                            </div>
+                            <span class="intent-percent">20%</span>
+                        </div>
+                        <div class="intent-bar">
+                            <span class="intent-label">一般諮詢</span>
+                            <div class="bar-bg">
+                                <div class="bar-fill" style="width: 17%; background: #8B5CF6;"></div>
+                            </div>
+                            <span class="intent-percent">17%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h4>😊 情緒分析趨勢</h4>
+                    <div class="emotion-trend">
+                        <div class="emotion-stat">
+                            <span class="emotion-icon">😊</span>
+                            <span class="emotion-label">正面</span>
+                            <span class="emotion-value">68%</span>
+                        </div>
+                        <div class="emotion-stat">
+                            <span class="emotion-icon">😐</span>
+                            <span class="emotion-label">中性</span>
+                            <span class="emotion-value">25%</span>
+                        </div>
+                        <div class="emotion-stat">
+                            <span class="emotion-icon">😔</span>
+                            <span class="emotion-label">需關懷</span>
+                            <span class="emotion-value">7%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smart Cache Strategy -->
+        <div class="cache-strategy fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">智慧快取策略</h3>
+            <div class="cache-flow">
+                <div class="cache-step">
+                    <div class="cache-icon">❓</div>
+                    <h4>用戶提問</h4>
+                    <p>「塔位價格多少？」</p>
+                </div>
+                <div class="cache-arrow">→</div>
+                <div class="cache-step highlight">
+                    <div class="cache-icon">💾</div>
+                    <h4>檢查快取</h4>
+                    <p>TTL: 1 小時<br>命中率: 85%</p>
+                </div>
+                <div class="cache-arrow">→</div>
+                <div class="cache-result">
+                    <div class="result-fast">
+                        <div class="cache-icon">⚡</div>
+                        <h5>快取命中</h5>
+                        <p>< 50ms 回應</p>
+                    </div>
+                    <div class="result-slow">
+                        <div class="cache-icon">🔄</div>
+                        <h5>快取失效</h5>
+                        <p>查詢 + 更新快取</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cache-benefits">
+                <div class="benefit-item">
+                    <strong>🚀 效能提升</strong>
+                    <p>回應速度快 10 倍</p>
+                </div>
+                <div class="benefit-item">
+                    <strong>💰 成本節省</strong>
+                    <p>減少 85% API 呼叫</p>
+                </div>
+                <div class="benefit-item">
+                    <strong>📊 智慧預載</strong>
+                    <p>熱門問題自動快取</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="security-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">企業級資訊安全保障</h2>
+            <p style="text-align: center; font-size: 1.2rem;">採用 Google Cloud Platform，享有世界級安全防護</p>
+        </div>
+
+        <div class="security-container fade-in">
+            <!-- GCP 安全基礎 -->
+            <div class="security-foundation">
+                <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
+                    <img src="https://www.gstatic.com/devrel-devsite/prod/v1241c04ebcb2127897d6c18221acbd64e7ed5c46e5217fd83dd808e592c47bf6/cloud/images/cloud-logo.svg" alt="Google Cloud" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+                    Google 等級的安全基礎設施
+                </h3>
+                
+                <div class="security-grid">
+                    <div class="security-item">
+                        <div class="security-icon">🏛️</div>
+                        <h4>實體安全</h4>
+                        <p>Google 資料中心 24/7 監控<br>多層次實體防護</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon">🔐</div>
+                        <h4>加密保護</h4>
+                        <p>傳輸中加密（TLS 1.3）<br>靜態資料 AES-256 加密</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon">🛡️</div>
+                        <h4>DDoS 防護</h4>
+                        <p>Google 全球網路自動防護<br>確保服務不中斷</p>
+                    </div>
+                    <div class="security-item">
+                        <div class="security-icon">📜</div>
+                        <h4>國際認證</h4>
+                        <p>ISO 27001、SOC 2/3<br>GDPR 合規</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 資料保護實踐 -->
+            <div class="data-protection">
+                <h3 style="color: var(--accent-color); margin-bottom: 2rem;">五湖園資料保護實踐</h3>
+                
+                <div class="protection-practice">
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">🔑</span>
+                            <strong>敏感資料管理</strong>
+                        </div>
+                        <ul>
+                            <li>API 金鑰存放於 Secret Manager</li>
+                            <li>自動輪替機制</li>
+                            <li>最小權限原則</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">🗑️</span>
+                            <strong>隱私保護設計</strong>
+                        </div>
+                        <ul>
+                            <li>對話記錄 30 天自動刪除</li>
+                            <li>不儲存身分證、電話等個資</li>
+                            <li>用戶可要求刪除所有資料</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">👤</span>
+                            <strong>存取控制</strong>
+                        </div>
+                        <ul>
+                            <li>IAM 身份驗證</li>
+                            <li>服務帳戶最小權限</li>
+                            <li>稽核日誌完整記錄</li>
+                        </ul>
+                    </div>
+
+                    <div class="practice-item">
+                        <div class="practice-header">
+                            <span class="practice-icon">🔄</span>
+                            <strong>災難復原</strong>
+                        </div>
+                        <ul>
+                            <li>自動備份機制</li>
+                            <li>多區域備援（台灣 + 新加坡）</li>
+                            <li>一鍵回退功能</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 安全承諾 -->
+        <div class="security-commitment fade-in">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Google Cloud 安全保障</h3>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--gray-dark);">
+                採用 Google 企業級基礎設施，享有與 Google 服務同等級的安全防護
+            </p>
+            <div class="commitment-cards">
+                <div class="commitment-card">
+                    <div class="commitment-icon">🔒</div>
+                    <h4>資料主權</h4>
+                    <p>您的資料永遠屬於您<br>隨時可匯出或刪除</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🌏</div>
+                    <h4>在地合規</h4>
+                    <p>資料存放於亞洲<br>符合台灣法規要求</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🔍</div>
+                    <h4>透明稽核</h4>
+                    <p>定期安全報告<br>可追蹤的操作日誌</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🚨</div>
+                    <h4>即時應變</h4>
+                    <p>24/7 監控警報<br>快速事件響應</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Calculator Section -->
+    <section id="cost" class="calculator-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">投資透明度</h2>
+            <p style="text-align: center; font-size: 1.2rem;">清楚了解每一分投資</p>
+        </div>
+
+        <div class="calculator fade-in">
+            <div class="input-group">
+                <label>預期每月對話量：<span id="volume-display">1000</span> 則</label>
+                <input type="range" class="slider" id="volume-slider" min="100" max="5000" value="1000" step="100">
+            </div>
+
+            <div class="input-group">
+                <label>對話複雜度分布</label>
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                    <div>
+                        <label>簡單查詢：<span id="simple-display">40</span>%</label>
+                        <input type="range" class="slider" id="simple-slider" min="0" max="100" value="40" style="width: 200px;">
+                    </div>
+                    <div>
+                        <label>中等複雜：<span id="medium-display">40</span>%</label>
+                        <input type="range" class="slider" id="medium-slider" min="0" max="100" value="40" style="width: 200px;">
+                    </div>
+                    <div>
+                        <label>複雜流程：<span id="complex-display">20</span>%</label>
+                        <input type="range" class="slider" id="complex-slider" min="0" max="100" value="20" style="width: 200px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="cost-breakdown">
+                <h3 style="margin-bottom: 1rem;">成本明細</h3>
+                <div class="cost-item">
+                    <span>AI 對話成本 (GPT-4o)</span>
+                    <span id="ai-cost">$150</span>
+                </div>
+                <div class="cost-item">
+                    <span>Cloud Run 運算服務</span>
+                    <span id="cloudrun-cost">$800</span>
+                </div>
+                <div class="cost-item">
+                    <span>Firestore 資料庫</span>
+                    <span id="firestore-cost">$150</span>
+                </div>
+                <div class="cost-item">
+                    <span>Secret Manager 金鑰管理</span>
+                    <span id="secret-cost">$30</span>
+                </div>
+                <div class="cost-item">
+                    <span>Cloud Storage 檔案儲存</span>
+                    <span id="storage-cost">$40</span>
+                </div>
+                <div class="cost-item">
+                    <span>網路傳輸費用</span>
+                    <span id="network-cost">$60</span>
+                </div>
+                <div class="cost-item">
+                    <span>Google Sheets API</span>
+                    <span>免費</span>
+                </div>
+                <div class="cost-total">
+                    總月度投資：<span id="total-cost">$1,230 TWD</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Metrics Section -->
+    <section id="metrics" class="metrics-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">預期成效</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">系統導入後的改善方向</p>
+        </div>
+
+        <div class="metrics-grid fade-in">
+            <!-- 技術成效 -->
+            <div class="metric-card">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🔧 技術層面</h3>
+                <div class="metric-item">
+                    <span class="metric-label">系統穩定性</span>
+                    <span class="metric-value">24/7 穩定運作</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">回應速度</span>
+                    <span class="metric-value">即時回覆</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">理解能力</span>
+                    <span class="metric-value">自然語言理解</span>
+                </div>
+            </div>
+
+            <!-- 客戶體驗 -->
+            <div class="metric-card">
+                <h3 style="color: var(--accent-color); margin-bottom: 1rem;">📈 客戶體驗</h3>
+                <div class="metric-item">
+                    <span class="metric-label">服務感受</span>
+                    <span class="metric-value">更貼心溫暖</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">問題解決</span>
+                    <span class="metric-value">更快速有效</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">整體滿意度</span>
+                    <span class="metric-value">顯著提升</span>
+                </div>
+            </div>
+
+            <!-- 營運效益 -->
+            <div class="metric-card">
+                <h3 style="color: var(--success-color); margin-bottom: 1rem;">💰 營運效益</h3>
+                <div class="metric-item">
+                    <span class="metric-label">人力配置</span>
+                    <span class="metric-value">更有效運用</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">服務品質</span>
+                    <span class="metric-value">持續優化</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">品牌形象</span>
+                    <span class="metric-value">智慧園區實踐</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">準備好突破限制了嗎？</h2>
+        <p style="font-size: 1.5rem; margin-bottom: 2rem;">讓 Sibyl AI 為五湖園開啟智慧服務的新篇章</p>
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 1rem; max-width: 800px; margin: 0 auto;">
+            <h3 style="margin-bottom: 1rem;">✅ 系統已開發完成</h3>
+            <p>核心功能已完善，雙模式系統穩定運行</p>
+            <h3 style="margin: 1rem 0;">✅ 段階式推進建議</h3>
+            <p>第1個月：內部測試與部分客戶試行<br>
+               第2個月：系統優化與監控完善<br>
+               第3個月：全面部署與標準化運營</p>
+            <h3 style="margin: 1rem 0;">✅ 立即行動建議</h3>
+            <p>1. 完成客服人員培訓<br>
+               2. 熟悉人機協作流程<br>
+               3. 設定監控與回退機制</p>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Chat simulation - 改善相容性
+        function initializeChatSimulation() {
+            const traditionalMessages = [
+                { type: 'user', text: '我想了解塔位價格', delay: 1000 },
+                { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 1500 },
+                { type: 'user', text: '有哪些樓層可以選擇？', delay: 3000 },
+                { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 3500 }
+            ];
+
+            const aiMessages = [
+                { type: 'user', text: '我想了解塔位價格', delay: 1000 },
+                { type: 'system', text: '您好！五湖園的塔位價格從 8 萬元起（已含 12% 管理費），依據位置、樓層和大小有不同選擇。目前正值優惠期間，歡迎您預約參觀，我們可以根據您的需求推薦最適合的方案。', delay: 1500 },
+                { type: 'user', text: '有哪些樓層可以選擇？', delay: 3000 },
+                { type: 'system', text: '我們有多個樓層可供選擇，每層都有不同的景觀特色。低樓層可欣賞園區綠意，高樓層視野開闊。建議您親自來參觀，感受不同樓層的氛圍，我們的專業團隊會詳細為您介紹每個位置的特色。', delay: 3500 }
+            ];
+
+            function addMessage(container, message, index) {
+                setTimeout(function() {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message ' + message.type;
+                    messageDiv.style.animationDelay = (index * 0.1) + 's';
+                    
+                    const bubble = document.createElement('div');
+                    bubble.className = 'message-bubble';
+                    // 處理換行符號
+                    bubble.innerHTML = message.text.replace(/\n/g, '<br>');
+                    
+                    messageDiv.appendChild(bubble);
+                    container.appendChild(messageDiv);
+                    
+                    // Auto scroll
+                    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+                }, message.delay);
+            }
+
+            // 使用 IntersectionObserver 或 fallback
+            if ('IntersectionObserver' in window) {
+                const chatSection = document.querySelector('.pain-section');
+                const chatObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const traditionalChat = document.getElementById('traditional-chat');
+                            const aiChat = document.getElementById('ai-chat');
+                            
+                            if (traditionalChat && aiChat) {
+                                traditionalMessages.forEach(function(msg, index) {
+                                    addMessage(traditionalChat, msg, index);
+                                });
+                                
+                                aiMessages.forEach(function(msg, index) {
+                                    addMessage(aiChat, msg, index);
+                                });
+                            }
+                            
+                            chatObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                if (chatSection) {
+                    chatObserver.observe(chatSection);
+                }
+            } else {
+                // Fallback: 直接執行動畫
+                setTimeout(function() {
+                    const traditionalChat = document.getElementById('traditional-chat');
+                    const aiChat = document.getElementById('ai-chat');
+                    
+                    if (traditionalChat && aiChat) {
+                        traditionalMessages.forEach(function(msg, index) {
+                            addMessage(traditionalChat, msg, index);
+                        });
+                        
+                        aiMessages.forEach(function(msg, index) {
+                            addMessage(aiChat, msg, index);
+                        });
+                    }
+                }, 2000);
+            }
+        }
+
+        // 確保 DOM 載入完成後執行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeChatSimulation);
+        } else {
+            initializeChatSimulation();
+        }
+
+        // Growth bar animation
+        const growthBar = document.getElementById('growth-bar');
+        const growthObserver = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+                growthBar.classList.add('animate');
+                
+                // Animate percentage
+                let current = 60;
+                const target = 85;
+                const increment = 1;
+                const timer = setInterval(() => {
+                    current += increment;
+                    growthBar.querySelector('.growth-label').textContent = current + '%';
+                    if (current >= target) clearInterval(timer);
+                }, 50);
+                
+                growthObserver.disconnect();
+            }
+        }, { threshold: 0.5 });
+        
+        if (growthBar) growthObserver.observe(growthBar);
+
+        // Cost calculator
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeDisplay = document.getElementById('volume-display');
+        const simpleSlider = document.getElementById('simple-slider');
+        const mediumSlider = document.getElementById('medium-slider');
+        const complexSlider = document.getElementById('complex-slider');
+
+        function updateCosts() {
+            const volume = parseInt(volumeSlider.value);
+            const simple = parseInt(simpleSlider.value);
+            const medium = parseInt(mediumSlider.value);
+            const complex = parseInt(complexSlider.value);
+            
+            // Update displays
+            volumeDisplay.textContent = volume;
+            document.getElementById('simple-display').textContent = simple;
+            document.getElementById('medium-display').textContent = medium;
+            document.getElementById('complex-display').textContent = complex;
+            
+            // Calculate AI cost
+            const avgTokensPerConversation = (simple * 500 + medium * 1000 + complex * 2000) / 100;
+            const totalTokens = volume * avgTokensPerConversation;
+            const aiCost = Math.round(totalTokens * 0.001 * 0.225); // Output tokens cost more
+            
+            // Calculate infrastructure costs based on volume
+            const cloudRunCost = volume < 1000 ? 500 : volume < 3000 ? 800 : 1200;
+            const firestoreCost = volume < 1000 ? 100 : volume < 3000 ? 150 : 200;
+            const secretCost = 30;
+            const storageCost = volume < 1000 ? 20 : volume < 3000 ? 40 : 60;
+            const networkCost = volume < 1000 ? 30 : volume < 3000 ? 60 : 100;
+            
+            // Update display
+            document.getElementById('ai-cost').textContent = `$${aiCost}`;
+            document.getElementById('cloudrun-cost').textContent = `$${cloudRunCost}`;
+            document.getElementById('firestore-cost').textContent = `$${firestoreCost}`;
+            document.getElementById('secret-cost').textContent = `$${secretCost}`;
+            document.getElementById('storage-cost').textContent = `$${storageCost}`;
+            document.getElementById('network-cost').textContent = `$${networkCost}`;
+            
+            const total = aiCost + cloudRunCost + firestoreCost + secretCost + storageCost + networkCost;
+            document.getElementById('total-cost').textContent = `$${total} TWD`;
+        }
+
+        // Balance sliders
+        function balanceSliders(changedSlider) {
+            const sliders = [simpleSlider, mediumSlider, complexSlider];
+            const values = sliders.map(s => parseInt(s.value));
+            const total = values.reduce((a, b) => a + b, 0);
+            
+            if (total > 100) {
+                const excess = total - 100;
+                const otherSliders = sliders.filter(s => s !== changedSlider);
+                const distribution = excess / otherSliders.length;
+                
+                otherSliders.forEach(slider => {
+                    const newValue = Math.max(0, parseInt(slider.value) - distribution);
+                    slider.value = newValue;
+                });
+            }
+            
+            updateCosts();
+        }
+
+        volumeSlider.addEventListener('input', updateCosts);
+        simpleSlider.addEventListener('input', () => balanceSliders(simpleSlider));
+        mediumSlider.addEventListener('input', () => balanceSliders(mediumSlider));
+        complexSlider.addEventListener('input', () => balanceSliders(complexSlider));
+
+        // Initialize
+        updateCosts();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
