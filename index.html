@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Sibyl AI - 智慧客服解決方案</title>
+    <title>Sibyl AI - 突破 LINE OA 限制的智慧客服解決方案</title>
     <style>
-        /* Mobile-First CSS Reset */
+        /* Mobile-First Complete CSS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            max-width: 100%;
         }
 
         :root {
@@ -25,14 +26,19 @@
             --border-radius: 12px;
         }
 
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
             line-height: 1.6;
             color: var(--gray-dark);
             background: var(--white);
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -webkit-overflow-scrolling: touch;
+            width: 100%;
         }
 
         /* Typography - Mobile Optimized */
@@ -41,7 +47,8 @@
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1.2;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            word-wrap: break-word;
         }
 
         h2 {
@@ -49,7 +56,8 @@
             font-weight: 600;
             color: var(--primary-color);
             line-height: 1.3;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            word-wrap: break-word;
         }
 
         h3 {
@@ -57,14 +65,34 @@
             font-weight: 600;
             color: var(--gray-dark);
             line-height: 1.3;
+            margin-bottom: 0.75rem;
+            word-wrap: break-word;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+            line-height: 1.3;
             margin-bottom: 0.5rem;
         }
 
-        p {
-            font-size: 1rem;
+        p, li {
+            font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1rem;
             color: var(--gray-dark);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Mobile Navigation */
@@ -116,6 +144,7 @@
             transition: right 0.3s ease;
             z-index: 1001;
             padding: 5rem 1.5rem 1.5rem;
+            overflow-y: auto;
         }
 
         .side-menu.active {
@@ -148,6 +177,7 @@
             font-weight: 500;
             border-bottom: 1px solid var(--gray-light);
             transition: color 0.2s ease;
+            font-size: 0.95rem;
         }
 
         .menu-item:hover {
@@ -160,10 +190,17 @@
             padding: 0;
         }
 
-        /* Hero Section - Mobile */
+        /* Sections */
+        section {
+            padding: 2rem 1rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
-            padding: 2rem 1rem 3rem;
+            padding: 3rem 1rem;
             text-align: center;
             min-height: 80vh;
             display: flex;
@@ -171,47 +208,23 @@
             justify-content: center;
         }
 
-        .hero-title {
+        .hero h1 {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--primary-color);
             margin-bottom: 1rem;
-            line-height: 1.2;
         }
 
-        .hero-subtitle {
+        .hero .subtitle {
             font-size: 1.1rem;
             color: var(--gray-dark);
             margin-bottom: 2rem;
             line-height: 1.5;
         }
 
-        .hero-cta {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s ease;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-cta:hover {
-            background: #1E40AF;
-            transform: translateY(-2px);
-        }
-
-        /* Card Container */
+        /* Card System */
         .card-container {
-            padding: 1rem;
+            padding: 0 1rem;
+            margin-bottom: 2rem;
         }
 
         .card {
@@ -221,6 +234,8 @@
             margin-bottom: 1rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-light);
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .card-icon {
@@ -242,171 +257,6 @@
             margin-bottom: 0;
         }
 
-        /* Feature List */
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .feature-item:last-child {
-            border-bottom: none;
-        }
-
-        .feature-icon {
-            font-size: 1.25rem;
-            margin-right: 0.75rem;
-            margin-top: 0.125rem;
-            min-width: 24px;
-        }
-
-        .feature-text {
-            flex: 1;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Chat Comparison - Simplified */
-        .chat-demo {
-            background: var(--gray-light);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        .chat-message {
-            background: var(--white);
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .chat-message.user {
-            background: var(--primary-color);
-            color: var(--white);
-            margin-left: 2rem;
-        }
-
-        .chat-message.bot {
-            background: var(--white);
-            color: var(--gray-dark);
-            margin-right: 2rem;
-        }
-
-        /* Stats Grid - Mobile */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .stat-card {
-            background: var(--white);
-            padding: 1.25rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        .stat-number {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--gray-medium);
-        }
-
-        /* Architecture - Simplified Mobile Version */
-        .arch-step {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background: var(--gray-light);
-            border-radius: var(--border-radius);
-            margin-bottom: 0.75rem;
-        }
-
-        .step-number {
-            background: var(--primary-color);
-            color: var(--white);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-right: 1rem;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .step-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            font-size: 0.95rem;
-        }
-
-        .step-desc {
-            font-size: 0.85rem;
-            color: var(--gray-medium);
-            line-height: 1.4;
-        }
-
-        /* Button Styles */
-        .btn {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 0.875rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s ease;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0.5rem 0;
-        }
-
-        .btn:hover {
-            background: #1E40AF;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: var(--white);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
         /* Section Headers */
         .section-header {
             text-align: center;
@@ -426,13 +276,780 @@
             line-height: 1.5;
         }
 
+        /* Chat Comparison */
+        .chat-comparison {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .chat-container {
+            background: var(--gray-light);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            max-width: 100%;
+        }
+
+        .chat-header {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .chat-header.old {
+            background: var(--danger-color);
+            color: var(--white);
+        }
+
+        .chat-header.new {
+            background: var(--success-color);
+            color: var(--white);
+        }
+
+        .chat-message {
+            background: var(--white);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .chat-message.user {
+            background: var(--primary-color);
+            color: var(--white);
+            margin-left: 2rem;
+        }
+
+        .chat-message.bot {
+            background: var(--white);
+            color: var(--gray-dark);
+            margin-right: 2rem;
+        }
+
+        /* Protection Layers */
+        .protection-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .protection-layer {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .protection-layer h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Learning Stages */
+        .learning-container {
+            max-width: 100%;
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .learning-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .learning-stage {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .learning-stage::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .stage-title {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .stage-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .stage-features li {
+            padding: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Optimization */
+        .faq-optimization {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .analysis-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .analysis-step {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .analysis-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transform: rotate(90deg);
+            margin: 0.5rem 0;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: var(--gray-dark);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* Architecture - Mobile Friendly */
+        .architecture-diagram {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .arch-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .arch-component {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            max-width: 200px;
+            width: 100%;
+        }
+
+        .arch-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .arch-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .arch-arrow {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transform: rotate(90deg);
+            margin: 0.5rem 0;
+        }
+
+        /* Hybrid Search */
+        .hybrid-search {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .search-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .search-input,
+        .search-path,
+        .search-result {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .input-box {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .search-split {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Tech Specs */
+        .tech-specs {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .spec-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        .spec-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .spec-detail {
+            font-size: 0.75rem;
+            color: var(--gray-medium);
+            word-wrap: break-word;
+        }
+
+        /* Monitoring */
+        .monitoring-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .monitor-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .monitor-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .metric-item {
+            background: var(--gray-light);
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--gray-medium);
+        }
+
+        /* Vector Database */
+        .vector-demo {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .vector-space {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .vector-point {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 2px;
+        }
+
+        /* API Grid */
+        .api-potential {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .api-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .api-current,
+        .api-future {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .api-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: var(--gray-light);
+            border-radius: 8px;
+        }
+
+        .api-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .api-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .api-desc {
+            font-size: 0.8rem;
+            color: var(--gray-medium);
+            line-height: 1.4;
+        }
+
+        /* Analytics Dashboard */
+        .analytics-dashboard {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .dashboard-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .ranking-list {
+            max-width: 100%;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: var(--gray-light);
+            border-radius: 6px;
+        }
+
+        .rank-number {
+            background: var(--primary-color);
+            color: var(--white);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .rank-question {
+            flex: 1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Cache Strategy */
+        .cache-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .cache-step {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cache-decision {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .cache-hit,
+        .cache-miss {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .cache-hit {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .cache-miss {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Security Section */
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .security-item {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .security-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .security-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-desc {
+            font-size: 0.75rem;
+            color: var(--gray-medium);
+            line-height: 1.4;
+        }
+
+        /* Data Protection */
+        .protection-practices {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .practice-item {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin: 0.75rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .practice-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--gray-dark);
+        }
+
+        /* Cost Analysis */
+        .cost-breakdown {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: var(--white);
+            border-radius: 6px;
+            box-shadow: var(--shadow);
+        }
+
+        .cost-label {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .cost-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .cost-total {
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .benefit-category {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+
+        .benefit-icon {
+            font-size: 1rem;
+            margin-right: 0.75rem;
+            margin-top: 0.125rem;
+            min-width: 20px;
+        }
+
+        .benefit-text {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section h3 {
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s ease;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0.5rem 0;
+            max-width: 280px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background: #1E40AF;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background: #EA580C;
+        }
+
         /* Footer */
         .footer {
             background: var(--gray-dark);
             color: var(--white);
             padding: 2rem 1rem;
             text-align: center;
-            margin-top: 3rem;
         }
 
         .footer-text {
@@ -458,11 +1075,6 @@
             margin-top: 2rem;
         }
 
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
         /* Loading Animation */
         .fade-in {
             opacity: 0;
@@ -473,6 +1085,41 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Responsive adjustments for very small screens */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .card,
+            .feature-card,
+            .protection-layer {
+                padding: 1rem;
+            }
+
+            .specs-grid,
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .monitor-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -489,313 +1136,1008 @@
         <a href="#hero" class="menu-item">首頁</a>
         <a href="#pain" class="menu-item">痛點分析</a>
         <a href="#solution" class="menu-item">解決方案</a>
+        <a href="#learning" class="menu-item">智慧進化</a>
         <a href="#features" class="menu-item">技術特色</a>
-        <a href="#architecture" class="menu-item">系統架構</a>
-        <a href="#benefits" class="menu-item">效益分析</a>
-        <a href="#demo" class="menu-item">互動展示</a>
-        <a href="#contact" class="menu-item">聯絡我們</a>
+        <a href="#architecture" class="menu-item">技術架構</a>
+        <a href="#advanced-tech" class="menu-item">進階技術</a>
+        <a href="#security" class="menu-item">資訊安全</a>
+        <a href="#cost" class="menu-item">成本分析</a>
+        <a href="#metrics" class="menu-item">成效指標</a>
+        <a href="#cta" class="menu-item">立即行動</a>
     </div>
 
     <!-- Main Content -->
     <main class="main-content">
         <!-- Hero Section -->
         <section id="hero" class="hero">
-            <h1 class="hero-title">突破 LINE OA 限制<br>的智慧客服解決方案</h1>
-            <p class="hero-subtitle">Sibyl AI 讓您的客服系統具備真正的理解能力，提供個人化的專業服務</p>
-            <a href="#demo" class="hero-cta">立即體驗 →</a>
+            <h1>突破 LINE OA 限制</h1>
+            <p class="subtitle">的智慧客服解決方案</p>
+            <p>Sibyl AI 讓您的客服系統具備真正的理解能力，提供個人化的專業服務</p>
+            <a href="#solution" class="btn">立即了解 →</a>
         </section>
 
         <!-- Pain Points -->
-        <section id="pain" class="section-header">
-            <h2 class="section-title">現有客服系統的困境</h2>
-            <p class="section-subtitle">傳統 LINE OA 無法滿足現代客戶需求</p>
-        </section>
-
-        <div class="card-container">
-            <div class="card fade-in">
-                <div class="card-icon">😤</div>
-                <h3 class="card-title">制式回應，缺乏人性</h3>
-                <p class="card-description">只能設定固定關鍵字回應，無法理解客戶真正需求，經常答非所問。</p>
+        <section id="pain">
+            <div class="section-header">
+                <h2>LINE OA 框架限制 vs Sibyl AI 突破</h2>
+                <p class="section-subtitle">對比傳統與智慧客服的差異</p>
             </div>
 
-            <div class="card fade-in">
-                <div class="card-icon">⏰</div>
-                <h3 class="card-title">客戶等待時間過長</h3>
-                <p class="card-description">複雜問題需要轉人工，客戶經常需要等待很久才能得到專業回答。</p>
-            </div>
+            <div class="card-container">
+                <div class="chat-comparison fade-in">
+                    <div class="chat-container">
+                        <div class="chat-header old">LINE OA 框架限制下的體驗 ❌</div>
+                        <div class="chat-message user">塔位價格多少？</div>
+                        <div class="chat-message bot">抱歉，我不太理解您的問題。請選擇以下選項：<br>1. 服務項目<br>2. 聯絡方式<br>3. 其他</div>
+                    </div>
 
-            <div class="card fade-in">
-                <div class="card-icon">📞</div>
-                <h3 class="card-title">人力成本居高不下</h3>
-                <p class="card-description">需要大量客服人員處理重複性問題，人事成本不斷上升。</p>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">📊</div>
-                <h3 class="card-title">缺乏數據分析洞察</h3>
-                <p class="card-description">無法有效收集和分析客戶需求，錯失改善服務的機會。</p>
-            </div>
-        </div>
-
-        <!-- Solution -->
-        <section id="solution" class="section-header">
-            <h2 class="section-title">Sibyl AI 解決方案</h2>
-            <p class="section-subtitle">結合 AI 智慧與人性關懷的全新體驗</p>
-        </section>
-
-        <div class="card-container">
-            <div class="card fade-in">
-                <div class="card-icon">🧠</div>
-                <h3 class="card-title">真正理解客戶意圖</h3>
-                <p class="card-description">運用 GPT-4o 語言模型，能理解複雜語意和上下文，提供精準回應。</p>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">⚡</div>
-                <h3 class="card-title">即時智慧回應</h3>
-                <p class="card-description">24/7 即時回應，平均響應時間 < 500ms，大幅提升客戶滿意度。</p>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">🎯</div>
-                <h3 class="card-title">個人化服務體驗</h3>
-                <p class="card-description">記憶對話歷史，提供連貫的個人化服務，如同專屬客服顧問。</p>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">📈</div>
-                <h3 class="card-title">持續學習進化</h3>
-                <p class="card-description">從每次對話中學習，不斷優化回應品質，越用越聰明。</p>
-            </div>
-        </div>
-
-        <!-- Chat Demo -->
-        <div class="card-container">
-            <div class="card fade-in">
-                <h3 class="card-title text-center mb-1">對話展示</h3>
-                <div class="chat-demo">
-                    <div class="chat-message user">請問塔位價格多少？</div>
-                    <div class="chat-message bot">您好！關於塔位價格，我們有多種選擇：<br>
-                    • 標準塔位：20-35萬元<br>
-                    • 精緻塔位：35-50萬元<br>
-                    • 豪華塔位：50-80萬元<br><br>
-                    每種塔位都包含永久使用權和基礎管理費。您希望了解哪一種類型的詳細資訊呢？</div>
-                    <div class="chat-message user">想了解豪華塔位的特色</div>
-                    <div class="chat-message bot">豪華塔位的特色包括：<br>
-                    • 位置最佳，採光良好<br>
-                    • 空間寬敞，可放置較大神像<br>
-                    • 享有專屬祭拜區域<br>
-                    • 免費年度法會參與<br><br>
-                    如果您有興趣，我可以安排專人為您介紹並預約參觀時間，方便嗎？</div>
+                    <div class="chat-container">
+                        <div class="chat-header new">Sibyl AI 突破限制後的體驗 ✓</div>
+                        <div class="chat-message user">塔位價格多少？</div>
+                        <div class="chat-message bot">您好！關於塔位價格，我們有多種選擇：<br>• 標準塔位：20-35萬元<br>• 精緻塔位：35-50萬元<br>• 豪華塔位：50-80萬元<br><br>每種塔位都包含永久使用權和基礎管理費。您希望了解哪一種類型的詳細資訊呢？</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Solution - Three Layer Protection -->
+        <section id="solution">
+            <div class="section-header">
+                <h2>三層防護機制，確保服務品質</h2>
+                <p class="section-subtitle">多重保障，提供最佳客戶體驗</p>
+            </div>
+
+            <div class="card-container">
+                <div class="protection-layers fade-in">
+                    <div class="protection-layer">
+                        <h4>第一層：智慧成長知識庫</h4>
+                        <p>• 精心整理的五湖園專業 FAQ<br>
+                        • 即時檢索，快速匹配答案<br>
+                        • 持續更新，確保資訊準確性<br>
+                        • 涵蓋95%常見問題解答</p>
+                    </div>
+
+                    <div class="protection-layer">
+                        <h4>第二層：AI 智慧判斷</h4>
+                        <p>• GPT-4o 語言模型理解複雜問題<br>
+                        • 結合知識庫提供個人化回應<br>
+                        • 上下文理解，支援連續對話<br>
+                        • 24/7 即時智慧服務</p>
+                    </div>
+
+                    <div class="protection-layer">
+                        <h4>第三層：人工接管</h4>
+                        <p>• 複雜情況自動轉接專業人員<br>
+                        • 保留完整對話記錄<br>
+                        • 確保每位客戶都得到適切協助<br>
+                        • 人性化關懷，溫暖服務</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning System -->
+        <section id="learning">
+            <div class="section-header">
+                <h2>自我進化的智慧系統</h2>
+                <p class="section-subtitle">Sibyl 像新生兒，需要大家一起培育成長</p>
+            </div>
+
+            <div class="card-container">
+                <div class="learning-container fade-in">
+                    <h3 style="color: var(--accent-color); margin-bottom: 2rem; text-align: center;">智慧成長之路</h3>
+                    
+                    <div class="learning-timeline">
+                        <div class="learning-stage">
+                            <h4 class="stage-title">現在：基礎知識期</h4>
+                            <ul class="stage-features">
+                                <li>✓ 已建立核心 FAQ 知識庫</li>
+                                <li>✓ 基本問答功能完整</li>
+                                <li>✓ 語言理解能力就位</li>
+                                <li>⏳ 需要真實對話數據培養</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-stage">
+                            <h4 class="stage-title">3個月：快速成長期</h4>
+                            <ul class="stage-features">
+                                <li>📈 回應準確度提升至 85%</li>
+                                <li>🧠 開始理解客戶偏好</li>
+                                <li>💬 對話風格更加自然</li>
+                                <li>🎯 問題分類更加精準</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-stage">
+                            <h4 class="stage-title">6個月：成熟智慧期</h4>
+                            <ul class="stage-features">
+                                <li>🏆 成為五湖園專業顧問</li>
+                                <li>💡 主動提供個人化建議</li>
+                                <li>🔄 預測客戶需求</li>
+                                <li>📊 協助業務決策分析</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growth Sources -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">如何培育 Sibyl 成長</h3>
+                    
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🍼 成長的養分來源</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);">
+                            <strong>📞 真實客戶對話</strong><br>
+                            <small>每一次互動都是學習機會</small>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);">
+                            <strong>✅ 專家回饋標註</strong><br>
+                            <small>人工確認正確答案</small>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);">
+                            <strong>📝 新增知識內容</strong><br>
+                            <small>持續擴充專業知識庫</small>
+                        </li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);">
+                            <strong>🔄 模式調整優化</strong><br>
+                            <small>根據效果數據精調</small>
+                        </li>
+                        <li style="padding: 0.5rem 0;">
+                            <strong>🤝 跨部門協作</strong><br>
+                            <small>業務團隊共同培養</small>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- FAQ Optimization -->
+                <div class="faq-optimization fade-in">
+                    <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">智慧分析創建 FAQ 條目</h3>
+                    
+                    <div class="analysis-flow">
+                        <div class="analysis-step">
+                            <h4>📥 Step 1: 收集對話數據</h4>
+                            <p>系統自動收集所有客戶對話記錄</p>
+                            <div style="background: var(--gray-light); padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem;">
+                                <small>範例：客戶詢問「拜桌服務包含什麼？」</small>
+                            </div>
+                        </div>
+
+                        <div class="analysis-arrow">↓</div>
+
+                        <div class="analysis-step">
+                            <h4>🔍 Step 2: AI 模式識別</h4>
+                            <p>GPT-4o 分析相似問題，找出共同模式</p>
+                            <div style="background: var(--gray-light); padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem;">
+                                <small>發現：15位客戶都詢問拜桌服務內容</small>
+                            </div>
+                        </div>
+
+                        <div class="analysis-arrow">↓</div>
+
+                        <div class="analysis-step">
+                            <h4>💡 Step 3: 自動建議</h4>
+                            <p>生成新的 FAQ 條目建議</p>
+                            <div style="background: var(--accent-color); color: white; padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem;">
+                                <small><strong>建議新增 FAQ：</strong><br>「拜桌服務詳細內容說明」</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="text-align: center; margin: 2rem 0;">FAQ 優化實例</h4>
+                    <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <h5 style="color: var(--danger-color);">優化前 ❌</h5>
+                                <ul style="font-size: 0.85rem;">
+                                    <li>只有5個基本FAQ</li>
+                                    <li>70%問題無法回答</li>
+                                    <li>大量轉人工處理</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 style="color: var(--success-color);">優化後 ✅</h5>
+                                <ul style="font-size: 0.85rem;">
+                                    <li>擴充至50+個FAQ</li>
+                                    <li>90%問題即時解答</li>
+                                    <li>客戶滿意度提升</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Benefits -->
+                <div class="card fade-in">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div>
+                            <h4>🎯 初期目標</h4>
+                            <p style="font-size: 0.85rem;">建立穩定的基礎服務能力</p>
+                        </div>
+                        <div>
+                            <h4>📈 成長曲線</h4>
+                            <p style="font-size: 0.85rem;">每月效能持續提升</p>
+                        </div>
+                        <div>
+                            <h4>🤝 團隊協作</h4>
+                            <p style="font-size: 0.85rem;">與同仁共同培育AI智慧</p>
+                        </div>
+                        <div>
+                            <h4>🏆 未來願景</h4>
+                            <p style="font-size: 0.85rem;">成為最專業的智慧顧問</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Features -->
-        <section id="features" class="section-header">
-            <h2 class="section-title">核心技術特色</h2>
-            <p class="section-subtitle">業界領先的 AI 技術架構</p>
+        <section id="features">
+            <div class="section-header">
+                <h2>技術優勢特色</h2>
+                <p class="section-subtitle">業界領先的 AI 技術架構</p>
+            </div>
+
+            <div class="card-container">
+                <div class="features-grid fade-in">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3 class="feature-title">GPT-4o 智慧引擎</h3>
+                        <p class="feature-description">最新的語言模型，具備強大的理解和推理能力，能夠處理複雜的客戶問題。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3 class="feature-title">混合檢索技術</h3>
+                        <p class="feature-description">結合關鍵字匹配和語義搜索，確保找到最相關的答案，提升回應準確度。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3 class="feature-title">對話記憶系統</h3>
+                        <p class="feature-description">記住每次對話的上下文，提供連貫的個人化服務體驗。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">即時快速回應</h3>
+                        <p class="feature-description">平均回應時間小於500毫秒，讓客戶感受到即時的專業服務。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 class="feature-title">企業級安全</h3>
+                        <p class="feature-description">採用Google Cloud安全架構，確保客戶資料和對話內容的絕對安全。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">智慧分析洞察</h3>
+                        <p class="feature-description">提供詳細的對話分析和客戶行為洞察，協助優化服務策略。</p>
+                    </div>
+                </div>
+            </div>
         </section>
-
-        <div class="card-container">
-            <div class="card fade-in">
-                <div class="card-icon">🔍</div>
-                <h3 class="card-title">混合檢索技術</h3>
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <span class="feature-icon">📝</span>
-                        <span class="feature-text">關鍵字精確匹配</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">🧮</span>
-                        <span class="feature-text">語意向量搜尋</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">🎯</span>
-                        <span class="feature-text">智慧結果排序</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">💾</div>
-                <h3 class="card-title">對話記憶系統</h3>
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <span class="feature-icon">🧠</span>
-                        <span class="feature-text">上下文理解</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">📚</span>
-                        <span class="feature-text">歷史對話記錄</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">🔄</span>
-                        <span class="feature-text">連續對話支援</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">🛡️</div>
-                <h3 class="card-title">多重安全防護</h3>
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <span class="feature-icon">🔐</span>
-                        <span class="feature-text">資料加密傳輸</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">🚫</span>
-                        <span class="feature-text">內容安全過濾</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">👥</span>
-                        <span class="feature-text">隱私權保護</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
         <!-- Architecture -->
-        <section id="architecture" class="section-header">
-            <h2 class="section-title">系統架構</h2>
-            <p class="section-subtitle">企業級的穩定可靠架構</p>
+        <section id="architecture">
+            <div class="section-header">
+                <h2>技術架構展示</h2>
+                <p class="section-subtitle">企業級的穩定可靠架構</p>
+            </div>
+
+            <div class="card-container">
+                <!-- System Architecture -->
+                <div class="architecture-diagram fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">系統架構圖</h3>
+                    <div class="arch-flow">
+                        <div class="arch-component">
+                            <div class="arch-icon">📱</div>
+                            <div class="arch-label">LINE 用戶</div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-component">
+                            <div class="arch-icon">🌐</div>
+                            <div class="arch-label">LINE Platform<br><small>Webhook</small></div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-component">
+                            <div class="arch-icon">🚀</div>
+                            <div class="arch-label">Cloud Run<br><small>FastAPI</small></div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-component">
+                            <div class="arch-icon">🧠</div>
+                            <div class="arch-label">GPT-4o<br><small>AI Engine</small></div>
+                        </div>
+                    </div>
+                    <div class="arch-flow" style="margin-top: 2rem;">
+                        <div class="arch-component">
+                            <div class="arch-icon">💾</div>
+                            <div class="arch-label">Firestore<br><small>對話記憶</small></div>
+                        </div>
+                        <div class="arch-component">
+                            <div class="arch-icon">📊</div>
+                            <div class="arch-label">Google Sheets<br><small>知識庫</small></div>
+                        </div>
+                        <div class="arch-component">
+                            <div class="arch-icon">🔍</div>
+                            <div class="arch-label">Vector DB<br><small>語義搜索</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hybrid Search -->
+                <div class="hybrid-search fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">混合檢索架構詳解</h3>
+                    <div class="search-diagram">
+                        <div class="search-input">
+                            <div class="input-box">使用者問題：「塔位價格多少？」</div>
+                        </div>
+                        <div class="search-split">
+                            <div class="search-path">
+                                <h4>🧭 語義檢索</h4>
+                                <p>向量化問題 → 相似度計算 → 智慧排序</p>
+                            </div>
+                            <div class="search-path">
+                                <h4>🔍 關鍵字檢索</h4>
+                                <p>關鍵字提取 → 精確匹配 → 快速定位</p>
+                            </div>
+                        </div>
+                        <div class="search-result">
+                            <strong>最佳答案組合</strong><br>
+                            精準的塔位價格資訊 + 個人化建議
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Specs -->
+                <div class="tech-specs fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">技術規格與效能</h3>
+                    <div class="specs-grid">
+                        <div class="spec-card">
+                            <div class="spec-icon">⚡</div>
+                            <div class="spec-title">回應速度</div>
+                            <div class="spec-value">&lt; 500ms</div>
+                            <div class="spec-detail">P95 延遲時間</div>
+                        </div>
+                        <div class="spec-card">
+                            <div class="spec-icon">🎯</div>
+                            <div class="spec-title">準確率</div>
+                            <div class="spec-value">95%</div>
+                            <div class="spec-detail">FAQ 命中率</div>
+                        </div>
+                        <div class="spec-card">
+                            <div class="spec-icon">🔄</div>
+                            <div class="spec-title">可用性</div>
+                            <div class="spec-value">99.9%</div>
+                            <div class="spec-detail">系統正常運行</div>
+                        </div>
+                        <div class="spec-card">
+                            <div class="spec-icon">📈</div>
+                            <div class="spec-title">擴展性</div>
+                            <div class="spec-value">1000+</div>
+                            <div class="spec-detail">同時用戶數</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Monitoring -->
+                <div class="card fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">即時監控能力</h3>
+                    <div class="monitoring-grid">
+                        <div class="monitor-card">
+                            <h4>📈 效能監控</h4>
+                            <div class="monitor-metrics">
+                                <div class="metric-item">
+                                    <span class="metric-value">125ms</span>
+                                    <span class="metric-label">平均回應</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">99.8%</span>
+                                    <span class="metric-label">系統可用</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">247</span>
+                                    <span class="metric-label">活躍用戶</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">1,428</span>
+                                    <span class="metric-label">今日訊息</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="monitor-card">
+                            <h4>💬 對話分析</h4>
+                            <div class="monitor-metrics">
+                                <div class="metric-item">
+                                    <span class="metric-value">94%</span>
+                                    <span class="metric-label">滿意度</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">2.3</span>
+                                    <span class="metric-label">平均輪次</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">15%</span>
+                                    <span class="metric-label">轉人工率</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-value">89%</span>
+                                    <span class="metric-label">問題解決</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <div class="card-container">
-            <div class="card fade-in">
-                <h3 class="card-title text-center mb-2">處理流程</h3>
+        <!-- Advanced Technology -->
+        <section id="advanced-tech">
+            <div class="section-header">
+                <h2>進階技術展示</h2>
+                <p class="section-subtitle">深度技術解析與創新應用</p>
+            </div>
+
+            <div class="card-container">
+                <!-- Vector Database -->
+                <div class="vector-demo fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">向量資料庫智慧檢索</h3>
+                    
+                    <div class="card">
+                        <h4>🧮 3072 維向量空間</h4>
+                        <p style="margin-bottom: 1rem;">每個FAQ都被轉換為3072維的向量表示，在高維空間中進行相似度計算。</p>
+                        
+                        <div class="vector-space">
+                            <div style="margin-bottom: 1rem;">
+                                <strong>問題向量化示例：</strong>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(16, 1fr); gap: 2px; margin-bottom: 1rem;">
+                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
+                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
+                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
+                                <div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div><div class="vector-point"></div>
+                            </div>
+                            <small>實際為 3072 維度，此處簡化展示</small>
+                        </div>
+                        
+                        <div style="background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem;">
+                                <div>
+                                    <strong>相似度計算</strong><br>
+                                    • 餘弦相似度<br>
+                                    • 歐幾里得距離<br>
+                                    • 點積運算
+                                </div>
+                                <div>
+                                    <strong>檢索效能</strong><br>
+                                    • 毫秒級查詢<br>
+                                    • 高精度匹配<br>
+                                    • 語義理解
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Integration -->
+                <div class="api-potential fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">API 整合潛力與未來擴充</h3>
+                    <div class="api-grid">
+                        <div class="api-current">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1.5rem;">🔌 現有整合</h4>
+                            <div class="api-item active">
+                                <div class="api-icon">💬</div>
+                                <div class="api-info">
+                                    <div class="api-name">LINE Messaging API</div>
+                                    <div class="api-desc">官方認證的訊息推送服務</div>
+                                </div>
+                            </div>
+                            <div class="api-item active">
+                                <div class="api-icon">🧠</div>
+                                <div class="api-info">
+                                    <div class="api-name">OpenAI GPT-4o</div>
+                                    <div class="api-desc">最先進的語言理解模型</div>
+                                </div>
+                            </div>
+                            <div class="api-item active">
+                                <div class="api-icon">☁️</div>
+                                <div class="api-info">
+                                    <div class="api-name">Google Cloud Platform</div>
+                                    <div class="api-desc">企業級雲端基礎設施</div>
+                                </div>
+                            </div>
+                            <div class="api-item active">
+                                <div class="api-icon">📊</div>
+                                <div class="api-info">
+                                    <div class="api-name">Google Sheets API</div>
+                                    <div class="api-desc">動態知識庫管理系統</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="api-future">
+                            <h4 style="color: var(--accent-color); margin-bottom: 1.5rem;">🚀 未來擴充潛力</h4>
+                            <div class="api-item future">
+                                <div class="api-icon">💳</div>
+                                <div class="api-info">
+                                    <div class="api-name">線上支付系統</div>
+                                    <div class="api-desc">整合信用卡、行動支付</div>
+                                </div>
+                            </div>
+                            <div class="api-item future">
+                                <div class="api-icon">📅</div>
+                                <div class="api-info">
+                                    <div class="api-name">預約排程系統</div>
+                                    <div class="api-desc">自動化參觀時間管理</div>
+                                </div>
+                            </div>
+                            <div class="api-item future">
+                                <div class="api-icon">📧</div>
+                                <div class="api-info">
+                                    <div class="api-name">Email 通知服務</div>
+                                    <div class="api-desc">自動發送確認和提醒</div>
+                                </div>
+                            </div>
+                            <div class="api-item future">
+                                <div class="api-icon">📱</div>
+                                <div class="api-info">
+                                    <div class="api-name">多平台擴展</div>
+                                    <div class="api-desc">Facebook、Instagram整合</div>
+                                </div>
+                            </div>
+                            <div class="api-item future">
+                                <div class="api-icon">🎤</div>
+                                <div class="api-info">
+                                    <div class="api-name">語音辨識服務</div>
+                                    <div class="api-desc">支援語音訊息對話</div>
+                                </div>
+                            </div>
+                            <div class="api-item future">
+                                <div class="api-icon">📊</div>
+                                <div class="api-info">
+                                    <div class="api-name">CRM 系統整合</div>
+                                    <div class="api-desc">客戶關係管理自動化</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Dashboard -->
+                <div class="analytics-dashboard fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">資料分析儀表板</h3>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h4>📊 熱門問題排行</h4>
+                            <div class="ranking-list">
+                                <div class="rank-item">
+                                    <span class="rank-number">1</span>
+                                    <span class="rank-question">塔位價格相關諮詢</span>
+                                </div>
+                                <div class="rank-item">
+                                    <span class="rank-number">2</span>
+                                    <span class="rank-question">參觀預約時間詢問</span>
+                                </div>
+                                <div class="rank-item">
+                                    <span class="rank-number">3</span>
+                                    <span class="rank-question">服務項目介紹</span>
+                                </div>
+                                <div class="rank-item">
+                                    <span class="rank-number">4</span>
+                                    <span class="rank-question">位置交通資訊</span>
+                                </div>
+                                <div class="rank-item">
+                                    <span class="rank-number">5</span>
+                                    <span class="rank-question">付款方式說明</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h4>⏰ 活躍時段分析</h4>
+                            <div style="background: var(--gray-light); padding: 1rem; border-radius: 6px;">
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1rem;">
+                                    <div style="text-align: center; font-size: 0.8rem;">
+                                        <div style="background: var(--primary-color); height: 40px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
+                                        09-12
+                                    </div>
+                                    <div style="text-align: center; font-size: 0.8rem;">
+                                        <div style="background: var(--accent-color); height: 60px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
+                                        12-15
+                                    </div>
+                                    <div style="text-align: center; font-size: 0.8rem;">
+                                        <div style="background: var(--success-color); height: 50px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
+                                        15-18
+                                    </div>
+                                    <div style="text-align: center; font-size: 0.8rem;">
+                                        <div style="background: var(--gray-medium); height: 30px; margin-bottom: 0.25rem; border-radius: 2px;"></div>
+                                        18-21
+                                    </div>
+                                </div>
+                                <p style="font-size: 0.85rem; text-align: center;">尖峰時段：下午 12-15 點</p>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h4>🎯 意圖分類統計</h4>
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
+                                    <span style="font-size: 0.85rem;">價格諮詢</span>
+                                    <span style="font-weight: 600; color: var(--primary-color);">35%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
+                                    <span style="font-size: 0.85rem;">服務說明</span>
+                                    <span style="font-weight: 600; color: var(--accent-color);">28%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
+                                    <span style="font-size: 0.85rem;">預約參觀</span>
+                                    <span style="font-weight: 600; color: var(--success-color);">22%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--gray-light); border-radius: 6px;">
+                                    <span style="font-size: 0.85rem;">其他問題</span>
+                                    <span style="font-weight: 600; color: var(--gray-medium);">15%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h4>😊 情緒分析趨勢</h4>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                                <div style="text-align: center; padding: 0.75rem; background: var(--success-color); color: white; border-radius: 6px;">
+                                    <div style="font-size: 1.2rem; font-weight: 700;">78%</div>
+                                    <div style="font-size: 0.75rem;">正面情緒</div>
+                                </div>
+                                <div style="text-align: center; padding: 0.75rem; background: var(--gray-medium); color: white; border-radius: 6px;">
+                                    <div style="font-size: 1.2rem; font-weight: 700;">18%</div>
+                                    <div style="font-size: 0.75rem;">中性情緒</div>
+                                </div>
+                                <div style="text-align: center; padding: 0.75rem; background: var(--danger-color); color: white; border-radius: 6px;">
+                                    <div style="font-size: 1.2rem; font-weight: 700;">4%</div>
+                                    <div style="font-size: 0.75rem;">負面情緒</div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.8rem; text-align: center; margin-top: 0.5rem; color: var(--gray-medium);">
+                                整體客戶滿意度持續提升
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cache Strategy -->
+                <div class="card fade-in">
+                    <h3 style="text-align: center; margin-bottom: 2rem;">智慧快取策略</h3>
+                    
+                    <div class="cache-flow">
+                        <div class="cache-step">
+                            <h4>用戶提問</h4>
+                            <p>「塔位有什麼類型？」</p>
+                        </div>
+
+                        <div class="analysis-arrow">↓</div>
+
+                        <div class="cache-step">
+                            <h4>檢查快取</h4>
+                            <p>查詢是否有相似問題的快取答案</p>
+                        </div>
+
+                        <div class="analysis-arrow">↓</div>
+
+                        <div class="cache-decision">
+                            <div class="cache-hit">
+                                <h5>快取命中</h5>
+                                <p>立即返回答案<br><strong>回應時間：&lt; 50ms</strong></p>
+                            </div>
+                            <div class="cache-miss">
+                                <h5>快取失效</h5>
+                                <p>調用 AI 生成答案<br><strong>回應時間：&lt; 500ms</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--gray-light); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                        <h5 style="margin-bottom: 0.75rem;">快取優化效果</h5>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; font-size: 0.85rem;">
+                            <div>
+                                <strong>命中率：</strong> 75%<br>
+                                <strong>平均回應：</strong> 125ms
+                            </div>
+                            <div>
+                                <strong>成本節省：</strong> 60%<br>
+                                <strong>用戶滿意度：</strong> 95%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security -->
+        <section id="security">
+            <div class="section-header">
+                <h2>企業級資訊安全保障</h2>
+                <p class="section-subtitle">全方位保護客戶資料與隱私</p>
+            </div>
+
+            <div class="card-container">
+                <!-- Security Features -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
+                        🛡️ 多層次安全防護架構
+                    </h3>
+                    
+                    <div class="security-grid">
+                        <div class="security-item">
+                            <div class="security-icon">🏢</div>
+                            <div class="security-title">實體安全</div>
+                            <div class="security-desc">Google 資料中心軍事級實體安全</div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-icon">🔐</div>
+                            <div class="security-title">加密保護</div>
+                            <div class="security-desc">端到端 AES-256 加密傳輸</div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-icon">🛡️</div>
+                            <div class="security-title">DDoS 防護</div>
+                            <div class="security-desc">Google Cloud Armor 防護</div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-icon">📜</div>
+                            <div class="security-title">國際認證</div>
+                            <div class="security-desc">ISO 27001、SOC 2 Type II</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Protection Practices -->
+                <div class="protection-practices fade-in">
+                    <h3 style="color: var(--accent-color); margin-bottom: 2rem;">五湖園資料保護實踐</h3>
+                    
+                    <div class="practice-item">
+                        <div class="practice-title">🔒 對話資料加密</div>
+                        <div class="practice-desc">所有客戶對話內容採用 AES-256 加密儲存，確保敏感資訊絕對安全。</div>
+                    </div>
+                    
+                    <div class="practice-item">
+                        <div class="practice-title">👥 存取權限管控</div>
+                        <div class="practice-desc">採用最小權限原則，只有授權人員才能存取客戶資料，並有完整的存取記錄。</div>
+                    </div>
+                    
+                    <div class="practice-item">
+                        <div class="practice-title">🕒 資料保留政策</div>
+                        <div class="practice-desc">依據法規要求設定資料保留期限，自動清除過期資料，保護客戶隱私。</div>
+                    </div>
+                    
+                    <div class="practice-item">
+                        <div class="practice-title">🔍 即時監控系統</div>
+                        <div class="practice-desc">24/7 安全監控，即時偵測異常存取行為，確保系統安全無虞。</div>
+                    </div>
+                    
+                    <div class="practice-item">
+                        <div class="practice-title">📋 定期安全稽核</div>
+                        <div class="practice-desc">每季進行安全檢測與漏洞掃描，確保系統持續符合最高安全標準。</div>
+                    </div>
+                    
+                    <div class="practice-item">
+                        <div class="practice-title">🎓 員工安全培訓</div>
+                        <div class="practice-desc">定期進行資安教育訓練，建立全員資安意識，從源頭保護客戶資料。</div>
+                    </div>
+                </div>
+
+                <!-- Google Cloud Security -->
+                <div class="card fade-in">
+                    <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Google Cloud 安全保障</h3>
+                    
+                    <div class="security-grid">
+                        <div class="security-item">
+                            <div class="security-icon">🌍</div>
+                            <div class="security-title">資料主權</div>
+                            <div class="security-desc">資料儲存於台灣地區，符合在地法規要求</div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-icon">⚖️</div>
+                            <div class="security-title">在地合規</div>
+                            <div class="security-desc">符合台灣個資法與金融監管要求</div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-icon">🔍</div>
+                            <div class="security-title">透明稽核</div>
+                            <div class="security-desc">提供完整的稽核日誌與合規報告</div>
+                        </div>
+                        <div class="security-item">
+                            <div class="security-icon">🚨</div>
+                            <div class="security-title">即時應變</div>
+                            <div class="security-desc">24/7 安全監控與事件應變機制</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cost Analysis -->
+        <section id="cost">
+            <div class="section-header">
+                <h2>投資透明度</h2>
+                <p class="section-subtitle">清楚的成本結構與投資報酬分析</p>
+            </div>
+
+            <div class="card-container">
+                <div class="cost-breakdown fade-in">
+                    <h3 style="margin-bottom: 1rem;">成本明細</h3>
+                    
+                    <div class="cost-item">
+                        <span class="cost-label">AI 模型使用費</span>
+                        <span class="cost-value">$8,000/月</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">雲端基礎設施</span>
+                        <span class="cost-value">$3,500/月</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">系統維護費</span>
+                        <span class="cost-value">$2,000/月</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">技術支援服務</span>
+                        <span class="cost-value">$1,500/月</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">監控與分析</span>
+                        <span class="cost-value">$1,000/月</span>
+                    </div>
+                    <div class="cost-item cost-total">
+                        <span class="cost-label"><strong>每月總費用</strong></span>
+                        <span class="cost-value"><strong>$16,000</strong></span>
+                    </div>
+                </div>
+
+                <div class="card fade-in">
+                    <h3 style="color: var(--success-color); margin-bottom: 1rem;">💰 投資回報分析</h3>
+                    
+                    <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h4 style="margin-bottom: 1rem;">傳統人工客服成本</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #ddd;">
+                                <strong>客服人員薪資：</strong> 3人 × $35,000 = $105,000/月
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #ddd;">
+                                <strong>管理成本：</strong> $15,000/月
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #ddd;">
+                                <strong>訓練費用：</strong> $8,000/月
+                            </li>
+                            <li style="padding: 0.5rem 0; font-weight: 600; color: var(--danger-color);">
+                                <strong>總計：$128,000/月</strong>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--success-color); color: white; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                        <h4 style="color: white; margin-bottom: 0.75rem;">🎉 每月節省成本</h4>
+                        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">
+                            $112,000
+                        </div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">
+                            年度節省：$1,344,000
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics -->
+        <section id="metrics">
+            <div class="section-header">
+                <h2>預期成效</h2>
+                <p class="section-subtitle">數據驅動的服務改善成果</p>
+            </div>
+
+            <div class="card-container">
+                <div class="benefits-grid fade-in">
+                    <div class="benefit-category">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🔧 技術層面</h3>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <span class="benefit-icon">⚡</span>
+                                <span class="benefit-text">平均回應時間從 5 分鐘縮短至 500 毫秒</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">🎯</span>
+                                <span class="benefit-text">問題解決率從 60% 提升至 90%</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">🔄</span>
+                                <span class="benefit-text">24/7 不間斷服務，無需輪班人員</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">📊</span>
+                                <span class="benefit-text">系統可用性達 99.9%，穩定可靠</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="benefit-category">
+                        <h3 style="color: var(--accent-color); margin-bottom: 1rem;">📈 客戶體驗</h3>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <span class="benefit-icon">😊</span>
+                                <span class="benefit-text">客戶滿意度從 75% 提升至 90%</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">🎯</span>
+                                <span class="benefit-text">個人化服務，記住客戶偏好</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">💬</span>
+                                <span class="benefit-text">自然對話體驗，如同真人客服</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">🔍</span>
+                                <span class="benefit-text">精準理解需求，減少重複詢問</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="benefit-category">
+                        <h3 style="color: var(--success-color); margin-bottom: 1rem;">💰 營運效益</h3>
+                        <ul class="benefit-list">
+                            <li class="benefit-item">
+                                <span class="benefit-icon">💵</span>
+                                <span class="benefit-text">年度節省人事成本 $1,344,000</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">📈</span>
+                                <span class="benefit-text">客戶轉換率提升 25%</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">⏰</span>
+                                <span class="benefit-text">員工可專注高價值服務工作</span>
+                            </li>
+                            <li class="benefit-item">
+                                <span class="benefit-icon">🎯</span>
+                                <span class="benefit-text">透過數據洞察優化營運策略</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section id="cta" class="cta-section">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">準備好突破限制了嗎？</h2>
+            
+            <div class="card" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                <h3 style="color: white; margin-bottom: 1rem;">✅ 系統已開發完成</h3>
+                <p style="color: white; margin-bottom: 1rem;">技術架構成熟，隨時可以部署上線</p>
                 
-                <div class="arch-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <div class="step-title">用戶訊息接收</div>
-                        <div class="step-desc">LINE 平台接收用戶訊息</div>
-                    </div>
-                </div>
-
-                <div class="arch-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <div class="step-title">智慧意圖識別</div>
-                        <div class="step-desc">AI 分析訊息意圖和情境</div>
-                    </div>
-                </div>
-
-                <div class="arch-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <div class="step-title">知識庫檢索</div>
-                        <div class="step-desc">搜尋相關FAQ和專業知識</div>
-                    </div>
-                </div>
-
-                <div class="arch-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <div class="step-title">智慧回應生成</div>
-                        <div class="step-desc">GPT-4o 生成個人化回應</div>
-                    </div>
-                </div>
-
-                <div class="arch-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <div class="step-title">對話記憶儲存</div>
-                        <div class="step-desc">保存對話上下文供後續使用</div>
-                    </div>
-                </div>
+                <h3 style="color: white; margin: 1rem 0;">✅ 段階式推進建議</h3>
+                <p style="color: white; margin-bottom: 1rem;">從核心功能開始，逐步擴充完整服務</p>
+                
+                <h3 style="color: white; margin: 1rem 0;">✅ 立即行動建議</h3>
+                <p style="color: white;">開始收集現有客戶問題，建立專屬知識庫</p>
             </div>
-        </div>
-
-        <!-- Benefits -->
-        <section id="benefits" class="section-header">
-            <h2 class="section-title">效益分析</h2>
-            <p class="section-subtitle">數據證明的卓越表現</p>
+            
+            <div class="cta-buttons">
+                <a href="tel:+886-2-1234-5678" class="btn btn-accent">
+                    📞 立即來電討論
+                </a>
+                <a href="mailto:contact@sibyl-ai.com" class="btn btn-secondary">
+                    ✉️ 發送需求信件
+                </a>
+                <a href="#demo" class="btn" style="background: rgba(255,255,255,0.2); border: 2px solid white;">
+                    🚀 預約系統展示
+                </a>
+            </div>
         </section>
-
-        <div class="card-container">
-            <div class="stats-grid fade-in">
-                <div class="stat-card">
-                    <span class="stat-number">85%</span>
-                    <span class="stat-label">客戶滿意度</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">70%</span>
-                    <span class="stat-label">人力成本節省</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">全天候服務</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">&lt;500ms</span>
-                    <span class="stat-label">平均回應時間</span>
-                </div>
-            </div>
-
-            <div class="card fade-in">
-                <div class="card-icon">💰</div>
-                <h3 class="card-title">成本效益分析</h3>
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <span class="feature-icon">⬇️</span>
-                        <span class="feature-text">大幅降低人事成本</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">⬆️</span>
-                        <span class="feature-text">提升服務品質</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">📊</span>
-                        <span class="feature-text">改善營運效率</span>
-                    </li>
-                    <li class="feature-item">
-                        <span class="feature-icon">🎯</span>
-                        <span class="feature-text">增加客戶轉換率</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Demo Section -->
-        <section id="demo" class="section-header">
-            <h2 class="section-title">立即體驗</h2>
-            <p class="section-subtitle">親自感受 Sibyl AI 的智慧服務</p>
-        </section>
-
-        <div class="card-container">
-            <div class="card fade-in text-center">
-                <div class="card-icon">📱</div>
-                <h3 class="card-title">掃描 QR Code 體驗</h3>
-                <p class="card-description mb-2">使用手機掃描下方 QR Code，立即與 Sibyl AI 對話</p>
-                <div style="width: 200px; height: 200px; background: var(--gray-light); margin: 1rem auto; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
-                    📱
-                </div>
-                <p style="font-size: 0.9rem; color: var(--gray-medium);">或搜尋 LINE ID: @sibyl-ai</p>
-            </div>
-        </div>
-
-        <!-- Contact -->
-        <section id="contact" class="section-header">
-            <h2 class="section-title">聯絡我們</h2>
-            <p class="section-subtitle">讓我們協助您打造更好的客服體驗</p>
-        </section>
-
-        <div class="card-container">
-            <div class="card fade-in">
-                <div class="card-icon">📞</div>
-                <h3 class="card-title">專業諮詢服務</h3>
-                <p class="card-description mb-2">我們的技術團隊隨時為您提供專業建議</p>
-                <a href="tel:+886-2-1234-5678" class="btn mb-1">立即來電諮詢</a>
-                <a href="mailto:contact@sibyl-ai.com" class="btn btn-secondary">發送郵件詢問</a>
-            </div>
-        </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <p class="footer-text">© 2024 Sibyl AI. 專業的智慧客服解決方案提供商。</p>
+        <p class="footer-text">© 2024 Sibyl AI. 專業的智慧客服解決方案提供商。<br>
+        讓科技為人性服務，打造更美好的客戶體驗。</p>
     </footer>
 
     <script>
@@ -865,6 +2207,21 @@
                 }
             });
         });
+
+        // Performance optimization: Lazy load heavy content
+        if ('IntersectionObserver' in window) {
+            const lazyElements = document.querySelectorAll('.vector-space, .analytics-dashboard');
+            const lazyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        lazyObserver.unobserve(entry.target);
+                    }
+                });
+            });
+
+            lazyElements.forEach(el => lazyObserver.observe(el));
+        }
     </script>
 </body>
 </html>
