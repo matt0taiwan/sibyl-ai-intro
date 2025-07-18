@@ -1710,6 +1710,190 @@
             padding: 4rem 2rem;
         }
 
+        /* Implementation Plan Styles */
+        .implementation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ready-status {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .ready-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .ready-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ready-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .ready-item h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .ready-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ready-item li {
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .timeline-section {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-month {
+            margin-bottom: 2rem;
+        }
+
+        .timeline-week {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid rgba(255,255,255,0.5);
+        }
+
+        .timeline-week h5 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: #FCD34D;
+        }
+
+        .timeline-activities {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-activities li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .timeline-activities li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #FCD34D;
+        }
+
+        .highlight-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .transition-visual {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .progress-bars {
+            margin-top: 1rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            height: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FCD34D 0%, #FBBF24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            transition: width 1s ease-out;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .benefit-period {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .benefit-period h4 {
+            color: #FCD34D;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+
+        .benefit-metric {
+            font-weight: 600;
+            color: #10B981;
+        }
+
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -3566,18 +3750,191 @@
     <!-- CTA Section -->
     <section id="cta" class="cta-section">
         <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">準備好突破限制了嗎？</h2>
-        <p style="font-size: 1.5rem; margin-bottom: 2rem;">讓 Sibyl AI 為五湖園開啟智慧服務的新篇章</p>
-        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 1rem; max-width: 800px; margin: 0 auto;">
-            <h3 style="margin-bottom: 1rem;">✅ 系統已開發完成</h3>
-            <p>核心功能已完善，雙模式系統穩定運行</p>
-            <h3 style="margin: 1rem 0;">✅ 段階式推進建議</h3>
-            <p>第1個月：內部測試與部分客戶試行<br>
-               第2個月：系統優化與監控完善<br>
-               第3個月：全面部署與標準化運營</p>
-            <h3 style="margin: 1rem 0;">✅ 立即行動建議</h3>
-            <p>1. 完成客服人員培訓<br>
-               2. 熟悉人機協作流程<br>
-               3. 設定監控與回退機制</p>
+        <p style="font-size: 1.5rem; margin-bottom: 3rem;">讓 Sibyl AI 為五湖園開啟智慧服務的新篇章</p>
+        
+        <div class="implementation-container">
+            <!-- 系統就緒狀態 -->
+            <div class="ready-status">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: #FCD34D;">
+                    🚀 系統就緒，萬事俱備
+                </h3>
+                <div class="ready-grid">
+                    <div class="ready-item">
+                        <h4>✅ 雙模式系統已完成</h4>
+                        <ul>
+                            <li>傳統選單模式（保留現有體驗）</li>
+                            <li>AI 智慧對話模式（全新升級）</li>
+                            <li>客戶可自主選擇使用模式</li>
+                        </ul>
+                    </div>
+                    <div class="ready-item">
+                        <h4>✅ 核心功能穩定運行</h4>
+                        <ul>
+                            <li>24/7 自動回應能力</li>
+                            <li>情感理解與溫暖對話</li>
+                            <li>智慧知識庫即時查詢</li>
+                        </ul>
+                    </div>
+                    <div class="ready-item">
+                        <h4>✅ 技術架構已驗證</h4>
+                        <ul>
+                            <li>Google Cloud Platform 基礎設施</li>
+                            <li>GPT-4o 最新 AI 技術</li>
+                            <li>完整的備份與容錯機制</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 階段性實施計畫 -->
+            <div class="timeline-section">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">
+                    📅 階段性實施計畫
+                </h3>
+                
+                <!-- 第一個月 -->
+                <div class="timeline-month">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #FCD34D;">
+                        第一個月：基礎建設與智慧過渡
+                    </h4>
+                    
+                    <div class="timeline-week">
+                        <h5>📍 第 1 週：技術整合期</h5>
+                        <ul class="timeline-activities">
+                            <li>Day 1-2：與普立陽協調 Webhook 設定
+                                <div class="highlight-box">
+                                    💡 簡單程式調整，確保雙系統順暢共存
+                                </div>
+                            </li>
+                            <li>Day 3-4：系統部署與環境設定</li>
+                            <li>Day 5-7：功能驗證與壓力測試</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-week">
+                        <h5>📍 第 2 週：團隊準備期</h5>
+                        <ul class="timeline-activities">
+                            <li>客服團隊 AI 協作培訓（2小時速成）</li>
+                            <li>建立標準作業流程（SOP）</li>
+                            <li>設定監控儀表板與警報機制</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-week">
+                        <h5>📍 第 3-4 週：雙模式並行期</h5>
+                        <ul class="timeline-activities">
+                            <li>客戶進入時可自主選擇使用模式</li>
+                            <li>收集真實使用數據與回饋</li>
+                            <li>持續優化 AI 回應品質</li>
+                        </ul>
+                        <div class="transition-visual">
+                            <p style="margin-bottom: 1rem; font-weight: 600;">預期使用模式分布：</p>
+                            <div class="progress-bars">
+                                <div class="progress-item">
+                                    <div class="progress-label">
+                                        <span>第 3 週</span>
+                                        <span>傳統 vs AI</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 70%;">
+                                            70% 傳統 | 30% AI
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <div class="progress-label">
+                                        <span>第 4 週</span>
+                                        <span>使用趨勢</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 50%;">
+                                            50% 傳統 | 50% AI
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">
+                                💡 客戶自然選擇，數據驅動優化
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第 2-3 個月 -->
+                <div class="timeline-month">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #FCD34D;">
+                        第 2-3 個月：智慧過渡期
+                    </h4>
+                    <div class="timeline-week">
+                        <ul class="timeline-activities">
+                            <li>根據使用數據持續優化 AI 表現</li>
+                            <li>引導更多客戶體驗 AI 模式的便利性</li>
+                            <li>收集成功案例，建立信心</li>
+                            <li>準備全面升級計畫</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 最終目標 -->
+                <div style="background: rgba(251, 191, 36, 0.1); padding: 2rem; border-radius: 0.5rem; margin-top: 2rem; text-align: center;">
+                    <h4 style="color: #FCD34D; margin-bottom: 1rem;">
+                        🎯 最終目標：完全智慧化升級
+                    </h4>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        當數據顯示 AI 模式的滿意度穩定超過 90%<br>
+                        當多數客戶主動選擇使用 AI 模式<br>
+                        <strong>我們將制定完全切換的時程表</strong>
+                    </p>
+                    <p style="margin-top: 1rem; opacity: 0.9;">
+                        預計時程：3-6 個月內實現完全智慧化
+                    </p>
+                </div>
+            </div>
+
+            <!-- 預期成效 -->
+            <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">
+                    📊 預期成效展望
+                </h3>
+                <div class="benefits-grid">
+                    <div class="benefit-period">
+                        <h4>📈 立即效益（1個月內）</h4>
+                        <div class="benefit-item">
+                            回應時間：<span class="benefit-metric">20分鐘 → 3秒</span>
+                        </div>
+                        <div class="benefit-item">
+                            服務時段：<span class="benefit-metric">8小時 → 24/7</span>
+                        </div>
+                        <div class="benefit-item">
+                            客服壓力：<span class="benefit-metric">降低 40%</span>
+                        </div>
+                    </div>
+                    <div class="benefit-period">
+                        <h4>💰 短期效益（3個月內）</h4>
+                        <div class="benefit-item">
+                            客戶滿意度：<span class="benefit-metric">提升 15%</span>
+                        </div>
+                        <div class="benefit-item">
+                            營運成本：<span class="benefit-metric">降低 30%</span>
+                        </div>
+                        <div class="benefit-item">
+                            諮詢轉換率：<span class="benefit-metric">提升 25%</span>
+                        </div>
+                    </div>
+                    <div class="benefit-period">
+                        <h4>🏆 長期價值（6個月後）</h4>
+                        <div class="benefit-item">
+                            <span class="benefit-metric">行業技術領先地位</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-metric">寶貴客戶洞察累積</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-metric">AI 創新基礎奠定</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
