@@ -1448,6 +1448,158 @@
             font-weight: bold;
         }
 
+        /* Enterprise Trust Section */
+        .enterprise-trust {
+            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+            padding: 3rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enterprise-trust::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(30, 58, 138, 0.05) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .enterprise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .enterprise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .enterprise-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enterprise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .enterprise-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .enterprise-card:hover::after {
+            transform: translateX(0);
+        }
+
+        .enterprise-logo {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+        }
+
+        .enterprise-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .enterprise-industry {
+            font-size: 0.85rem;
+            color: var(--gray-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .enterprise-achievement {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .trust-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .trust-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .trust-stat {
+            text-align: center;
+        }
+
+        .trust-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .trust-stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
         .security-commitment {
             background: var(--gray-light);
             padding: 3rem;
@@ -3009,6 +3161,104 @@
         </div>
 
         <div class="security-container fade-in">
+            <!-- 全球企業信任 -->
+            <div class="enterprise-trust">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">
+                    🌍 與全球領先企業同級的技術選擇
+                </h3>
+                <p style="text-align: center; font-size: 1.1rem; color: var(--gray-dark); margin-bottom: 2rem;">
+                    這些世界級企業都選擇 Google Cloud Platform 作為核心基礎設施
+                </p>
+                
+                <div class="enterprise-grid">
+                    <!-- Spotify -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">🎵</div>
+                        <div class="enterprise-name">Spotify</div>
+                        <div class="enterprise-industry">音樂串流平台</div>
+                        <div class="enterprise-achievement">成本降低 60%</div>
+                    </div>
+                    
+                    <!-- PayPal -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">💳</div>
+                        <div class="enterprise-name">PayPal</div>
+                        <div class="enterprise-industry">金融支付</div>
+                        <div class="enterprise-achievement">每秒處理 1,000 筆交易</div>
+                    </div>
+                    
+                    <!-- Toyota -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">🚗</div>
+                        <div class="enterprise-name">Toyota</div>
+                        <div class="enterprise-industry">汽車製造</div>
+                        <div class="enterprise-achievement">AI 開發時間縮短 50%</div>
+                    </div>
+                    
+                    <!-- Samsung -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">📱</div>
+                        <div class="enterprise-name">Samsung</div>
+                        <div class="enterprise-industry">科技巨頭</div>
+                        <div class="enterprise-achievement">Galaxy S24 AI 功能</div>
+                    </div>
+                    
+                    <!-- Twitter/X -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">🐦</div>
+                        <div class="enterprise-name">Twitter / X</div>
+                        <div class="enterprise-industry">社交媒體</div>
+                        <div class="enterprise-achievement">大數據處理現代化</div>
+                    </div>
+                    
+                    <!-- P&G -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">🧼</div>
+                        <div class="enterprise-name">P&G 寶僑</div>
+                        <div class="enterprise-industry">日用品</div>
+                        <div class="enterprise-achievement">360° 客戶視角</div>
+                    </div>
+                    
+                    <!-- Home Depot -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">🏠</div>
+                        <div class="enterprise-name">Home Depot</div>
+                        <div class="enterprise-industry">零售業</div>
+                        <div class="enterprise-achievement">Fortune 500 企業</div>
+                    </div>
+                    
+                    <!-- Coca-Cola -->
+                    <div class="enterprise-card">
+                        <div class="enterprise-logo">🥤</div>
+                        <div class="enterprise-name">可口可樂</div>
+                        <div class="enterprise-industry">飲料產業</div>
+                        <div class="enterprise-achievement">70萬台自動販賣機 AI</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="trust-badge">
+                        <span>🏆</span>
+                        <span>Fortune 500 企業中 35% 使用 GCP</span>
+                    </div>
+                </div>
+                
+                <div class="trust-stats">
+                    <div class="trust-stat">
+                        <div class="trust-stat-number">96萬+</div>
+                        <div class="trust-stat-label">全球企業客戶</div>
+                    </div>
+                    <div class="trust-stat">
+                        <div class="trust-stat-number">99.99%</div>
+                        <div class="trust-stat-label">服務可用性 SLA</div>
+                    </div>
+                    <div class="trust-stat">
+                        <div class="trust-stat-number">150+</div>
+                        <div class="trust-stat-label">國際安全認證</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- GCP 安全基礎 -->
             <div class="security-foundation">
                 <h3 style="color: var(--primary-color); margin-bottom: 2rem; text-align: center;">
@@ -3096,13 +3346,43 @@
             </div>
         </div>
 
-        <!-- 最高安全等級部署方案 -->
+        <!-- 安全承諾 -->
+        <div class="security-commitment fade-in">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Google Cloud 安全保障</h3>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--gray-dark);">
+                採用 Google 企業級基礎設施，享有與 Google 服務同等級的安全防護
+            </p>
+            <div class="commitment-cards">
+                <div class="commitment-card">
+                    <div class="commitment-icon">🔒</div>
+                    <h4>資料主權</h4>
+                    <p>您的資料永遠屬於您<br>隨時可匯出或刪除</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🌏</div>
+                    <h4>在地合規</h4>
+                    <p>資料存放於亞洲<br>符合台灣法規要求</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🔍</div>
+                    <h4>透明稽核</h4>
+                    <p>定期安全報告<br>可追蹤的操作日誌</p>
+                </div>
+                <div class="commitment-card">
+                    <div class="commitment-icon">🚨</div>
+                    <h4>即時應變</h4>
+                    <p>24/7 監控警報<br>快速事件響應</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最高安全等級部署方案（終極底牌）-->
         <div class="high-security-deployment fade-in" style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(219, 234, 254, 0.3), rgba(191, 219, 254, 0.3)); border-radius: 1rem; border: 2px solid rgba(59, 130, 246, 0.2);">
             <h3 style="text-align: center; margin-bottom: 1rem; color: var(--primary-color);">
                 🛡️ 最高安全等級部署方案
             </h3>
             <p style="text-align: center; font-size: 1.1rem; color: #475569; margin-bottom: 2rem;">
-                當資訊安全要求達到最高標準時
+                當資訊安全要求達到最高標準時，我們已經準備好備案
             </p>
             
             <div style="max-width: 800px; margin: 0 auto;">
@@ -3150,36 +3430,6 @@
                     選擇 Docker 容器化不只是技術決策，更是為未來的靈活性提前鋪路。<br>
                     無論公司的需求如何變化，Sibyl AI 都已做好準備。
                 </p>
-            </div>
-        </div>
-
-        <!-- 安全承諾 -->
-        <div class="security-commitment fade-in">
-            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">Google Cloud 安全保障</h3>
-            <p style="text-align: center; margin-bottom: 2rem; color: var(--gray-dark);">
-                採用 Google 企業級基礎設施，享有與 Google 服務同等級的安全防護
-            </p>
-            <div class="commitment-cards">
-                <div class="commitment-card">
-                    <div class="commitment-icon">🔒</div>
-                    <h4>資料主權</h4>
-                    <p>您的資料永遠屬於您<br>隨時可匯出或刪除</p>
-                </div>
-                <div class="commitment-card">
-                    <div class="commitment-icon">🌏</div>
-                    <h4>在地合規</h4>
-                    <p>資料存放於亞洲<br>符合台灣法規要求</p>
-                </div>
-                <div class="commitment-card">
-                    <div class="commitment-icon">🔍</div>
-                    <h4>透明稽核</h4>
-                    <p>定期安全報告<br>可追蹤的操作日誌</p>
-                </div>
-                <div class="commitment-card">
-                    <div class="commitment-icon">🚨</div>
-                    <h4>即時應變</h4>
-                    <p>24/7 監控警報<br>快速事件響應</p>
-                </div>
             </div>
         </div>
     </section>
