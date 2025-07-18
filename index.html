@@ -203,56 +203,53 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            overflow: hidden;
         }
 
         .matrix-column {
             position: absolute;
-            top: -100%;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 20px;
-            font-weight: bold;
-            line-height: 1.2;
-            animation: matrix-fall linear infinite;
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            text-shadow: 0 0 5px currentColor;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1;
+            color: rgba(107, 124, 147, 0.8);
+            text-shadow: 0 0 8px currentColor;
+            white-space: nowrap;
         }
 
-        /* 混合色系 */
         .matrix-column:nth-child(3n) {
-            color: rgba(107, 124, 147, 0.7); /* 莫蘭迪藍灰 */
+            color: rgba(107, 124, 147, 0.8); /* 莫蘭迪藍灰 */
         }
 
         .matrix-column:nth-child(3n+1) {
-            color: rgba(200, 184, 161, 0.5); /* 莫蘭迪奶茶 */
+            color: rgba(200, 184, 161, 0.6); /* 莫蘭迪奶茶 */
         }
 
         .matrix-column:nth-child(3n+2) {
-            color: rgba(147, 169, 156, 0.6); /* 莫蘭迪灰綠 */
+            color: rgba(147, 169, 156, 0.7); /* 莫蘭迪灰綠 */
         }
 
-        /* 尾巴漸淡效果 */
-        .matrix-column {
-            mask-image: linear-gradient(to bottom,
-                transparent 0%,
-                black 10%,
-                black 90%,
-                transparent 100%
-            );
-            -webkit-mask-image: linear-gradient(to bottom,
-                transparent 0%,
-                black 10%,
-                black 90%,
-                transparent 100%
-            );
+        .matrix-char {
+            display: inline-block;
+            opacity: 0;
+            animation: char-fall var(--fall-duration) linear infinite;
+            animation-delay: var(--fall-delay);
         }
 
-        @keyframes matrix-fall {
+        @keyframes char-fall {
             0% {
-                top: -100%;
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
             }
             100% {
-                top: 100%;
+                transform: translateY(100vh);
+                opacity: 0;
             }
         }
 
@@ -2904,7 +2901,7 @@
         <div>
             <h1>突破 LINE OA 限制</h1>
             <p class="subtitle">GPT-4o 賦能的智慧客服系統</p>
-            <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto;">
+            <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto 0;">
                 <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600; margin-bottom: 1rem;">
                     🎯 核心價值主張
                 </p>
@@ -4566,27 +4563,40 @@
         // Matrix Rain Effect
         function createMatrixRain() {
             const matrixContainer = document.getElementById('matrixRain');
-            const columnCount = Math.floor(window.innerWidth / 30);
+            const columnCount = Math.floor(window.innerWidth / 25);
             
             for (let i = 0; i < columnCount; i++) {
                 const column = document.createElement('div');
                 column.className = 'matrix-column';
-                column.style.left = `${i * 30}px`;
-                column.style.animationDuration = `${Math.random() * 10 + 8}s`;
-                column.style.animationDelay = `${Math.random() * 5}s`;
+                column.style.left = `${i * 25}px`;
+                column.style.top = '0';
                 
-                // 生成隨機二進制字符串
-                let text = '';
-                const charCount = Math.floor(Math.random() * 25 + 15);
+                // 為每個列創建多個字符
+                const charCount = Math.floor(window.innerHeight / 20);
                 for (let j = 0; j < charCount; j++) {
-                    const char = Math.random() < 0.5 ? '0' : '1';
-                    text += char;
+                    const charSpan = document.createElement('span');
+                    charSpan.className = 'matrix-char';
+                    charSpan.textContent = Math.random() < 0.5 ? '0' : '1';
+                    charSpan.style.setProperty('--fall-duration', `${Math.random() * 15 + 10}s`);
+                    charSpan.style.setProperty('--fall-delay', `${Math.random() * 15}s`);
+                    charSpan.style.position = 'absolute';
+                    charSpan.style.top = `${j * 20}px`;
+                    
+                    column.appendChild(charSpan);
                 }
                 
-                column.textContent = text;
-                column.setAttribute('data-text', text);
                 matrixContainer.appendChild(column);
             }
+            
+            // 定期更新字符
+            setInterval(() => {
+                const chars = matrixContainer.querySelectorAll('.matrix-char');
+                chars.forEach(char => {
+                    if (Math.random() < 0.01) {
+                        char.textContent = Math.random() < 0.5 ? '0' : '1';
+                    }
+                });
+            }, 100);
         }
 
         // 初始化代碼雨
