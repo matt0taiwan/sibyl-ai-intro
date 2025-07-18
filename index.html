@@ -1868,24 +1868,28 @@
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 2.5rem;
             margin-top: 2rem;
+            padding: 0 1rem;
         }
 
         @media (max-width: 768px) {
             .benefits-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
         .benefit-period {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.05);
             padding: 1.5rem;
             border-radius: 0.5rem;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
             min-height: 250px;
             display: flex;
             flex-direction: column;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .benefit-period h4 {
@@ -1895,14 +1899,17 @@
             white-space: nowrap;
         }
 
-        .benefit-item {
-            padding: 0.75rem 0;
+        .cta-benefit-item {
+            padding: 1rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             line-height: 1.6;
+            background: transparent;
+            margin-bottom: 0.5rem;
         }
 
-        .benefit-item:last-child {
+        .cta-benefit-item:last-child {
             border-bottom: none;
+            margin-bottom: 0;
         }
 
         .benefit-metric {
@@ -3908,10 +3915,10 @@
                     <p style="font-size: 1.1rem; line-height: 1.8;">
                         當數據顯示 AI 模式的滿意度穩定超過 90%<br>
                         當多數客戶主動選擇使用 AI 模式<br>
-                        <strong>我們將制定完全切換的時程表</strong>
+                        <strong>即可評估是否完全升級至智慧化服務</strong>
                     </p>
                     <p style="margin-top: 1rem; opacity: 0.9;">
-                        預計時程：3-6 個月內實現完全智慧化
+                        一切以客戶體驗和實際成效為依歸
                     </p>
                 </div>
             </div>
@@ -3924,45 +3931,45 @@
                 <div class="benefits-grid">
                     <div class="benefit-period">
                         <h4>📈 立即效益（1個月內）</h4>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             回應時間
                             <span class="benefit-metric">20分鐘 → 3秒</span>
                         </div>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             服務時段
                             <span class="benefit-metric">8小時 → 24/7</span>
                         </div>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             客服壓力
                             <span class="benefit-metric">降低 40%</span>
                         </div>
                     </div>
                     <div class="benefit-period">
                         <h4>💰 短期效益（3個月內）</h4>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             客戶滿意度
                             <span class="benefit-metric">提升 15%</span>
                         </div>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             營運成本
                             <span class="benefit-metric">降低 30%</span>
                         </div>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             諮詢轉換率
                             <span class="benefit-metric">提升 25%</span>
                         </div>
                     </div>
                     <div class="benefit-period">
                         <h4>🏆 長期價值（6個月後）</h4>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             產業定位
                             <span class="benefit-metric">技術領先標竿</span>
                         </div>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             數據資產
                             <span class="benefit-metric">客戶洞察累積</span>
                         </div>
-                        <div class="benefit-item">
+                        <div class="cta-benefit-item">
                             創新能力
                             <span class="benefit-metric">AI 基礎奠定</span>
                         </div>
