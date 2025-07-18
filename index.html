@@ -212,6 +212,7 @@
             font-size: 14px;
             line-height: 1.2;
             animation: matrix-fall linear infinite;
+            -webkit-animation: matrix-fall linear infinite;
             writing-mode: vertical-rl;
             text-orientation: upright;
         }
@@ -230,6 +231,15 @@
         }
 
         @keyframes matrix-fall {
+            0% {
+                top: -100%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+
+        @-webkit-keyframes matrix-fall {
             0% {
                 top: -100%;
             }
@@ -2142,6 +2152,9 @@
                 min-height: 90vh;
                 padding: 80px 1rem 2rem;
                 text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .chat-comparison {
