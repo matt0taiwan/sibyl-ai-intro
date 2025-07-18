@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sibyl - 突破 LINE OA 限制的智慧客服解決方案</title>
+    <title>Sibyl AI - 突破 LINE OA 限制的智慧客服解決方案</title>
     <style>
 
         :root {
@@ -2598,6 +2598,200 @@
                 line-height: 1.3;
             }
         }
+        
+        /* Developer Signature Section */
+        .developer-signature {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .developer-signature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--accent-color), 
+                var(--primary-color), 
+                var(--accent-color), 
+                transparent
+            );
+        }
+
+        .signature-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .signature-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .signature-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .system-version {
+            color: #888;
+            font-family: 'Courier New', monospace;
+        }
+
+        .developer-info {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .developer-title {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .tech-stack {
+            margin-bottom: 3rem;
+        }
+
+        .tech-stack h4 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-category {
+            text-align: center;
+        }
+
+        .category-title {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tech-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .tech-badge:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .signature-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+
+        .copyright {
+            text-align: left;
+        }
+
+        .copyright p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .company-copyright {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.5rem !important;
+            font-weight: 500;
+        }
+
+        .developer-copyright {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem !important;
+        }
+
+        .project-note {
+            color: #888;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-link .icon {
+            font-size: 1.2rem;
+        }
+
+        /* 響應式設計 for Developer Signature */
+        @media (max-width: 768px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .signature-footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .copyright {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -4212,5 +4406,73 @@
             });
         });
     </script>
+    
+    <!-- Developer Signature Section -->
+    <footer class="developer-signature">
+        <div class="signature-container">
+            <div class="signature-header">
+                <h3>Sibyl AI 智慧客服系統</h3>
+                <p class="system-version">v1.0.0 | 2025</p>
+            </div>
+            
+            <div class="developer-info">
+                <p class="developer-title">架構設計與開發</p>
+                <p class="developer-name">Full-Stack AI System Engineer | Matthew</p>
+            </div>
+            
+            <div class="tech-stack">
+                <h4>Technology Stack</h4>
+                <div class="tech-grid">
+                    <div class="tech-category">
+                        <span class="category-title">Backend</span>
+                        <div class="tech-items">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">FastAPI</span>
+                            <span class="tech-badge">Docker</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <span class="category-title">AI & ML</span>
+                        <div class="tech-items">
+                            <span class="tech-badge">GPT-4o</span>
+                            <span class="tech-badge">LangChain</span>
+                            <span class="tech-badge">Vector DB</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <span class="category-title">Cloud & DevOps</span>
+                        <div class="tech-items">
+                            <span class="tech-badge">Google Cloud</span>
+                            <span class="tech-badge">Cloud Run</span>
+                            <span class="tech-badge">Firestore</span>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <span class="category-title">Integration</span>
+                        <div class="tech-items">
+                            <span class="tech-badge">LINE Messaging API</span>
+                            <span class="tech-badge">RESTful API</span>
+                            <span class="tech-badge">Webhook</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="signature-footer">
+                <div class="copyright">
+                    <p class="company-copyright">版權所有 © ETERNAL LIFE Co., Ltd. All rights reserved.</p>
+                    <p class="developer-copyright">System developed by Matthew © 2025</p>
+                    <p class="project-note">Exclusively crafted for 五湖園</p>
+                </div>
+                <div class="contact-links">
+                    <a href="https://github.com/matt0taiwan" class="contact-link" target="_blank">
+                        <span class="icon">💻</span>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
 </body>
 </html>
