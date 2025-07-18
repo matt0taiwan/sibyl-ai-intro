@@ -203,64 +203,55 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            overflow: hidden;
         }
 
-        .matrix-column {
+        .matrix-drop {
             position: absolute;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1.1;
             font-weight: 600;
-            line-height: 1;
-            color: rgba(107, 124, 147, 0.8);
-            text-shadow: 0 0 8px currentColor;
-            white-space: nowrap;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            animation: drop-fall linear infinite;
         }
 
-        .matrix-column:nth-child(3n) {
-            color: rgba(107, 124, 147, 0.8); /* 莫蘭迪藍灰 */
+        /* 三種顏色 */
+        .matrix-drop.color-1 {
+            color: rgba(107, 124, 147, 0.5); /* 莫蘭迪藍灰 */
+            text-shadow: 0 0 3px rgba(107, 124, 147, 0.8);
         }
 
-        .matrix-column:nth-child(3n+1) {
-            color: rgba(200, 184, 161, 0.6); /* 莫蘭迪奶茶 */
+        .matrix-drop.color-2 {
+            color: rgba(200, 184, 161, 0.4); /* 莫蘭迪奶茶 */
+            text-shadow: 0 0 3px rgba(200, 184, 161, 0.6);
         }
 
-        .matrix-column:nth-child(3n+2) {
-            color: rgba(147, 169, 156, 0.7); /* 莫蘭迪灰綠 */
+        .matrix-drop.color-3 {
+            color: rgba(147, 169, 156, 0.45); /* 莫蘭迪灰綠 */
+            text-shadow: 0 0 3px rgba(147, 169, 156, 0.7);
         }
 
-        .matrix-char {
-            display: inline-block;
-            opacity: 0;
-            animation: char-fall var(--fall-duration) linear infinite;
-            animation-delay: var(--fall-delay);
-        }
-
-        @keyframes char-fall {
-            0% {
-                transform: translateY(-100vh);
-                opacity: 0;
+        @keyframes drop-fall {
+            from {
+                transform: translateY(-100%);
             }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
+            to {
+                transform: translateY(calc(100vh + 100%));
             }
         }
 
 
-        /* 確保內容在代碼雨之上 */
+        /* 確保內容在代碼雨之上且置中 */
         .hero > div {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 1200px;
-            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         h1 {
@@ -4563,40 +4554,30 @@
         // Matrix Rain Effect
         function createMatrixRain() {
             const matrixContainer = document.getElementById('matrixRain');
-            const columnCount = Math.floor(window.innerWidth / 25);
+            const columnWidth = 30;
+            const columnCount = Math.floor(window.innerWidth / columnWidth);
             
             for (let i = 0; i < columnCount; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = `${i * 25}px`;
-                column.style.top = '0';
+                const drop = document.createElement('div');
+                drop.className = `matrix-drop color-${(i % 3) + 1}`;
+                drop.style.left = `${i * columnWidth + 10}px`;
                 
-                // 為每個列創建多個字符
-                const charCount = Math.floor(window.innerHeight / 20);
-                for (let j = 0; j < charCount; j++) {
-                    const charSpan = document.createElement('span');
-                    charSpan.className = 'matrix-char';
-                    charSpan.textContent = Math.random() < 0.5 ? '0' : '1';
-                    charSpan.style.setProperty('--fall-duration', `${Math.random() * 15 + 10}s`);
-                    charSpan.style.setProperty('--fall-delay', `${Math.random() * 15}s`);
-                    charSpan.style.position = 'absolute';
-                    charSpan.style.top = `${j * 20}px`;
-                    
-                    column.appendChild(charSpan);
+                // 隨機動畫時長和延遲
+                const duration = Math.random() * 20 + 10; // 10-30秒
+                const delay = Math.random() * 20; // 0-20秒延遲
+                drop.style.animationDuration = `${duration}s`;
+                drop.style.animationDelay = `${delay}s`;
+                
+                // 生成二進制字符串
+                let binaryString = '';
+                const length = Math.floor(Math.random() * 20 + 15); // 15-35個字符
+                for (let j = 0; j < length; j++) {
+                    binaryString += Math.random() < 0.5 ? '0' : '1';
                 }
+                drop.textContent = binaryString;
                 
-                matrixContainer.appendChild(column);
+                matrixContainer.appendChild(drop);
             }
-            
-            // 定期更新字符
-            setInterval(() => {
-                const chars = matrixContainer.querySelectorAll('.matrix-char');
-                chars.forEach(char => {
-                    if (Math.random() < 0.01) {
-                        char.textContent = Math.random() < 0.5 ? '0' : '1';
-                    }
-                });
-            }, 100);
         }
 
         // 初始化代碼雨
