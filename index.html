@@ -1841,18 +1841,28 @@
             border-radius: 15px;
             overflow: hidden;
             position: relative;
+            display: flex;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #FCD34D 0%, #FBBF24 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            color: var(--primary-color);
             font-size: 0.9rem;
             transition: width 1s ease-out;
+        }
+        
+        .progress-fill.traditional {
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border-right: 2px solid rgba(255,255,255,0.5);
+        }
+        
+        .progress-fill.ai {
+            background: linear-gradient(90deg, #FCD34D 0%, #FBBF24 100%);
+            color: var(--primary-color);
         }
 
         .benefits-grid {
@@ -1869,20 +1879,26 @@
         }
 
         .benefit-period {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             padding: 1.5rem;
             border-radius: 0.5rem;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
         }
 
         .benefit-period h4 {
             color: #FCD34D;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            white-space: nowrap;
         }
 
         .benefit-item {
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            line-height: 1.6;
         }
 
         .benefit-item:last-child {
@@ -1890,8 +1906,11 @@
         }
 
         .benefit-metric {
-            font-weight: 600;
+            font-weight: 700;
             color: #10B981;
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 1.05rem;
         }
 
         .cta-button {
@@ -3833,22 +3852,28 @@
                                 <div class="progress-item">
                                     <div class="progress-label">
                                         <span>第 3 週</span>
-                                        <span>傳統 vs AI</span>
+                                        <span>使用模式分布</span>
                                     </div>
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 70%;">
-                                            70% 傳統 | 30% AI
+                                        <div class="progress-fill traditional" style="width: 70%;">
+                                            70% 傳統
+                                        </div>
+                                        <div class="progress-fill ai" style="width: 30%;">
+                                            30% AI
                                         </div>
                                     </div>
                                 </div>
                                 <div class="progress-item">
                                     <div class="progress-label">
                                         <span>第 4 週</span>
-                                        <span>使用趨勢</span>
+                                        <span>使用趨勢變化</span>
                                     </div>
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 50%;">
-                                            50% 傳統 | 50% AI
+                                        <div class="progress-fill traditional" style="width: 50%;">
+                                            50% 傳統
+                                        </div>
+                                        <div class="progress-fill ai" style="width: 50%;">
+                                            50% AI
                                         </div>
                                     </div>
                                 </div>
@@ -3900,37 +3925,46 @@
                     <div class="benefit-period">
                         <h4>📈 立即效益（1個月內）</h4>
                         <div class="benefit-item">
-                            回應時間：<span class="benefit-metric">20分鐘 → 3秒</span>
+                            回應時間
+                            <span class="benefit-metric">20分鐘 → 3秒</span>
                         </div>
                         <div class="benefit-item">
-                            服務時段：<span class="benefit-metric">8小時 → 24/7</span>
+                            服務時段
+                            <span class="benefit-metric">8小時 → 24/7</span>
                         </div>
                         <div class="benefit-item">
-                            客服壓力：<span class="benefit-metric">降低 40%</span>
+                            客服壓力
+                            <span class="benefit-metric">降低 40%</span>
                         </div>
                     </div>
                     <div class="benefit-period">
                         <h4>💰 短期效益（3個月內）</h4>
                         <div class="benefit-item">
-                            客戶滿意度：<span class="benefit-metric">提升 15%</span>
+                            客戶滿意度
+                            <span class="benefit-metric">提升 15%</span>
                         </div>
                         <div class="benefit-item">
-                            營運成本：<span class="benefit-metric">降低 30%</span>
+                            營運成本
+                            <span class="benefit-metric">降低 30%</span>
                         </div>
                         <div class="benefit-item">
-                            諮詢轉換率：<span class="benefit-metric">提升 25%</span>
+                            諮詢轉換率
+                            <span class="benefit-metric">提升 25%</span>
                         </div>
                     </div>
                     <div class="benefit-period">
                         <h4>🏆 長期價值（6個月後）</h4>
                         <div class="benefit-item">
-                            <span class="benefit-metric">行業技術領先地位</span>
+                            產業定位
+                            <span class="benefit-metric">技術領先標竿</span>
                         </div>
                         <div class="benefit-item">
-                            <span class="benefit-metric">寶貴客戶洞察累積</span>
+                            數據資產
+                            <span class="benefit-metric">客戶洞察累積</span>
                         </div>
                         <div class="benefit-item">
-                            <span class="benefit-metric">AI 創新基礎奠定</span>
+                            創新能力
+                            <span class="benefit-metric">AI 基礎奠定</span>
                         </div>
                     </div>
                 </div>
