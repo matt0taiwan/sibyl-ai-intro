@@ -201,31 +201,54 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            opacity: 0.3;
+            z-index: 1;
         }
 
         .matrix-column {
             position: absolute;
             top: -100%;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.2;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.1;
             animation: matrix-fall linear infinite;
             writing-mode: vertical-rl;
             text-orientation: upright;
+            letter-spacing: 2px;
+        }
+
+        .matrix-char {
+            display: inline-block;
+            opacity: 0;
+            animation: char-fade 1s ease-out forwards;
         }
 
         /* 混合色系 */
         .matrix-column:nth-child(3n) {
-            color: rgba(107, 124, 147, 0.6); /* 莫蘭迪藍灰 */
+            color: #6B7C93; /* 莫蘭迪藍灰 */
         }
 
         .matrix-column:nth-child(3n+1) {
-            color: rgba(200, 184, 161, 0.4); /* 莫蘭迪奶茶 */
+            color: #C8B8A1; /* 莫蘭迪奶茶 */
         }
 
         .matrix-column:nth-child(3n+2) {
-            color: rgba(147, 169, 156, 0.5); /* 莫蘭迪灰綠 */
+            color: #93A99C; /* 莫蘭迪灰綠 */
+        }
+
+        /* 尾巴漸淡效果 - 使用 mask 實現更好的效果 */
+        .matrix-column {
+            -webkit-mask-image: linear-gradient(to bottom,
+                transparent 0%,
+                black 15%,
+                black 85%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(to bottom,
+                transparent 0%,
+                black 15%,
+                black 85%,
+                transparent 100%
+            );
         }
 
         @keyframes matrix-fall {
@@ -235,6 +258,27 @@
             100% {
                 top: 100%;
             }
+        }
+
+        @keyframes char-fade {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* 確保內容在代碼雨之上 */
+        .hero > div {
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -4537,24 +4581,43 @@
         // Matrix Rain Effect
         function createMatrixRain() {
             const matrixContainer = document.getElementById('matrixRain');
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?~漢字智慧客服系統資料庫向量搜尋機器學習自然語言處理';
-            const columnCount = Math.floor(window.innerWidth / 20);
+            const characters = '01'; // 只使用 0 和 1
+            const columnCount = Math.floor(window.innerWidth / 25);
             
             for (let i = 0; i < columnCount; i++) {
                 const column = document.createElement('div');
                 column.className = 'matrix-column';
-                column.style.left = `${i * 20}px`;
-                column.style.animationDuration = `${Math.random() * 15 + 10}s`;
-                column.style.animationDelay = `${Math.random() * 5}s`;
+                column.style.left = `${i * 25}px`;
+                column.style.animationDuration = `${Math.random() * 20 + 15}s`;
+                column.style.animationDelay = `${Math.random() * 8}s`;
+                column.style.opacity = `${Math.random() * 0.3 + 0.1}`; // 0.1 到 0.4 的透明度
                 
-                // 生成隨機字符串
+                // 生成隨機二進制字符串
                 let text = '';
-                const charCount = Math.floor(Math.random() * 20 + 15);
+                const charCount = Math.floor(Math.random() * 30 + 20);
                 for (let j = 0; j < charCount; j++) {
-                    text += characters.charAt(Math.floor(Math.random() * characters.length));
+                    const char = Math.random() < 0.5 ? '0' : '1';
+                    text += char;
                 }
-                column.textContent = text;
                 
+                // 創建漸變效果
+                const gradient = document.createElement('div');
+                gradient.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(to bottom,
+                        transparent 0%,
+                        rgba(255,255,255,0.1) 20%,
+                        rgba(255,255,255,0.1) 80%,
+                        transparent 100%
+                    );
+                    pointer-events: none;
+                `;
+                
+                column.textContent = text;
                 matrixContainer.appendChild(column);
             }
         }
