@@ -28,6 +28,7 @@
             width: 100%;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
         
         * {
@@ -218,7 +219,9 @@
             writing-mode: vertical-rl;
             text-orientation: upright;
             will-change: transform;
-            transform: translateZ(0);
+            transform: translateY(-100vh);
+            opacity: 0;
+            animation-fill-mode: forwards;
         }
 
         /* 混合色系 */
@@ -237,18 +240,34 @@
         @keyframes matrix-fall {
             0% {
                 transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
             }
             100% {
                 transform: translateY(100vh);
+                opacity: 0;
             }
         }
 
         @-webkit-keyframes matrix-fall {
             0% {
                 transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
             }
             100% {
                 transform: translateY(100vh);
+                opacity: 0;
             }
         }
 
@@ -271,6 +290,7 @@
             margin-bottom: 1rem;
             animation: fadeInUp 1s ease-out;
             text-align: center;
+            width: 100%;
         }
 
         .subtitle {
@@ -280,6 +300,7 @@
             animation: fadeInUp 1s ease-out 0.2s;
             animation-fill-mode: both;
             text-align: center;
+            width: 100%;
         }
 
         /* Pain Points */
@@ -2908,7 +2929,7 @@
         <div>
             <h1>突破 LINE OA 限制</h1>
             <p class="subtitle">GPT-4o 賦能的智慧客服系統</p>
-            <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto;">
+            <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto 0;">
                 <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600; margin-bottom: 1rem;">
                     🎯 核心價值主張
                 </p>
