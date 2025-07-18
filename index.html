@@ -187,7 +187,6 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
             text-align: center;
             background: linear-gradient(135deg, #E8EAED 0%, #F5F3F0 100%);
             position: relative;
@@ -202,56 +201,40 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            opacity: 0.3;
         }
 
-        .matrix-drop {
+        .matrix-column {
             position: absolute;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 16px;
-            line-height: 1.1;
-            font-weight: 600;
+            top: -100%;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            animation: matrix-fall linear infinite;
             writing-mode: vertical-rl;
             text-orientation: upright;
-            animation: drop-fall linear infinite;
         }
 
-        /* 三種顏色 */
-        .matrix-drop.color-1 {
-            color: rgba(107, 124, 147, 0.5); /* 莫蘭迪藍灰 */
-            text-shadow: 0 0 3px rgba(107, 124, 147, 0.8);
+        /* 混合色系 */
+        .matrix-column:nth-child(3n) {
+            color: rgba(107, 124, 147, 0.6); /* 莫蘭迪藍灰 */
         }
 
-        .matrix-drop.color-2 {
+        .matrix-column:nth-child(3n+1) {
             color: rgba(200, 184, 161, 0.4); /* 莫蘭迪奶茶 */
-            text-shadow: 0 0 3px rgba(200, 184, 161, 0.6);
         }
 
-        .matrix-drop.color-3 {
-            color: rgba(147, 169, 156, 0.45); /* 莫蘭迪灰綠 */
-            text-shadow: 0 0 3px rgba(147, 169, 156, 0.7);
+        .matrix-column:nth-child(3n+2) {
+            color: rgba(147, 169, 156, 0.5); /* 莫蘭迪灰綠 */
         }
 
-        @keyframes drop-fall {
-            from {
-                transform: translateY(-100%);
+        @keyframes matrix-fall {
+            0% {
+                top: -100%;
             }
-            to {
-                transform: translateY(calc(100vh + 100%));
+            100% {
+                top: 100%;
             }
-        }
-
-
-        /* 確保內容在代碼雨之上且置中 */
-        .hero > div {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
 
         h1 {
@@ -2892,7 +2875,7 @@
         <div>
             <h1>突破 LINE OA 限制</h1>
             <p class="subtitle">GPT-4o 賦能的智慧客服系統</p>
-            <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto 0;">
+            <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto;">
                 <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: 600; margin-bottom: 1rem;">
                     🎯 核心價值主張
                 </p>
@@ -4554,29 +4537,25 @@
         // Matrix Rain Effect
         function createMatrixRain() {
             const matrixContainer = document.getElementById('matrixRain');
-            const columnWidth = 30;
-            const columnCount = Math.floor(window.innerWidth / columnWidth);
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?~漢字智慧客服系統資料庫向量搜尋機器學習自然語言處理';
+            const columnCount = Math.floor(window.innerWidth / 20);
             
             for (let i = 0; i < columnCount; i++) {
-                const drop = document.createElement('div');
-                drop.className = `matrix-drop color-${(i % 3) + 1}`;
-                drop.style.left = `${i * columnWidth + 10}px`;
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 20}px`;
+                column.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
                 
-                // 隨機動畫時長和延遲
-                const duration = Math.random() * 20 + 10; // 10-30秒
-                const delay = Math.random() * 20; // 0-20秒延遲
-                drop.style.animationDuration = `${duration}s`;
-                drop.style.animationDelay = `${delay}s`;
-                
-                // 生成二進制字符串
-                let binaryString = '';
-                const length = Math.floor(Math.random() * 20 + 15); // 15-35個字符
-                for (let j = 0; j < length; j++) {
-                    binaryString += Math.random() < 0.5 ? '0' : '1';
+                // 生成隨機字符串
+                let text = '';
+                const charCount = Math.floor(Math.random() * 20 + 15);
+                for (let j = 0; j < charCount; j++) {
+                    text += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
-                drop.textContent = binaryString;
+                column.textContent = text;
                 
-                matrixContainer.appendChild(drop);
+                matrixContainer.appendChild(column);
             }
         }
 
