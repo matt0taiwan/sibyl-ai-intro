@@ -7,14 +7,14 @@
     <style>
 
         :root {
-            --primary-color: #1E3A8A;
-            --accent-color: #F97316;
-            --success-color: #10B981;
-            --danger-color: #EF4444;
-            --gray-light: #F3F4F6;
-            --gray-dark: #374151;
+            --primary-color: #6B7C93;  /* 莫蘭迪藍灰 */
+            --accent-color: #C8B8A1;   /* 莫蘭迪奶茶 */
+            --success-color: #93A99C;  /* 莫蘭迪灰綠 */
+            --danger-color: #D4A5A5;   /* 莫蘭迪粉紅 */
+            --gray-light: #F5F3F0;     /* 莫蘭迪米白 */
+            --gray-dark: #6B6B6B;      /* 莫蘭迪深灰 */
             --white: #FFFFFF;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
         }
 
         body {
@@ -188,7 +188,7 @@
             display: flex;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+            background: linear-gradient(135deg, #E8EAED 0%, #F5F3F0 100%);
         }
 
         h1 {
@@ -1450,7 +1450,7 @@
 
         /* Enterprise Trust Section */
         .enterprise-trust {
-            background: linear-gradient(135deg, #EBF5FF 0%, #FFF7ED 100%);
+            background: linear-gradient(135deg, #E8EAED 0%, #F5F3F0 100%);
             padding: 3rem;
             border-radius: 1rem;
             margin-bottom: 3rem;
@@ -1704,7 +1704,7 @@
 
         /* CTA Section */
         .cta-section {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8A99AB 100%);
             color: white;
             text-align: center;
             padding: 4rem 2rem;
@@ -1781,7 +1781,7 @@
         .timeline-week h5 {
             margin-bottom: 1rem;
             font-size: 1.1rem;
-            color: #FCD34D;
+            color: var(--accent-color);
         }
 
         .timeline-activities {
@@ -1801,12 +1801,12 @@
             content: '→';
             position: absolute;
             left: 0;
-            color: #FCD34D;
+            color: var(--accent-color);
         }
 
         .highlight-box {
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.3);
+            background: rgba(200, 184, 161, 0.15);
+            border: 1px solid rgba(200, 184, 161, 0.4);
             padding: 1rem;
             border-radius: 0.5rem;
             margin-top: 0.5rem;
@@ -1861,8 +1861,8 @@
         }
         
         .progress-fill.ai {
-            background: linear-gradient(90deg, #FCD34D 0%, #FBBF24 100%);
-            color: var(--primary-color);
+            background: linear-gradient(90deg, var(--accent-color) 0%, #B5A492 100%);
+            color: #FFFFFF;
         }
 
         .benefits-grid {
@@ -1893,7 +1893,7 @@
         }
 
         .benefit-period h4 {
-            color: #FCD34D;
+            color: var(--accent-color);
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
             white-space: nowrap;
@@ -1914,7 +1914,7 @@
 
         .benefit-metric {
             font-weight: 700;
-            color: #10B981;
+            color: var(--success-color);
             display: block;
             margin-top: 0.25rem;
             font-size: 1.05rem;
@@ -3781,7 +3781,7 @@
         <div class="implementation-container">
             <!-- 系統就緒狀態 -->
             <div class="ready-status">
-                <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: #FCD34D;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 2rem; color: #C8B8A1;">
                     🚀 系統就緒，萬事俱備
                 </h3>
                 <div class="ready-grid">
@@ -3820,7 +3820,7 @@
                 
                 <!-- 第一個月 -->
                 <div class="timeline-month">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #FCD34D;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #C8B8A1;">
                         第一個月：基礎建設與智慧過渡
                     </h4>
                     
@@ -3859,28 +3859,28 @@
                                 <div class="progress-item">
                                     <div class="progress-label">
                                         <span>第 3 週</span>
-                                        <span>使用模式分布</span>
+                                        <span>預期使用模式</span>
                                     </div>
                                     <div class="progress-bar">
                                         <div class="progress-fill traditional" style="width: 70%;">
-                                            70% 傳統
+                                            多數傳統
                                         </div>
                                         <div class="progress-fill ai" style="width: 30%;">
-                                            30% AI
+                                            部分 AI
                                         </div>
                                     </div>
                                 </div>
                                 <div class="progress-item">
                                     <div class="progress-label">
                                         <span>第 4 週</span>
-                                        <span>使用趨勢變化</span>
+                                        <span>逐步平衡</span>
                                     </div>
                                     <div class="progress-bar">
                                         <div class="progress-fill traditional" style="width: 50%;">
-                                            50% 傳統
+                                            傳統模式
                                         </div>
                                         <div class="progress-fill ai" style="width: 50%;">
-                                            50% AI
+                                            AI 模式
                                         </div>
                                     </div>
                                 </div>
@@ -3894,7 +3894,7 @@
 
                 <!-- 第 2-3 個月 -->
                 <div class="timeline-month">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #FCD34D;">
+                    <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #C8B8A1;">
                         第 2-3 個月：智慧過渡期
                     </h4>
                     <div class="timeline-week">
@@ -3908,13 +3908,13 @@
                 </div>
 
                 <!-- 最終目標 -->
-                <div style="background: rgba(251, 191, 36, 0.1); padding: 2rem; border-radius: 0.5rem; margin-top: 2rem; text-align: center;">
-                    <h4 style="color: #FCD34D; margin-bottom: 1rem;">
+                <div style="background: rgba(200, 184, 161, 0.15); padding: 2rem; border-radius: 0.5rem; margin-top: 2rem; text-align: center;">
+                    <h4 style="color: #C8B8A1; margin-bottom: 1rem;">
                         🎯 最終目標：完全智慧化升級
                     </h4>
                     <p style="font-size: 1.1rem; line-height: 1.8;">
-                        當數據顯示 AI 模式的滿意度穩定超過 90%<br>
-                        當多數客戶主動選擇使用 AI 模式<br>
+                        當數據顯示 AI 模式獲得良好評價<br>
+                        當多數客戶習慣使用 AI 模式<br>
                         <strong>即可評估是否完全升級至智慧化服務</strong>
                     </p>
                     <p style="margin-top: 1rem; opacity: 0.9;">
@@ -3933,45 +3933,45 @@
                         <h4>📈 立即效益（1個月內）</h4>
                         <div class="cta-benefit-item">
                             回應時間
-                            <span class="benefit-metric">20分鐘 → 3秒</span>
+                            <span class="benefit-metric">顯著縮短</span>
                         </div>
                         <div class="cta-benefit-item">
                             服務時段
-                            <span class="benefit-metric">8小時 → 24/7</span>
+                            <span class="benefit-metric">全天候服務</span>
                         </div>
                         <div class="cta-benefit-item">
-                            客服壓力
-                            <span class="benefit-metric">降低 40%</span>
+                            客服負擔
+                            <span class="benefit-metric">有效減輕</span>
                         </div>
                     </div>
                     <div class="benefit-period">
                         <h4>💰 短期效益（3個月內）</h4>
                         <div class="cta-benefit-item">
                             客戶滿意度
-                            <span class="benefit-metric">提升 15%</span>
+                            <span class="benefit-metric">預期提升</span>
                         </div>
                         <div class="cta-benefit-item">
-                            營運成本
-                            <span class="benefit-metric">降低 30%</span>
+                            營運效率
+                            <span class="benefit-metric">持續優化</span>
                         </div>
                         <div class="cta-benefit-item">
-                            諮詢轉換率
-                            <span class="benefit-metric">提升 25%</span>
+                            服務品質
+                            <span class="benefit-metric">穩定改善</span>
                         </div>
                     </div>
                     <div class="benefit-period">
                         <h4>🏆 長期價值（6個月後）</h4>
                         <div class="cta-benefit-item">
                             產業定位
-                            <span class="benefit-metric">技術領先標竿</span>
+                            <span class="benefit-metric">技術領先</span>
                         </div>
                         <div class="cta-benefit-item">
                             數據資產
-                            <span class="benefit-metric">客戶洞察累積</span>
+                            <span class="benefit-metric">持續累積</span>
                         </div>
                         <div class="cta-benefit-item">
                             創新能力
-                            <span class="benefit-metric">AI 基礎奠定</span>
+                            <span class="benefit-metric">基礎建立</span>
                         </div>
                     </div>
                 </div>
