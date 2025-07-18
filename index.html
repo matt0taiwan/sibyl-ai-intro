@@ -272,34 +272,32 @@
         }
 
         /* 確保內容在代碼雨之上且正確置中 */
-        .hero > div {
+        .hero-content {
             position: relative;
             z-index: 2;
             width: 100%;
-            padding: 0 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            padding: 0;
+            margin: 0;
         }
 
         h1 {
             font-size: 3rem;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin: 0 0 1rem 0;
+            padding: 0;
             animation: fadeInUp 1s ease-out;
             text-align: center;
-            width: 100%;
         }
 
         .subtitle {
             font-size: 1.5rem;
             color: var(--gray-dark);
-            margin-bottom: 2rem;
+            margin: 0 0 2rem 0;
+            padding: 0;
             animation: fadeInUp 1s ease-out 0.2s;
             animation-fill-mode: both;
             text-align: center;
-            width: 100%;
         }
 
         /* Pain Points */
@@ -2925,7 +2923,7 @@
     <section id="hero" class="hero">
         <!-- Matrix Rain Background -->
         <div class="matrix-rain" id="matrixRain"></div>
-        <div>
+        <div class="hero-content">
             <h1>突破 LINE OA 限制</h1>
             <p class="subtitle">GPT-4o 賦能的智慧客服系統</p>
             <div style="padding: 2rem; background: white; border-radius: 1rem; box-shadow: var(--shadow); max-width: 600px; margin: 3rem auto 0;">
