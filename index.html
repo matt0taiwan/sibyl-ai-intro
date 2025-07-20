@@ -4475,7 +4475,7 @@
             // Calculate AI cost
             const avgTokensPerConversation = (simple * 500 + medium * 1000 + complex * 2000) / 100;
             const totalTokens = volume * avgTokensPerConversation;
-            const aiCost = Math.round(totalTokens * 0.001 * 0.225); // Output tokens cost more
+            const aiCost = Math.round(totalTokens * 0.001 * 1.65); // Output tokens cost more
             
             // Calculate infrastructure costs based on volume
             const cloudRunCost = volume < 1000 ? 500 : volume < 3000 ? 800 : 1200;
