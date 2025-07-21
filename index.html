@@ -349,16 +349,21 @@
             color: var(--success-color);
         }
 
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .message {
             margin-bottom: 1rem;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease-out;
-        }
-        
-        .message.show {
-            opacity: 1;
-            transform: translateY(0);
+            animation: messageSlide 0.5s ease-out forwards;
         }
 
         .message.user {
@@ -2982,10 +2987,10 @@
 
         <!-- 重要說明 -->
         <div class="learning-note fade-in" style="background: #FEF3C7; padding: 2rem; border-radius: 1rem; margin: 3rem auto; max-width: 800px;">
-            <h4 style="color: #92400E; margin-bottom: 1rem;">🌱 成長需要時間</h4>
+            <h4 style="color: #92400E; margin-bottom: 1rem;">💼 專業顧問持續精進</h4>
             <p style="color: #92400E; margin: 0; line-height: 1.8;">
-                Sibyl 就像一個聰明的新生兒，擁有強大的 Claude Sonnet 4 大腦，但對五湖園的專業知識還在學習中。
-                每一次對話都是她的養分，隨著時間累積，她會越來越了解您的需求，提供更貼心的服務。
+                Sibyl 就像一位專業顧問，擁有強大的 Claude Sonnet 4 智慧基礎，正在深入學習五湖園的專業知識。
+                每一次對話都讓她更了解客戶需求，持續精進服務品質，為您提供更精準的建議。
             </p>
         </div>
     </section>
@@ -3689,6 +3694,7 @@
                 setTimeout(function() {
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message ' + message.type;
+                    messageDiv.style.animationDelay = (index * 0.1) + 's';
                     
                     const bubble = document.createElement('div');
                     bubble.className = 'message-bubble';
@@ -3698,15 +3704,8 @@
                     messageDiv.appendChild(bubble);
                     container.appendChild(messageDiv);
                     
-                    // 強制瀏覽器渲染並觸發 transition
-                    setTimeout(function() {
-                        messageDiv.classList.add('show');
-                    }, 50);
-                    
                     // Auto scroll
-                    setTimeout(function() {
-                        container.parentElement.scrollTop = container.parentElement.scrollHeight;
-                    }, 100);
+                    container.parentElement.scrollTop = container.parentElement.scrollHeight;
                 }, message.delay);
             }
 
