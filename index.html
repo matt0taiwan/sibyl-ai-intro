@@ -117,6 +117,7 @@
             color: var(--gray-dark);
             font-weight: 500;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -352,7 +353,6 @@
             margin-bottom: 1rem;
             opacity: 0;
             animation: messageSlide 0.5s ease-out forwards;
-            -webkit-animation: messageSlide 0.5s ease-out forwards;
         }
 
         .message.user {
@@ -2067,17 +2067,6 @@
                 transform: translateX(0);
             }
         }
-        
-        @-webkit-keyframes messageSlide {
-            from {
-                opacity: 0;
-                -webkit-transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                -webkit-transform: translateX(0);
-            }
-        }
 
         .fade-in {
             opacity: 0;
@@ -2931,7 +2920,7 @@
                 <li><a href="#pain">痛點分析</a></li>
                 <li><a href="#solution">解決方案</a></li>
                 <li><a href="#features">技術特色</a></li>
-                <li><a href="#why-claude">為什麼選擇 Claude？</a></li>
+                <li><a href="#why-claude">為何選擇 Claude</a></li>
                 <li><a href="#architecture">技術架構</a></li>
                 <li><a href="#learning">智慧進化</a></li>
                 <li><a href="#advanced-tech">進階技術</a></li>
