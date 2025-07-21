@@ -3653,10 +3653,10 @@
                                         <span>預期使用模式</span>
                                     </div>
                                     <div class="progress-bar">
-                                        <div class="progress-fill traditional" style="width: 70%;">
+                                        <div class="progress-fill traditional animate-on-view" data-width="70%" style="width: 0;">
                                             多數傳統
                                         </div>
-                                        <div class="progress-fill ai" style="width: 30%;">
+                                        <div class="progress-fill ai animate-on-view" data-width="30%" style="width: 0;">
                                             部分 AI
                                         </div>
                                     </div>
@@ -3667,10 +3667,10 @@
                                         <span>逐步平衡</span>
                                     </div>
                                     <div class="progress-bar">
-                                        <div class="progress-fill traditional" style="width: 50%;">
+                                        <div class="progress-fill traditional animate-on-view" data-width="50%" style="width: 0;">
                                             傳統模式
                                         </div>
-                                        <div class="progress-fill ai" style="width: 50%;">
+                                        <div class="progress-fill ai animate-on-view" data-width="50%" style="width: 0;">
                                             AI 模式
                                         </div>
                                     </div>
@@ -4214,6 +4214,30 @@
             if (growthBars.length > 0 && growthBars[0].closest('div[style*="background: var(--gray-light)"]')) {
                 const container = growthBars[0].closest('div[style*="background: var(--gray-light)"]');
                 observer.observe(container);
+            }
+
+            // 預期使用模式分布的動畫
+            const progressAnimateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animateElements = entry.target.querySelectorAll('.animate-on-view');
+                        animateElements.forEach((element, index) => {
+                            setTimeout(() => {
+                                const targetWidth = element.getAttribute('data-width');
+                                element.style.width = targetWidth;
+                            }, index * 300);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const progressObserver = new IntersectionObserver(progressAnimateOnScroll, observerOptions);
+            
+            // 觀察進度條容器
+            const progressBarsContainer = document.querySelector('.transition-visual');
+            if (progressBarsContainer) {
+                progressObserver.observe(progressBarsContainer);
             }
         });
     </script>
