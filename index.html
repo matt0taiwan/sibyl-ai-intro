@@ -2584,6 +2584,77 @@
                 text-align: center;
             }
         }
+
+        /* 成長指標進度條動畫 */
+        @keyframes progressLoad {
+            from {
+                width: 0%;
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .growth-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .growth-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 載入波浪效果 */
+        .growth-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* 當元素進入視窗時觸發動畫 */
+        .growth-fill.animate {
+            animation: progressLoad 0.5s ease-out forwards;
+        }
+
+        .growth-fill[data-width="65"].animate {
+            width: 65% !important;
+        }
+
+        .growth-fill[data-width="75"].animate {
+            width: 75% !important;
+        }
+
+        .growth-fill[data-width="85"].animate {
+            width: 85% !important;
+        }
     </style>
 </head>
 <body>
@@ -2982,8 +3053,8 @@
                             <span>知識庫覆蓋率</span>
                             <span style="font-weight: 600; color: var(--success-color);">持續成長中</span>
                         </div>
-                        <div style="height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden;">
-                            <div style="height: 100%; background: var(--success-color); width: 65%; transition: width 0.5s;"></div>
+                        <div class="growth-bar">
+                            <div class="growth-fill" data-width="65" style="background: var(--success-color);"></div>
                         </div>
                     </div>
                     <div>
@@ -2991,8 +3062,8 @@
                             <span>回答準確度</span>
                             <span style="font-weight: 600; color: var(--primary-color);">逐步提升</span>
                         </div>
-                        <div style="height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden;">
-                            <div style="height: 100%; background: var(--primary-color); width: 75%; transition: width 0.5s;"></div>
+                        <div class="growth-bar">
+                            <div class="growth-fill" data-width="75" style="background: var(--primary-color);"></div>
                         </div>
                     </div>
                     <div>
@@ -3000,8 +3071,8 @@
                             <span>情感理解力</span>
                             <span style="font-weight: 600; color: var(--accent-color);">越來越好</span>
                         </div>
-                        <div style="height: 10px; background: #e5e7eb; border-radius: 5px; overflow: hidden;">
-                            <div style="height: 100%; background: var(--accent-color); width: 85%; transition: width 0.5s;"></div>
+                        <div class="growth-bar">
+                            <div class="growth-fill" data-width="85" style="background: var(--accent-color);"></div>
                         </div>
                     </div>
                 </div>
@@ -3926,7 +3997,7 @@
         <div class="signature-container">
             <div class="signature-header">
                 <h3>Sibyl AI 智慧客服系統</h3>
-                <p class="system-version">v3.1.4 | 2025</p>
+                <p class="system-version">v1.0.0-beta | 2025.07</p>
             </div>
             
             <div class="developer-info">
@@ -4079,6 +4150,52 @@
                 }, 250);
             });
         }
+
+        // 成長指標進度條動畫 - Intersection Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 找到所有的進度條填充元素
+                        const fills = entry.target.querySelectorAll('.growth-fill');
+                        fills.forEach((fill, index) => {
+                            // 延遲動畫，讓每個進度條依序載入
+                            setTimeout(() => {
+                                fill.classList.add('animate');
+                            }, index * 200);
+                        });
+                        // 動畫觸發後就不再觀察
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+            // 找到成長指標區塊
+            const growthHeaders = document.querySelectorAll('h4');
+            growthHeaders.forEach(header => {
+                if (header.textContent.includes('成長指標')) {
+                    const growthContainer = header.closest('div');
+                    if (growthContainer) {
+                        observer.observe(growthContainer);
+                    }
+                }
+            });
+
+            // 備用方案：直接尋找包含 growth-bar 的容器
+            const growthBars = document.querySelectorAll('.growth-bar');
+            if (growthBars.length > 0 && growthBars[0].closest('div[style*="background: var(--gray-light)"]')) {
+                const container = growthBars[0].closest('div[style*="background: var(--gray-light)"]');
+                observer.observe(container);
+            }
+        });
     </script>
     
 </body>
