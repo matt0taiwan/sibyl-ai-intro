@@ -352,6 +352,7 @@
             margin-bottom: 1rem;
             opacity: 0;
             animation: messageSlide 0.5s ease-out forwards;
+            -webkit-animation: messageSlide 0.5s ease-out forwards;
         }
 
         .message.user {
@@ -2066,6 +2067,17 @@
                 transform: translateX(0);
             }
         }
+        
+        @-webkit-keyframes messageSlide {
+            from {
+                opacity: 0;
+                -webkit-transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+            }
+        }
 
         .fade-in {
             opacity: 0;
@@ -2919,6 +2931,7 @@
                 <li><a href="#pain">痛點分析</a></li>
                 <li><a href="#solution">解決方案</a></li>
                 <li><a href="#features">技術特色</a></li>
+                <li><a href="#why-claude">為什麼選擇 Claude？</a></li>
                 <li><a href="#architecture">技術架構</a></li>
                 <li><a href="#learning">智慧進化</a></li>
                 <li><a href="#advanced-tech">進階技術</a></li>
@@ -3049,6 +3062,134 @@
             <div class="feature-item">
                 <div class="feature-title">🛡️ 企業級安全</div>
                 <div class="feature-desc">GCP安全防護，隱私合規保護</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Claude Section -->
+    <section id="why-claude" class="why-claude-section">
+        <div class="fade-in">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">為什麼選擇 Claude？</h2>
+            <p style="text-align: center; font-size: 1.2rem;">深度比較分析，展現最佳選擇的理由</p>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-container fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">Claude Sonnet 4 vs GPT-4o 詳細比較</h3>
+            <div class="comparison-table">
+                <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 1rem; overflow: hidden; box-shadow: var(--shadow);">
+                    <thead>
+                        <tr style="background: var(--primary-color); color: white;">
+                            <th style="padding: 1rem; text-align: left;">評估項目</th>
+                            <th style="padding: 1rem; text-align: center;">GPT-4o</th>
+                            <th style="padding: 1rem; text-align: center;">Claude Sonnet 4</th>
+                            <th style="padding: 1rem; text-align: left;">優勢說明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 1rem; font-weight: 600;">情感理解能力</td>
+                            <td style="padding: 1rem; text-align: center;">★★★★☆</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--success-color);">★★★★★</td>
+                            <td style="padding: 1rem; color: #666;">更細膩的情感識別，特別適合生命服務業</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+                            <td style="padding: 1rem; font-weight: 600;">繁體中文處理</td>
+                            <td style="padding: 1rem; text-align: center;">★★★★☆</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--success-color);">★★★★★</td>
+                            <td style="padding: 1rem; color: #666;">繁體中文更自然流暢，用詞更貼近台灣習慣</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 1rem; font-weight: 600;">對話記憶深度</td>
+                            <td style="padding: 1rem; text-align: center;">★★★★☆</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--success-color);">★★★★★</td>
+                            <td style="padding: 1rem; color: #666;">更長的上下文理解，記住更多對話細節</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB; background: #F9FAFB;">
+                            <td style="padding: 1rem; font-weight: 600;">回應速度</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--success-color);">★★★★★</td>
+                            <td style="padding: 1rem; text-align: center;">★★★★☆</td>
+                            <td style="padding: 1rem; color: #666;">略慢但品質顯著提升，值得等待</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #E5E7EB;">
+                            <td style="padding: 1rem; font-weight: 600;">安全性控管</td>
+                            <td style="padding: 1rem; text-align: center;">★★★★☆</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--success-color);">★★★★★</td>
+                            <td style="padding: 1rem; color: #666;">更謹慎的內容過濾，避免不當回應</td>
+                        </tr>
+                        <tr style="background: #F0F9FF;">
+                            <td style="padding: 1rem; font-weight: 600;">整體適用性</td>
+                            <td style="padding: 1rem; text-align: center;">★★★★☆</td>
+                            <td style="padding: 1rem; text-align: center; color: var(--success-color);">★★★★★</td>
+                            <td style="padding: 1rem; color: #666; font-weight: 600;">專為需要同理心的服務場景設計</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Key Advantages -->
+        <div class="advantages-grid fade-in" style="margin-top: 3rem;">
+            <h3 style="text-align: center; margin-bottom: 2rem;">Claude 的獨特優勢</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <span style="font-size: 1.5rem;">💬</span>
+                        </div>
+                        <h4 style="color: var(--primary-color); margin: 0;">更人性化的對話</h4>
+                    </div>
+                    <p style="color: #666; line-height: 1.8;">
+                        Claude 在對話中展現更多同理心和溫暖，不會給人冰冷的 AI 感覺，特別適合需要情感支持的場景。
+                    </p>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <span style="font-size: 1.5rem;">🎯</span>
+                        </div>
+                        <h4 style="color: var(--primary-color); margin: 0;">更精準的意圖理解</h4>
+                    </div>
+                    <p style="color: #666; line-height: 1.8;">
+                        即使客戶表達不清楚或使用口語化表達，Claude 也能準確理解真實需求，減少誤解和重複詢問。
+                    </p>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <span style="font-size: 1.5rem;">🛡️</span>
+                        </div>
+                        <h4 style="color: var(--primary-color); margin: 0;">更安全的回應控制</h4>
+                    </div>
+                    <p style="color: #666; line-height: 1.8;">
+                        在敏感話題上更加謹慎，避免可能造成傷害或不當的回應，保護品牌形象和客戶感受。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real Use Case Examples -->
+        <div class="use-cases fade-in" style="margin-top: 3rem;">
+            <h3 style="text-align: center; margin-bottom: 2rem;">實際案例對比</h3>
+            <div style="background: var(--gray-light); padding: 2rem; border-radius: 1rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 style="color: var(--danger-color); margin-bottom: 1rem;">❌ GPT-4o 的回應</h4>
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--danger-color);">
+                            <p style="font-style: italic; color: #666; margin-bottom: 1rem;">客戶：「我媽媽最近過世了...」</p>
+                            <p style="color: #333;">「很抱歉聽到這個消息。請問您需要了解我們的塔位服務嗎？我們有多種方案可供選擇。」</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--success-color); margin-bottom: 1rem;">✅ Claude 的回應</h4>
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--success-color);">
+                            <p style="font-style: italic; color: #666; margin-bottom: 1rem;">客戶：「我媽媽最近過世了...」</p>
+                            <p style="color: #333;">「這一定是非常艱難的時刻，失去至親的痛苦難以言喻。請您節哀順變。我在這裡陪伴您，如果您需要任何協助或只是想聊聊，我都會用心傾聽。」</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -3457,6 +3598,117 @@
             </div>
         </div>
 
+        <!-- Technical Decision Considerations -->
+        <div class="tech-decisions fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">技術決策考量</h3>
+            <div style="background: #F9FAFB; padding: 2rem; border-radius: 1rem;">
+                <h4 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">混合模型策略：因材施教的智慧選擇</h4>
+                
+                <!-- 模型選擇策略 -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <!-- LINE Bot 使用 Sonnet 4 -->
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: #E0E7FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <span style="font-size: 1.5rem;">💬</span>
+                            </div>
+                            <h5 style="color: var(--primary-color); margin: 0;">LINE Bot：Claude Sonnet 4</h5>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <p style="font-weight: 600; color: var(--success-color); margin-bottom: 0.5rem;">為什麼選擇 Sonnet 4？</p>
+                            <ul style="list-style: none; padding: 0; color: #666;">
+                                <li style="margin-bottom: 0.5rem;">✓ 高頻率互動（每日數百次）</li>
+                                <li style="margin-bottom: 0.5rem;">✓ 成本與品質的最佳平衡</li>
+                                <li style="margin-bottom: 0.5rem;">✓ 情感理解能力優異</li>
+                                <li style="margin-bottom: 0.5rem;">✓ 回應速度可接受</li>
+                            </ul>
+                        </div>
+                        <div style="padding: 1rem; background: #F0F9FF; border-radius: 0.5rem;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                <strong>成本效益：</strong>相比 GPT-4o 僅增加 20-50%，但對話品質顯著提升
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 優化使用 Opus 4 -->
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: #FEF3C7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <span style="font-size: 1.5rem;">🔍</span>
+                            </div>
+                            <h5 style="color: var(--primary-color); margin: 0;">FAQ 優化：Claude Opus 4</h5>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <p style="font-weight: 600; color: var(--accent-color); margin-bottom: 0.5rem;">為什麼使用 Opus 4？</p>
+                            <ul style="list-style: none; padding: 0; color: #666;">
+                                <li style="margin-bottom: 0.5rem;">✓ 需要最高品質的分析能力</li>
+                                <li style="margin-bottom: 0.5rem;">✓ 低頻率執行（每日一次）</li>
+                                <li style="margin-bottom: 0.5rem;">✓ 深度理解對話脈絡</li>
+                                <li style="margin-bottom: 0.5rem;">✓ 生成精準的 FAQ 建議</li>
+                            </ul>
+                        </div>
+                        <div style="padding: 1rem; background: #FEF3C7; border-radius: 0.5rem;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                <strong>投資回報：</strong>雖然成本較高，但持續優化 FAQ 可降低未來的 AI 使用量
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 向量檢索優化 -->
+                <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="width: 60px; height: 60px; background: #D1FAE5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                            <span style="font-size: 2rem;">🎯</span>
+                        </div>
+                        <h5 style="color: var(--primary-color); margin: 0; font-size: 1.2rem;">向量檢索：Gemini Embedding</h5>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;">
+                        <div style="text-align: center; padding: 1rem; background: #F0FDF4; border-radius: 0.5rem;">
+                            <p style="margin: 0; font-size: 2rem; color: var(--success-color); font-weight: 600;">3072</p>
+                            <p style="margin: 0; color: #666; font-size: 0.9rem;">相同向量維度</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #F0FDF4; border-radius: 0.5rem;">
+                            <p style="margin: 0; font-size: 2rem; color: var(--success-color); font-weight: 600;">-80%</p>
+                            <p style="margin: 0; color: #666; font-size: 0.9rem;">成本大幅降低</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #F0FDF4; border-radius: 0.5rem;">
+                            <p style="margin: 0; font-size: 2rem; color: var(--success-color); font-weight: 600;">100%</p>
+                            <p style="margin: 0; color: #666; font-size: 0.9rem;">品質不變</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 成本優化策略 -->
+                <div style="background: #E0E7FF; padding: 2rem; border-radius: 1rem;">
+                    <h4 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">整體成本優化策略</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                            <h6 style="color: var(--primary-color); margin-bottom: 0.5rem;">混合模型</h6>
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                依使用場景選擇適合的模型，達到成本與品質的最佳平衡
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔄</div>
+                            <h6 style="color: var(--primary-color); margin-bottom: 0.5rem;">FAQ 優先</h6>
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                持續優化 FAQ 覆蓋率，減少需要 AI 處理的對話比例
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💾</div>
+                            <h6 style="color: var(--primary-color); margin-bottom: 0.5rem;">智慧快取</h6>
+                            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                                向量快取機制，避免重複計算，降低 API 呼叫成本
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- API Integration Potential -->
         <div class="api-potential fade-in">
             <h3 style="text-align: center; margin-bottom: 2rem;">API 整合潛力與未來擴充</h3>
@@ -3514,6 +3766,104 @@
                         <div class="api-info">
                             <strong>CRM 系統整合</strong>
                             <p>客戶資料同步、服務歷程追蹤、關係管理</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertex AI Enterprise Advantages -->
+        <div class="vertex-ai-advantages fade-in">
+            <h3 style="text-align: center; margin-bottom: 2rem;">Vertex AI 企業級優勢</h3>
+            <div style="background: #F0F9FF; padding: 3rem; border-radius: 1rem; margin-bottom: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <!-- 稅務合規優勢 -->
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); border-top: 4px solid var(--success-color);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: #D1FAE5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <span style="font-size: 2rem;">🧾</span>
+                            </div>
+                            <h4 style="color: var(--primary-color); margin: 0;">統編發票開立</h4>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <p style="color: #059669; font-weight: 600; margin-bottom: 0.5rem;">✅ GCP 可開立台灣統一編號發票</p>
+                            <p style="color: #DC2626; font-weight: 600; margin-bottom: 0.5rem;">❌ OpenAI Platform 無法提供統編發票</p>
+                        </div>
+                        <p style="color: #666; line-height: 1.8;">
+                            符合台灣企業報稅需求，簡化財務作業流程，這是選擇 Vertex AI 的關鍵考量。
+                        </p>
+                    </div>
+
+                    <!-- 財務管理便利 -->
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); border-top: 4px solid var(--accent-color);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: #FEF3C7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <span style="font-size: 2rem;">💼</span>
+                            </div>
+                            <h4 style="color: var(--primary-color); margin: 0;">財務管理整合</h4>
+                        </div>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem; color: #666;">
+                                <span style="color: var(--success-color); font-weight: 600;">✓</span> 單一供應商發票（整合所有 GCP 服務）
+                            </li>
+                            <li style="margin-bottom: 0.8rem; color: #666;">
+                                <span style="color: var(--success-color); font-weight: 600;">✓</span> 簡化會計作業與對帳流程
+                            </li>
+                            <li style="margin-bottom: 0.8rem; color: #666;">
+                                <span style="color: var(--success-color); font-weight: 600;">✓</span> 便於成本中心分攤管理
+                            </li>
+                            <li style="color: #666;">
+                                <span style="color: var(--success-color); font-weight: 600;">✓</span> 統一費用報表與分析
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 企業治理 -->
+                    <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); border-top: 4px solid var(--primary-color);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: #E0E7FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                <span style="font-size: 2rem;">📊</span>
+                            </div>
+                            <h4 style="color: var(--primary-color); margin: 0;">企業級管理功能</h4>
+                        </div>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem; color: #666;">
+                                <span style="color: var(--primary-color); font-weight: 600;">▶</span> IAM 權限統一管理控制
+                            </li>
+                            <li style="margin-bottom: 0.8rem; color: #666;">
+                                <span style="color: var(--primary-color); font-weight: 600;">▶</span> 完整稽核軌跡與日誌
+                            </li>
+                            <li style="margin-bottom: 0.8rem; color: #666;">
+                                <span style="color: var(--primary-color); font-weight: 600;">▶</span> 符合企業內控要求
+                            </li>
+                            <li style="color: #666;">
+                                <span style="color: var(--primary-color); font-weight: 600;">▶</span> 資料主權與合規保障
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 比較總結 -->
+                <div style="margin-top: 2rem; padding: 2rem; background: white; border-radius: 1rem; border: 2px solid var(--success-color);">
+                    <h4 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">
+                        為什麼這對企業很重要？
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: center;">
+                        <div>
+                            <h5 style="color: var(--danger-color); margin-bottom: 0.5rem;">使用 OpenAI Platform</h5>
+                            <p style="color: #666; font-size: 0.9rem;">
+                                無統編發票 → 報稅困難<br>
+                                獨立計費 → 管理複雜<br>
+                                權限分散 → 控管不易
+                            </p>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--success-color); margin-bottom: 0.5rem;">使用 Vertex AI</h5>
+                            <p style="color: #666; font-size: 0.9rem;">
+                                統編發票 → 報稅便利<br>
+                                統一帳單 → 管理簡單<br>
+                                集中管控 → 符合治理
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -4115,6 +4465,129 @@
                 </div>
             </div>
         </div>
+
+        <!-- Detailed Cost Comparison -->
+        <div class="cost-comparison fade-in" style="margin-top: 3rem;">
+            <h3 style="text-align: center; margin-bottom: 2rem;">詳細成本比較分析</h3>
+            
+            <!-- 成本比較表格 -->
+            <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); margin-bottom: 2rem;">
+                <h4 style="color: var(--primary-color); margin-bottom: 1.5rem;">OpenAI vs Vertex AI 成本對比</h4>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #F3F4F6;">
+                            <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #E5E7EB;">服務項目</th>
+                            <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #E5E7EB;">OpenAI</th>
+                            <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #E5E7EB;">Vertex AI (Claude)</th>
+                            <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #E5E7EB;">成本差異</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #FAFAFA;">
+                            <td colspan="4" style="padding: 0.8rem; font-weight: 600; color: var(--primary-color);">📝 LLM 對話成本</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem 0.8rem 0.8rem 2rem;">輸入成本</td>
+                            <td style="padding: 0.8rem; text-align: center;">$2.50/百萬 tokens</td>
+                            <td style="padding: 0.8rem; text-align: center;">$3.00/百萬 tokens</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--danger-color);">+20%</td>
+                        </tr>
+                        <tr style="background: #FAFAFA;">
+                            <td style="padding: 0.8rem 0.8rem 0.8rem 2rem;">輸出成本</td>
+                            <td style="padding: 0.8rem; text-align: center;">$10.00/百萬 tokens</td>
+                            <td style="padding: 0.8rem; text-align: center;">$15.00/百萬 tokens</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--danger-color);">+50%</td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="4" style="padding: 0.8rem; font-weight: 600; color: var(--primary-color);">🔍 向量檢索成本</td>
+                        </tr>
+                        <tr style="background: #FAFAFA;">
+                            <td style="padding: 0.8rem 0.8rem 0.8rem 2rem;">Embedding API</td>
+                            <td style="padding: 0.8rem; text-align: center;">$0.13/百萬 tokens</td>
+                            <td style="padding: 0.8rem; text-align: center;">$0.025/千次查詢</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--success-color); font-weight: 600;">-80%</td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="4" style="padding: 0.8rem; font-weight: 600; color: var(--primary-color);">💼 企業服務</td>
+                        </tr>
+                        <tr style="background: #FAFAFA;">
+                            <td style="padding: 0.8rem 0.8rem 0.8rem 2rem;">統編發票支援</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--danger-color);">❌ 不支援</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--success-color);">✅ 支援</td>
+                            <td style="padding: 0.8rem; text-align: center; font-weight: 600; color: var(--success-color);">關鍵優勢</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.8rem 0.8rem 0.8rem 2rem;">帳單整合</td>
+                            <td style="padding: 0.8rem; text-align: center;">獨立計費</td>
+                            <td style="padding: 0.8rem; text-align: center;">統一帳單</td>
+                            <td style="padding: 0.8rem; text-align: center; color: var(--success-color);">管理便利</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 實際成本估算 -->
+            <div style="background: #F0F9FF; padding: 2rem; border-radius: 1rem; margin-bottom: 2rem;">
+                <h4 style="color: var(--primary-color); margin-bottom: 1.5rem;">實際營運成本估算（每月 10,000 次對話）</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 0.5rem;">
+                        <h5 style="color: #666; margin-bottom: 1rem;">使用 OpenAI</h5>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">LLM 對話：~$300 USD</li>
+                            <li style="margin-bottom: 0.5rem;">向量檢索：~$200 USD</li>
+                            <li style="margin-bottom: 0.5rem; font-weight: 600; color: var(--primary-color);">總計：~$500 USD</li>
+                            <li style="color: var(--danger-color); font-size: 0.9rem;">⚠️ 無法開立統編發票</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 0.5rem;">
+                        <h5 style="color: #666; margin-bottom: 1rem;">使用 Vertex AI (Claude)</h5>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">LLM 對話：~$400 USD</li>
+                            <li style="margin-bottom: 0.5rem;">向量檢索：~$40 USD</li>
+                            <li style="margin-bottom: 0.5rem; font-weight: 600; color: var(--primary-color);">總計：~$440 USD</li>
+                            <li style="color: var(--success-color); font-size: 0.9rem;">✅ 可開立統編發票</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 總體成本效益分析 -->
+            <div style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); border: 2px solid var(--success-color);">
+                <h4 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💡 總體成本效益分析</h4>
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <p style="font-size: 1.2rem; color: var(--success-color); font-weight: 600; margin-bottom: 0.5rem;">
+                        實際成本降低 12%，企業價值顯著提升
+                    </p>
+                    <p style="color: #666;">
+                        雖然 LLM 成本略增，但向量檢索大幅節省 80%，整體成本反而更低
+                    </p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
+                    <div style="padding: 1rem; background: #F0F9FF; border-radius: 0.5rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary-color);">更好的對話品質</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #666;">Claude 的情感理解</p>
+                    </div>
+                    <div style="padding: 1rem; background: #F0FDF4; border-radius: 0.5rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
+                        <p style="margin: 0; font-weight: 600; color: var(--success-color);">實際成本更低</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #666;">向量檢索節省 80%</p>
+                    </div>
+                    <div style="padding: 1rem; background: #FEF3C7; border-radius: 0.5rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧾</div>
+                        <p style="margin: 0; font-weight: 600; color: var(--accent-color);">統編發票報稅</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #666;">符合企業需求</p>
+                    </div>
+                    <div style="padding: 1rem; background: #E0E7FF; border-radius: 0.5rem;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary-color);">統一管理平台</p>
+                        <p style="margin: 0; font-size: 0.9rem; color: #666;">GCP 整合優勢</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- CTA Section -->
@@ -4344,6 +4817,7 @@
 
         // Chat simulation - 改善相容性
         function initializeChatSimulation() {
+            console.log('開始初始化對話動畫');
             const traditionalMessages = [
                 { type: 'user', text: '我想了解塔位價格', delay: 1000 },
                 { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 1500 },
@@ -4360,6 +4834,7 @@
 
             function addMessage(container, message, index) {
                 setTimeout(function() {
+                    console.log('新增訊息:', message.type, message.text.substring(0, 20));
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message ' + message.type;
                     messageDiv.style.animationDelay = (index * 0.1) + 's';
@@ -4371,6 +4846,19 @@
                     
                     messageDiv.appendChild(bubble);
                     container.appendChild(messageDiv);
+                    console.log('訊息已加入 DOM');
+                    
+                    // 強制觸發重排以確保動畫運作
+                    messageDiv.offsetHeight;
+                    
+                    // 備用方案：如果動畫未運作，1秒後強制顯示
+                    setTimeout(function() {
+                        if (messageDiv.style.opacity !== '1') {
+                            messageDiv.style.opacity = '1';
+                            messageDiv.style.transform = 'translateX(0)';
+                            console.log('使用備用方案顯示訊息');
+                        }
+                    }, 1000);
                     
                     // Auto scroll
                     container.parentElement.scrollTop = container.parentElement.scrollHeight;
@@ -4384,6 +4872,7 @@
                 const chatObserver = new IntersectionObserver(function(entries) {
                     entries.forEach(function(entry) {
                         if (entry.isIntersecting && !chatAnimationPlayed) {
+                            console.log('進入視窗，開始對話動畫');
                             const traditionalChat = document.getElementById('traditional-chat');
                             const aiChat = document.getElementById('ai-chat');
                             
