@@ -353,6 +353,9 @@
             margin-bottom: 1rem;
             opacity: 0;
             animation: messageSlide 0.5s ease-out forwards;
+            -webkit-animation: messageSlide 0.5s ease-out forwards;
+            -moz-animation: messageSlide 0.5s ease-out forwards;
+            -o-animation: messageSlide 0.5s ease-out forwards;
         }
 
         .message.user {
@@ -2064,6 +2067,45 @@
             }
             to {
                 opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @-webkit-keyframes messageSlide {
+            from {
+                opacity: 0;
+                -webkit-transform: translateX(20px);
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+        
+        @-moz-keyframes messageSlide {
+            from {
+                opacity: 0;
+                -moz-transform: translateX(20px);
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                -moz-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+        
+        @-o-keyframes messageSlide {
+            from {
+                opacity: 0;
+                -o-transform: translateX(20px);
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                -o-transform: translateX(0);
                 transform: translateX(0);
             }
         }
@@ -4833,7 +4875,14 @@
                 setTimeout(function() {
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message ' + message.type;
-                    messageDiv.style.animationDelay = (index * 0.1) + 's';
+                    // 直接設置所有動畫延遲
+                    const delay = (index * 0.1) + 's';
+                    messageDiv.style.cssText = `
+                        animation-delay: ${delay};
+                        -webkit-animation-delay: ${delay};
+                        -moz-animation-delay: ${delay};
+                        -o-animation-delay: ${delay};
+                    `;
                     
                     const bubble = document.createElement('div');
                     bubble.className = 'message-bubble';
