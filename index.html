@@ -357,6 +357,28 @@
         .message.show {
             animation: messageSlide 0.5s ease-out forwards;
         }
+        
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @-webkit-keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         .message.user {
             text-align: right;
@@ -3365,11 +3387,6 @@
                         </ul>
                     </div>
                 </div>
-                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(107, 124, 147, 0.08); border-radius: 0.5rem;">
-                    <p style="text-align: center; color: #475569; margin: 0;">
-                        <strong>投資回收期：</strong>預估 3-6 個月即可透過效率提升回收成本
-                    </p>
-                </div>
             </div>
 
             <!-- Cost Calculator -->
@@ -3414,8 +3431,29 @@
                         <span id="firestore-cost">NT$ 150</span>
                     </div>
                     <div class="cost-item">
+                        <span>Secret Manager 金鑰管理</span>
+                        <span id="secret-cost">NT$ 30</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Cloud Storage 檔案儲存</span>
+                        <span id="storage-cost">NT$ 40</span>
+                    </div>
+                    <div class="cost-item">
                         <span>網路傳輸費用</span>
                         <span id="network-cost">NT$ 60</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Google Sheets API</span>
+                        <span>免費</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Sibyl AI 系統</span>
+                        <span>-</span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem; padding-left: 1rem;">
+                        <p style="margin: 0; color: #666; font-size: 0.85rem; font-style: italic;">
+                            已完成獨立開發
+                        </p>
                     </div>
                     <div class="cost-total">
                         總月度投資：<span id="total-cost">NT$ 1,160</span>
@@ -3802,20 +3840,24 @@
             const inputTokens = totalTokens * 0.4;
             const outputTokens = totalTokens * 0.6;
             const aiCostUSD = (inputTokens * 0.003 + outputTokens * 0.015) / 1000;
-            const aiCost = Math.round(aiCostUSD * 32); // 轉換為 TWD
+            const aiCost = Math.round(aiCostUSD * 32 * 8); // 轉換為 TWD (提高 8 倍)
             
             // Calculate infrastructure costs based on volume
             const cloudRunCost = volume < 1000 ? 500 : volume < 3000 ? 800 : 1200;
             const firestoreCost = volume < 1000 ? 100 : volume < 3000 ? 150 : 200;
+            const secretCost = 30;
+            const storageCost = volume < 1000 ? 20 : volume < 3000 ? 40 : 60;
             const networkCost = volume < 1000 ? 30 : volume < 3000 ? 60 : 100;
             
             // Update display
             document.getElementById('ai-cost').textContent = `NT$ ${aiCost}`;
             document.getElementById('cloudrun-cost').textContent = `NT$ ${cloudRunCost}`;
             document.getElementById('firestore-cost').textContent = `NT$ ${firestoreCost}`;
+            document.getElementById('secret-cost').textContent = `NT$ ${secretCost}`;
+            document.getElementById('storage-cost').textContent = `NT$ ${storageCost}`;
             document.getElementById('network-cost').textContent = `NT$ ${networkCost}`;
             
-            const total = aiCost + cloudRunCost + firestoreCost + networkCost;
+            const total = aiCost + cloudRunCost + firestoreCost + secretCost + storageCost + networkCost;
             document.getElementById('total-cost').textContent = `NT$ ${total}`;
         }
 
