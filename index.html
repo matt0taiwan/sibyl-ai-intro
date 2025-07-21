@@ -4831,7 +4831,6 @@
 
             function addMessage(container, message, index) {
                 setTimeout(function() {
-                    console.log('新增訊息:', message.type, message.text.substring(0, 20));
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message ' + message.type;
                     messageDiv.style.animationDelay = (index * 0.1) + 's';
@@ -4843,19 +4842,6 @@
                     
                     messageDiv.appendChild(bubble);
                     container.appendChild(messageDiv);
-                    console.log('訊息已加入 DOM');
-                    
-                    // 強制觸發重排以確保動畫運作
-                    messageDiv.offsetHeight;
-                    
-                    // 備用方案：如果動畫未運作，1秒後強制顯示
-                    setTimeout(function() {
-                        if (messageDiv.style.opacity !== '1') {
-                            messageDiv.style.opacity = '1';
-                            messageDiv.style.transform = 'translateX(0)';
-                            console.log('使用備用方案顯示訊息');
-                        }
-                    }, 1000);
                     
                     // Auto scroll
                     container.parentElement.scrollTop = container.parentElement.scrollHeight;
