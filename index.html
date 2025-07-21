@@ -348,22 +348,33 @@
         .chat-box.ai h3 {
             color: var(--success-color);
         }
+        
+        #traditional-chat, #ai-chat {
+            height: calc(100% - 60px);
+            overflow-y: auto;
+            padding: 1rem;
+        }
 
         @keyframes messageSlide {
-            from {
+            0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px) scale(0.8);
             }
-            to {
+            50% {
+                opacity: 0.5;
+                transform: translateY(10px) scale(0.95);
+            }
+            100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
         .message {
             margin-bottom: 1rem;
             opacity: 0;
-            animation: messageSlide 0.5s ease-out forwards;
+            animation: messageSlide 1s ease-out forwards;
+            transform-origin: center bottom;
         }
 
         .message.user {
@@ -2629,13 +2640,23 @@
             <!-- Traditional Chat -->
             <div class="chat-box traditional">
                 <h3>LINE OA 框架限制下的體驗 ❌</h3>
-                <div id="traditional-chat"></div>
+                <div id="traditional-chat">
+                    <!-- 預設訊息，用於測試動畫 -->
+                    <div class="message user" style="animation-delay: 0.5s">
+                        <div class="message-bubble">我想了解塔位價格</div>
+                    </div>
+                </div>
             </div>
 
             <!-- AI Chat -->
             <div class="chat-box ai">
                 <h3>Sibyl AI 突破限制後的體驗 ✓</h3>
-                <div id="ai-chat"></div>
+                <div id="ai-chat">
+                    <!-- 預設訊息，用於測試動畫 -->
+                    <div class="message user" style="animation-delay: 0.5s">
+                        <div class="message-bubble">我想了解塔位價格</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -2701,7 +2722,7 @@
                     <p>✓ 預約隔日專人詳細介紹</p>
                 </div>
                 <div style="background: #FEF3C7; padding: 2rem; border-radius: 1rem;">
-                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">場景二：清明高峰</h4>
+                    <h4 style="color: var(--accent-color); margin-bottom: 1rem;">場景二：大法會期間高峰</h4>
                     <p style="margin-bottom: 0.5rem;">📈 同時湧入數百則詢問</p>
                     <p style="margin-bottom: 0.5rem;">✓ AI 自動分流處理常見問題</p>
                     <p>✓ 客服專注處理特殊需求</p>
@@ -3344,7 +3365,7 @@
                 <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; text-align: center;">💰 投資概算</h3>
                 <div style="text-align: center;">
                     <p style="font-size: 1.8rem; color: var(--primary-color); font-weight: 600; margin: 0;">
-                        月費約 NT$ 1,100-1,800
+                        月費約 NT$ 3,000-5,000
                     </p>
                     <p style="color: #666; margin-top: 0.5rem;">
                         依實際使用量計費，包含所有 AI 與雲端服務
@@ -3674,8 +3695,9 @@
             observer.observe(el);
         });
 
-        // Chat simulation - 改善相容性
+        // Chat simulation - 簡化實現
         function initializeChatSimulation() {
+            console.log('初始化聊天動畫...');
             const traditionalMessages = [
                 { type: 'user', text: '我想了解塔位價格', delay: 1000 },
                 { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 1500 },
@@ -3692,6 +3714,8 @@
 
             function addMessage(container, message, index) {
                 setTimeout(function() {
+                    console.log('Adding message:', message.text); // 調試訊息
+                    
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message ' + message.type;
                     messageDiv.style.animationDelay = (index * 0.1) + 's';
@@ -3704,63 +3728,38 @@
                     messageDiv.appendChild(bubble);
                     container.appendChild(messageDiv);
                     
+                    console.log('Message added to:', container.id); // 調試訊息
+                    
                     // Auto scroll
                     container.parentElement.scrollTop = container.parentElement.scrollHeight;
                 }, message.delay);
             }
 
-            // 使用 IntersectionObserver 或 fallback
-            if ('IntersectionObserver' in window) {
-                const chatSection = document.querySelector('.pain-section');
-                let chatAnimationPlayed = false;
-                const chatObserver = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting && !chatAnimationPlayed) {
-                            const traditionalChat = document.getElementById('traditional-chat');
-                            const aiChat = document.getElementById('ai-chat');
-                            
-                            if (traditionalChat && aiChat) {
-                                // 清空之前的內容
-                                traditionalChat.innerHTML = '';
-                                aiChat.innerHTML = '';
-                                
-                                traditionalMessages.forEach(function(msg, index) {
-                                    addMessage(traditionalChat, msg, index);
-                                });
-                                
-                                aiMessages.forEach(function(msg, index) {
-                                    addMessage(aiChat, msg, index);
-                                });
-                                
-                                chatAnimationPlayed = true;
-                            }
-                        } else if (!entry.isIntersecting) {
-                            // 當離開視窗時重置，允許下次再播放
-                            chatAnimationPlayed = false;
-                        }
-                    });
-                }, { threshold: 0.7 }); // 改為 70% 可見時才觸發
+            // 簡化實現 - 直接在頁面載入後執行
+            setTimeout(function() {
+                console.log('開始執行聊天動畫');
+                const traditionalChat = document.getElementById('traditional-chat');
+                const aiChat = document.getElementById('ai-chat');
                 
-                if (chatSection) {
-                    chatObserver.observe(chatSection);
-                }
-            } else {
-                // Fallback: 直接執行動畫
-                setTimeout(function() {
-                    const traditionalChat = document.getElementById('traditional-chat');
-                    const aiChat = document.getElementById('ai-chat');
+                if (traditionalChat && aiChat) {
+                    console.log('找到聊天容器，清空內容');
+                    // 清空之前的內容
+                    traditionalChat.innerHTML = '';
+                    aiChat.innerHTML = '';
                     
-                    if (traditionalChat && aiChat) {
-                        traditionalMessages.forEach(function(msg, index) {
-                            addMessage(traditionalChat, msg, index);
-                        });
-                        
-                        aiMessages.forEach(function(msg, index) {
-                            addMessage(aiChat, msg, index);
-                        });
-                    }
-                }, 2000);
-            }
+                    console.log('添加傳統聊天訊息');
+                    traditionalMessages.forEach(function(msg, index) {
+                        addMessage(traditionalChat, msg, index);
+                    });
+                    
+                    console.log('添加AI聊天訊息');
+                    aiMessages.forEach(function(msg, index) {
+                        addMessage(aiChat, msg, index);
+                    });
+                } else {
+                    console.error('找不到聊天容器！');
+                }
+            }, 2000); // 頁面載入後 2 秒開始
         }
 
         // 確保 DOM 載入完成後執行
