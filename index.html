@@ -352,32 +352,13 @@
         .message {
             margin-bottom: 1rem;
             opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
         }
         
         .message.show {
-            animation: messageSlide 0.5s ease-out forwards;
-        }
-        
-        @keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @-webkit-keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .message.user {
@@ -3717,17 +3698,15 @@
                     messageDiv.appendChild(bubble);
                     container.appendChild(messageDiv);
                     
-                    // 強制瀏覽器渲染
-                    void messageDiv.offsetWidth;
-                    
-                    // 延遲一個 frame 後加入動畫 class
-                    requestAnimationFrame(function() {
+                    // 強制瀏覽器渲染並觸發 transition
+                    setTimeout(function() {
                         messageDiv.classList.add('show');
-                        messageDiv.style.animationDelay = (index * 0.1) + 's';
-                    });
+                    }, 50);
                     
                     // Auto scroll
-                    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+                    setTimeout(function() {
+                        container.parentElement.scrollTop = container.parentElement.scrollHeight;
+                    }, 100);
                 }, message.delay);
             }
 
