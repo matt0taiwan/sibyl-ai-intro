@@ -326,9 +326,11 @@
             border-radius: 1rem;
             padding: 2rem;
             box-shadow: var(--shadow);
-            height: 600px;
+            height: 400px;
             overflow-y: auto;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .chat-box h3 {
@@ -350,19 +352,22 @@
         }
         
         #traditional-chat, #ai-chat {
-            height: calc(100% - 60px);
+            flex: 1;
             overflow-y: auto;
             padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
         }
 
         @keyframes messageSlide {
             0% {
                 opacity: 0;
-                transform: translateY(30px) scale(0.8);
+                transform: translateY(20px) scale(0.9);
             }
-            50% {
-                opacity: 0.5;
-                transform: translateY(10px) scale(0.95);
+            70% {
+                opacity: 1;
+                transform: translateY(-2px) scale(1.02);
             }
             100% {
                 opacity: 1;
@@ -373,7 +378,7 @@
         .message {
             margin-bottom: 1rem;
             opacity: 0;
-            animation: messageSlide 1s ease-out forwards;
+            animation: messageSlide 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
             transform-origin: center bottom;
         }
 
@@ -2640,23 +2645,13 @@
             <!-- Traditional Chat -->
             <div class="chat-box traditional">
                 <h3>LINE OA 框架限制下的體驗 ❌</h3>
-                <div id="traditional-chat">
-                    <!-- 預設訊息，用於測試動畫 -->
-                    <div class="message user" style="animation-delay: 0.5s">
-                        <div class="message-bubble">我想了解塔位價格</div>
-                    </div>
-                </div>
+                <div id="traditional-chat"></div>
             </div>
 
             <!-- AI Chat -->
             <div class="chat-box ai">
                 <h3>Sibyl AI 突破限制後的體驗 ✓</h3>
-                <div id="ai-chat">
-                    <!-- 預設訊息，用於測試動畫 -->
-                    <div class="message user" style="animation-delay: 0.5s">
-                        <div class="message-bubble">我想了解塔位價格</div>
-                    </div>
-                </div>
+                <div id="ai-chat"></div>
             </div>
         </div>
     </section>
@@ -3699,17 +3694,17 @@
         function initializeChatSimulation() {
             console.log('初始化聊天動畫...');
             const traditionalMessages = [
-                { type: 'user', text: '我想了解塔位價格', delay: 1000 },
+                { type: 'user', text: '我想了解塔位價格', delay: 500 },
                 { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 1500 },
-                { type: 'user', text: '有哪些樓層可以選擇？', delay: 3000 },
-                { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 3500 }
+                { type: 'user', text: '有哪些樓層可以選擇？', delay: 2800 },
+                { type: 'system', text: '❤️親愛的五湖園貴賓您好!\n歡迎使用自動回覆查詢\n⭐服務時間          請輸入 1\n⭐優惠新訊          請輸入 2\n⭐交通資訊          請輸入 3\n⭐年度祭典日期      請輸入 4\n⭐各類法會介紹      請輸入 5\n⭐法會報名表        請輸入 6\n⭐法會報名辦法&匯款  請輸入 7\n⭐報名查詢及線上追思 請輸入 8\n⭐佛事預約          請輸入 9', delay: 4000 }
             ];
 
             const aiMessages = [
-                { type: 'user', text: '我想了解塔位價格', delay: 1000 },
+                { type: 'user', text: '我想了解塔位價格', delay: 500 },
                 { type: 'system', text: '您好！五湖園的塔位價格從 8 萬元起（已含 12% 管理費），依據位置、樓層和大小有不同選擇。目前正值優惠期間，歡迎您預約參觀，我們可以根據您的需求推薦最適合的方案。', delay: 1500 },
-                { type: 'user', text: '有哪些樓層可以選擇？', delay: 3000 },
-                { type: 'system', text: '我們有多個樓層可供選擇，每層都有不同的景觀特色。低樓層可欣賞園區綠意，高樓層視野開闊。建議您親自來參觀，感受不同樓層的氛圍，我們的專業團隊會詳細為您介紹每個位置的特色。', delay: 3500 }
+                { type: 'user', text: '有哪些樓層可以選擇？', delay: 2800 },
+                { type: 'system', text: '我們有多個樓層可供選擇，每層都有不同的景觀特色。低樓層可欣賞園區綠意，高樓層視野開闊。建議您親自來參觀，感受不同樓層的氛圍，我們的專業團隊會詳細為您介紹每個位置的特色。', delay: 4000 }
             ];
 
             function addMessage(container, message, index) {
@@ -3730,8 +3725,13 @@
                     
                     console.log('Message added to:', container.id); // 調試訊息
                     
-                    // Auto scroll
-                    container.parentElement.scrollTop = container.parentElement.scrollHeight;
+                    // 改進的自動滾動 - 平滑滾動到最新訊息
+                    setTimeout(function() {
+                        container.scrollTo({
+                            top: container.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                    }, 100); // 延遲一點確保訊息已經渲染
                 }, message.delay);
             }
 
