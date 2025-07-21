@@ -326,7 +326,7 @@
             border-radius: 1rem;
             padding: 2rem;
             box-shadow: var(--shadow);
-            height: 400px;
+            height: 600px;
             overflow-y: auto;
             position: relative;
             display: flex;
@@ -2987,7 +2987,7 @@
                         <h4 style="color: var(--danger-color); margin-bottom: 1rem;">❌ GPT-4o 的回應</h4>
                         <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--danger-color);">
                             <p style="font-style: italic; color: #666; margin-bottom: 1rem;">客戶：「我媽媽最近過世了...」</p>
-                            <p style="color: #333;">「很抱歉聽到這個消息。請問您需要了解我們的塔位服務嗎？我們有多種方案可供選擇。」</p>
+                            <p style="color: #333;">「非常抱歉聽到您母親過世的消息，請節哀順變。我們理解這是困難的時刻。如果您需要了解相關服務，我們提供多種塔位選擇，包括一般塔位和家族塔位。請問您想了解哪方面的資訊？」</p>
                         </div>
                     </div>
                     <div>
@@ -3834,8 +3834,8 @@
                 }, message.delay);
             }
 
-            // 簡化實現 - 直接在頁面載入後執行
-            setTimeout(function() {
+            // 動畫播放函數
+            function runChatAnimation() {
                 console.log('開始執行聊天動畫');
                 const traditionalChat = document.getElementById('traditional-chat');
                 const aiChat = document.getElementById('ai-chat');
@@ -3858,6 +3858,19 @@
                 } else {
                     console.error('找不到聊天容器！');
                 }
+            }
+
+            // 計算總動畫時長（最後一個訊息的延遲 + 一些緩衝時間）
+            const totalAnimationTime = 4000 + 1000; // 5 秒
+            
+            // 初次執行動畫
+            setTimeout(function startAnimation() {
+                runChatAnimation();
+                
+                // 設定重複播放：動畫結束後等待 5 秒再重新開始
+                setTimeout(function() {
+                    startAnimation(); // 遞迴呼叫
+                }, totalAnimationTime + 5000); // 總時長 + 5 秒等待
             }, 2000); // 頁面載入後 2 秒開始
         }
 
