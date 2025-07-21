@@ -908,8 +908,8 @@
         }
 
         .api-item:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .api-icon {
@@ -3054,7 +3054,7 @@
 
         <!-- Tech Stack -->
         <div class="tech-stack fade-in" style="background: white; padding: 2rem; border-radius: 1rem; margin: 3rem auto; max-width: 800px; box-shadow: var(--shadow);">
-            <h3 style="text-align: center; margin-bottom: 2rem;">技術堆疊</h3>
+            <h3 style="text-align: center; margin-bottom: 2rem;">AI 技術堆疊</h3>
             <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
                 <div style="text-align: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🤖</div>
@@ -3083,38 +3083,51 @@
     </section>
 
     <!-- API Integration Potential Section -->
-    <section class="api-potential" style="background: var(--gray-light); padding: 4rem 2rem;">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem; color: var(--primary-color);">🚀 未來擴充潛力</h2>
-            <div style="max-width: 900px; margin: 0 auto;">
-                <div class="api-future" style="background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: var(--shadow);">
-                    <div class="api-item future">
-                        <div class="api-icon">💬</div>
-                        <div class="api-info">
-                            <strong>多通訊平台整合</strong>
-                            <p>Facebook、市話整合，統一客服管道</p>
-                        </div>
+    <section class="api-potential" style="background: linear-gradient(135deg, #F5F3F0 0%, #E8EAED 100%); padding: 5rem 2rem;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--primary-color); font-size: 2.5rem;">🚀 未來擴充潛力</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--gray-dark); font-size: 1.2rem;">
+                持續進化，為您創造更多可能
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                <!-- 多通訊平台整合 -->
+                <div class="api-item future" style="background: linear-gradient(135deg, #FFFFFF 0%, #FEF3C7 100%); padding: 2.5rem; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s; border: none; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: rgba(200, 184, 161, 0.1); border-radius: 50%;"></div>
+                    <div class="api-icon" style="font-size: 3rem; margin-bottom: 1.5rem; display: block; text-align: center;">💬</div>
+                    <div class="api-info" style="text-align: center;">
+                        <strong style="font-size: 1.2rem; color: var(--primary-color); display: block; margin-bottom: 0.8rem;">多通訊平台整合</strong>
+                        <p style="line-height: 1.6;">Facebook、市話整合<br>統一客服管道</p>
                     </div>
-                    <div class="api-item future">
-                        <div class="api-icon">🌐</div>
-                        <div class="api-info">
-                            <strong>官網內嵌智慧客服</strong>
-                            <p>觸及更廣客群：在官網提供獨立諮詢管道，服務重視隱私、不使用社群媒體的客戶，臨時查詢的潛在客戶</p>
-                        </div>
+                </div>
+                
+                <!-- 官網內嵌智慧客服 -->
+                <div class="api-item future" style="background: linear-gradient(135deg, #FFFFFF 0%, #D1FAE5 100%); padding: 2.5rem; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s; border: none; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: rgba(147, 169, 156, 0.1); border-radius: 50%;"></div>
+                    <div class="api-icon" style="font-size: 3rem; margin-bottom: 1.5rem; display: block; text-align: center;">🌐</div>
+                    <div class="api-info" style="text-align: center;">
+                        <strong style="font-size: 1.2rem; color: var(--primary-color); display: block; margin-bottom: 0.8rem;">官網內嵌智慧客服</strong>
+                        <p style="line-height: 1.6;">觸及更廣客群：為重視隱私與臨時查詢的客戶提供服務</p>
                     </div>
-                    <div class="api-item future">
-                        <div class="api-icon">📈</div>
-                        <div class="api-info">
-                            <strong>數據分析平台</strong>
-                            <p>Google Analytics、即時儀表板、行為分析</p>
-                        </div>
+                </div>
+                
+                <!-- 數據分析平台 -->
+                <div class="api-item future" style="background: linear-gradient(135deg, #FFFFFF 0%, #FEE2E2 100%); padding: 2.5rem; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s; border: none; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: rgba(212, 165, 165, 0.1); border-radius: 50%;"></div>
+                    <div class="api-icon" style="font-size: 3rem; margin-bottom: 1.5rem; display: block; text-align: center;">📈</div>
+                    <div class="api-info" style="text-align: center;">
+                        <strong style="font-size: 1.2rem; color: var(--primary-color); display: block; margin-bottom: 0.8rem;">數據分析平台</strong>
+                        <p style="line-height: 1.6;">Google Analytics<br>即時儀表板、行為分析</p>
                     </div>
-                    <div class="api-item future">
-                        <div class="api-icon">📊</div>
-                        <div class="api-info">
-                            <strong>CRM 系統整合</strong>
-                            <p>客戶資料同步、服務歷程追蹤、關係管理</p>
-                        </div>
+                </div>
+                
+                <!-- CRM 系統整合 -->
+                <div class="api-item future" style="background: linear-gradient(135deg, #FFFFFF 0%, #EBF5FF 100%); padding: 2.5rem; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s; border: none; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: rgba(107, 124, 147, 0.1); border-radius: 50%;"></div>
+                    <div class="api-icon" style="font-size: 3rem; margin-bottom: 1.5rem; display: block; text-align: center;">📊</div>
+                    <div class="api-info" style="text-align: center;">
+                        <strong style="font-size: 1.2rem; color: var(--primary-color); display: block; margin-bottom: 0.8rem;">CRM 系統整合</strong>
+                        <p style="line-height: 1.6;">客戶資料同步<br>服務歷程追蹤</p>
                     </div>
                 </div>
             </div>
@@ -4399,6 +4412,7 @@
                         <span class="category-title">AI & ML</span>
                         <div class="tech-items">
                             <span class="tech-badge">Claude Sonnet 4</span>
+                            <span class="tech-badge">Claude Opus 4</span>
                             <span class="tech-badge">Vertex AI</span>
                             <span class="tech-badge">Gemini Embedding</span>
                             <span class="tech-badge">LangChain</span>
