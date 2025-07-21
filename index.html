@@ -929,6 +929,168 @@
             margin: 0;
         }
 
+        /* FAQ Optimization Styles */
+        .faq-optimization {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .analysis-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .analysis-step {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            min-height: 280px;
+        }
+
+        .analysis-step h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .data-example {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .data-item:last-child {
+            border-bottom: none;
+        }
+
+        .count {
+            font-weight: 700;
+            color: var(--accent-color);
+            white-space: nowrap;
+            margin-right: 1rem;
+        }
+
+        .question {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .pattern-box, .suggestion-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .pattern-box p, .suggestion-box p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+        }
+
+        .alert-tag {
+            display: inline-block;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-suggestion {
+            background: #F0FDF4;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-a {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        .analysis-arrow {
+            font-size: 2rem;
+            color: var(--accent-color);
+            justify-self: center;
+        }
+
+        .optimization-cases {
+            margin-top: 3rem;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .case-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .case-header {
+            margin-bottom: 1rem;
+        }
+
+        .case-type {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .before-after {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .before, .after {
+            padding: 1rem;
+            background: white;
+            border-radius: 0.25rem;
+        }
+
+        .before {
+            border-left: 3px solid var(--danger-color);
+        }
+
+        .after {
+            border-left: 3px solid var(--success-color);
+        }
+
+        .improvement {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-align: center;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
         /* Analytics Dashboard */
         .analytics-dashboard {
             background: var(--gray-light);
@@ -1406,6 +1568,27 @@
         @media (max-width: 768px) {
             .trust-stats {
                 grid-template-columns: 1fr;
+            }
+            
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Responsive adjustment for analysis flow */
+        @media (max-width: 1200px) {
+            .analysis-flow {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .analysis-arrow {
+                transform: rotate(90deg);
+                margin: -1rem 0;
+            }
+            
+            .analysis-step {
+                min-height: auto;
             }
         }
 
@@ -2682,8 +2865,8 @@
                 <li><a href="#hero">首頁</a></li>
                 <li><a href="#pain">痛點分析</a></li>
                 <li><a href="#solution">完整解決方案</a></li>
-                <li><a href="#why-claude">為何選擇 Claude</a></li>
                 <li><a href="#features">核心技術能力</a></li>
+                <li><a href="#why-claude">為何選擇 Claude</a></li>
                 <li><a href="#learning">智慧進化</a></li>
                 <li><a href="#security">資訊安全</a></li>
                 <li><a href="#metrics-investment">成效與投資</a></li>
@@ -2840,16 +3023,36 @@
                 <div class="feature-desc">準確理解情感狀態，提供溫暖支援</div>
             </div>
             <div class="feature-item">
+                <div class="feature-title">🎯 精準理解</div>
+                <div class="feature-desc">語意分析準確率超過 90%</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">📊 混合檢索架構</div>
+                <div class="feature-desc">向量語義+關鍵字，準確率>90%</div>
+            </div>
+            <div class="feature-item">
                 <div class="feature-title">💾 智慧記憶系統</div>
                 <div class="feature-desc">30天對話歷史，個性化服務體驗</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">💬 多輪對話管理</div>
+                <div class="feature-desc">記住上下文，避免重複提問</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">⚡ 即時回應</div>
+                <div class="feature-desc">平均回應時間<5秒，24/7服務</div>
             </div>
             <div class="feature-item">
                 <div class="feature-title">🔄 雙模式切換</div>
                 <div class="feature-desc">傳統模式與AI模式無縫切換</div>
             </div>
             <div class="feature-item">
-                <div class="feature-title">🎯 精準理解</div>
-                <div class="feature-desc">語意分析準確率超過 90%</div>
+                <div class="feature-title">📱 豐富訊息格式</div>
+                <div class="feature-desc">圖文訊息、可點擊圖片、表情符號</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-title">🛡️ 企業級安全</div>
+                <div class="feature-desc">GCP安全防護，隱私合規保護</div>
             </div>
         </div>
 
@@ -2880,6 +3083,45 @@
             <p style="color: var(--gray-dark); font-size: 0.9rem; opacity: 0.8;">
                 ※ 完整技術文檔請參考頁尾連結
             </p>
+        </div>
+    </section>
+
+    <!-- API Integration Potential Section -->
+    <section class="api-potential" style="background: var(--gray-light); padding: 4rem 2rem;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem; color: var(--primary-color);">🚀 未來擴充潛力</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="api-future" style="background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: var(--shadow);">
+                    <div class="api-item future">
+                        <div class="api-icon">💬</div>
+                        <div class="api-info">
+                            <strong>多通訊平台整合</strong>
+                            <p>Facebook、市話整合，統一客服管道</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">🌐</div>
+                        <div class="api-info">
+                            <strong>官網內嵌智慧客服</strong>
+                            <p>觸及更廣客群：在官網提供獨立諮詢管道，服務重視隱私、不使用社群媒體的客戶，臨時查詢的潛在客戶</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">📈</div>
+                        <div class="api-info">
+                            <strong>數據分析平台</strong>
+                            <p>Google Analytics、即時儀表板、行為分析</p>
+                        </div>
+                    </div>
+                    <div class="api-item future">
+                        <div class="api-icon">📊</div>
+                        <div class="api-info">
+                            <strong>CRM 系統整合</strong>
+                            <p>客戶資料同步、服務歷程追蹤、關係管理</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -3095,6 +3337,101 @@
                 Sibyl 就像一位專業顧問，擁有強大的 Claude Sonnet 4 智慧基礎，正在深入學習五湖園的專業知識。
                 每一次對話都讓她更了解客戶需求，持續精進服務品質，為您提供更精準的建議。
             </p>
+        </div>
+        
+        <!-- FAQ 分析優化展示 -->
+        <div class="faq-optimization fade-in">
+            <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">智慧分析創建 FAQ 條目</h3>
+            
+            <!-- 分析流程 -->
+            <div class="analysis-flow">
+                <div class="analysis-step">
+                    <h4>📥 Step 1: 收集對話數據</h4>
+                    <div class="data-example">
+                        <div class="data-item">
+                            <span class="count">45次</span>
+                            <span class="question">「可以帶寵物來嗎？」</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="count">38次</span>
+                            <span class="question">「有寵物塔位嗎？」</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="count">22次</span>
+                            <span class="question">「毛小孩能安葬嗎？」</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="analysis-arrow">→</div>
+                
+                <div class="analysis-step">
+                    <h4>🔍 Step 2: 智慧分析</h4>
+                    <div class="pattern-box">
+                        <p><strong>發現模式：</strong></p>
+                        <p>• 高頻關鍵字：寵物、毛小孩</p>
+                        <p>• 用戶意圖：詢問寵物服務</p>
+                        <p>• 回答成功率：僅 23%</p>
+                        <div class="alert-tag">⚠️ 知識缺口</div>
+                    </div>
+                </div>
+                
+                <div class="analysis-arrow">→</div>
+                
+                <div class="analysis-step">
+                    <h4>💡 Step 3: 自動建議</h4>
+                    <div class="suggestion-box">
+                        <p><strong>建議新增 FAQ：</strong></p>
+                        <div class="faq-suggestion">
+                            <div class="faq-q">問：五湖園有提供寵物相關服務嗎？</div>
+                            <div class="faq-a">答：目前園區專注於人的生命服務，暫無寵物專屬區域。但我們理解毛小孩也是家人，建議您可以...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 優化案例 -->
+            <div class="optimization-cases">
+                <h4 style="text-align: center; margin: 2rem 0;">FAQ 優化實例</h4>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-type">🔧 用詞優化</span>
+                        </div>
+                        <div class="before-after">
+                            <div class="before">
+                                <strong>原本：</strong><br>
+                                「塔位使用權狀遺失補發需要...」
+                            </div>
+                            <div class="after">
+                                <strong>優化後：</strong><br>
+                                「權狀遺失了怎麼辦？別擔心，我們提供補發服務...」
+                            </div>
+                        </div>
+                        <div class="improvement">更口語化，降低焦慮感</div>
+                    </div>
+                    
+                    <div class="case-card">
+                        <div class="case-header">
+                            <span class="case-type">📝 內容擴充</span>
+                        </div>
+                        <div class="before-after">
+                            <div class="before">
+                                <strong>原本：</strong><br>
+                                「參觀時間：09:00-16:00」
+                            </div>
+                            <div class="after">
+                                <strong>優化後：</strong><br>
+                                「參觀時間：09:00-16:00<br>
+                                • 建議預約確保專人接待<br>
+                                • 週末人潮較多<br>
+                                • 可安排線上導覽」
+                            </div>
+                        </div>
+                        <div class="improvement">資訊更完整實用</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
