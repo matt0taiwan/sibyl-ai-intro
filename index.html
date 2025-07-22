@@ -1322,6 +1322,127 @@
             font-size: 1.1rem;
         }
 
+        /* QR Code Integration Styles */
+        .qr-code-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .qr-code-wrapper {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-code-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(200, 184, 161, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .qr-code-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .line-qr-code {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-code-wrapper:hover .line-qr-code {
+            transform: scale(1.05);
+        }
+
+        .qr-code-hint {
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .line-add-button {
+            display: inline-block;
+            background: #00B900;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0, 185, 0, 0.3);
+        }
+
+        .line-add-button:hover {
+            background: #00A000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 185, 0, 0.4);
+        }
+
+        /* Small QR Code for experience section */
+        .try-it-now {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #F0FDF4;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .try-it-now:hover {
+            background: #D1FAE5;
+            transform: translateY(-2px);
+        }
+
+        .try-it-now img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .try-it-now:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .line-qr-code {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .qr-code-wrapper {
+                padding: 1.5rem;
+            }
+            
+            .line-add-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
         /* Security Section */
         .security-section {
             background: white;
@@ -2915,6 +3036,11 @@
             <div class="chat-box ai">
                 <h3>Sibyl AI 突破限制後的體驗 ✓</h3>
                 <div id="ai-chat"></div>
+                <!-- Small QR Code for Try Now -->
+                <div class="try-it-now">
+                    <img src="images/sibyl-line-qr.png" alt="試用 Sibyl AI" style="width: 80px; height: 80px; margin-bottom: 0.5rem;">
+                    <p style="font-size: 0.9rem; color: var(--success-color); font-weight: 600;">掃碼立即體驗</p>
+                </div>
             </div>
         </div>
     </section>
@@ -3909,6 +4035,20 @@
         <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">準備好突破限制了嗎？</h2>
         <p style="font-size: 1.5rem; margin-bottom: 3rem;">讓 Sibyl AI 為五湖園開啟智慧服務的新篇章</p>
         
+        <!-- QR Code Section -->
+        <div class="qr-code-section">
+            <h3 style="color: #FFFFFF; font-size: 1.5rem; margin-bottom: 1.5rem;">
+                📱 立即體驗 Sibyl AI 智慧客服
+            </h3>
+            <div class="qr-code-wrapper">
+                <img src="images/sibyl-line-qr.png" alt="Sibyl AI LINE 官方帳號 QR Code" class="line-qr-code">
+                <p class="qr-code-hint">掃描 QR Code 或點擊下方按鈕加入好友</p>
+                <a href="https://lin.ee/6N8FZtM" class="line-add-button" target="_blank">
+                    加入 LINE 好友
+                </a>
+            </div>
+        </div>
+        
         <div class="implementation-container">
             <!-- 系統就緒狀態 -->
             <div class="ready-status">
@@ -4491,6 +4631,10 @@
                     through the perfect fusion of technology and humanity.</p>
                 </div>
                 <div class="contact-links">
+                    <a href="https://lin.ee/6N8FZtM" class="contact-link" target="_blank">
+                        <span class="icon">💬</span>
+                        <span>LINE 官方帳號</span>
+                    </a>
                     <a href="https://github.com/matt0taiwan" class="contact-link" target="_blank">
                         <span class="icon">💻</span>
                         <span>GitHub</span>
